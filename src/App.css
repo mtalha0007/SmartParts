@@ -1,4 +1,7 @@
 
-
-
+@media (max-width:1024px){
+    .logo{
+        max-width: 120px !important;
+    }
+}
   
