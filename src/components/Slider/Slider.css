@@ -1,0 +1,24 @@
+/* Custom styles for the dark variant carousel */
+.custom-dark-carousel .carousel-control-prev,
+.custom-dark-carousel .carousel-control-next {
+  display: none; 
+}
+
+.custom-dark-carousel:hover .carousel-control-prev,
+.custom-dark-carousel:hover .carousel-control-next {
+  display: flex; 
+ 
+}
+
+.custom-dark-carousel .carousel-control-prev-icon,
+.custom-dark-carousel .carousel-control-next-icon {
+ background-color: red;
+ position: absolute;
+  border-radius: 50%; 
+  width: 30px; 
+  height: 30px; 
+}
+
+.carousel-indicators{
+    display: none !important;
+}

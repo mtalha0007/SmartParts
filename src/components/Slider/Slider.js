@@ -1,28 +1,30 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
-import Images from '../../assets/images/Images';
-
-function SwiperSlider() {
+import Carousel from 'react-bootstrap/Carousel';
+import Images from "../../assets/images/Images"
+import "./Slider.css"
+function DarkVariantExample() {
   return (
-    <>
-      <Swiper
-        slidesPerView={'auto'}
-        centeredSlides={true}
-        spaceBetween={30}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        <SwiperSlide><img src={Images.verticalBanner1}/></SwiperSlide>
-        <SwiperSlide><img src={Images.verticalBanner2}/></SwiperSlide>
- 
-      </Swiper>
-    </>
+    <Carousel data-bs-theme="dark" style={{width:"100%"}} className="custom-dark-carousel" >
+      <Carousel.Item>
+        <img
+        style={{height: "80vh" ,width:"100%", borderRadius: "5px"}}
+          className="d-block "
+          src={Images.verticalBanner1}
+          alt="First slide"
+        />
+        
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+        style={{height: "80vh" ,width:"100%" ,borderRadius: "5px"}}
+          className="d-block "
+          src={Images.verticalBanner2}
+          alt="Second slide"
+        />
+        
+      </Carousel.Item>
+      
+    </Carousel>
   );
 }
-export default  SwiperSlider
+
+export default DarkVariantExample;
