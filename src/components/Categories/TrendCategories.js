@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
-import Images from "../../assets/images/Images";
+import {Images} from "../../assets/images/index";
 export default function TrendCategories() {
 const trendCategories = [
     {
@@ -48,8 +48,9 @@ const trendCategories = [
          flexDirection:"column" ,
          gap:"5px"
         }}>
-      {trendCategories.map((elem)=>(
+      {trendCategories.map((elem ,index)=>(
         <Box
+        key={index}
           sx={{
             border: " 1px solid #eaebed",
             borderRadius: "50px",

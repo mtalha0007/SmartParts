@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { TbRotateClockwise } from "react-icons/tb";
 import { FaRegHeart, FaRegUserCircle } from "react-icons/fa";
-import Images from "../../assets/images/Images";
+import {Images} from "../../assets/images/index";
 import Avatar from "@mui/material/Avatar";
 import { GrHomeRounded } from "react-icons/gr";
 import "../../App.css";

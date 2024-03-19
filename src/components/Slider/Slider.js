@@ -1,5 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
-import Images from "../../assets/images/Images"
+import {Images} from "../../assets/images/index"
 import "./Slider.css"
 function DarkVariantExample() {
   return (

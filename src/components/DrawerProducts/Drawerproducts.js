@@ -1,5 +1,5 @@
 import React from 'react';
-import Images from "../../assets/images/Images";
+import {Images} from "../../assets/images/index";
 import { Box } from '@mui/material';
 import ReactStars from 'react-stars'
 export default function Drawerproducts() {
@@ -25,7 +25,7 @@ export default function Drawerproducts() {
     ];
 
     return (
-        <div>
+        <>
             {products.map((data, index) => (
                 <Box key={index} sx={{ display: "flex",alignItems:"center", padding: "20px", gap: "10px" }}>
                     <Box>
@@ -35,7 +35,7 @@ export default function Drawerproducts() {
                         <Box sx={{fontSize:"13px" ,fontWeight:'600'}}>{data.name}</Box>
                         {/* Assuming you have a star rating component */}
                         <Box sx={{marginTop:"5px"}}>
-                            <ReactStars count={5} size={"5px"} color1={'#ffd700'} />
+                            <ReactStars count={5} size={15} color1={'#ffd700'} />
                     </Box>
                         <Box sx={{display:"flex" ,gap:"5px", marginTop:"5px"}}>
                         <Box sx={{fontSize:"13px",color:"#ed4b4b",textDecoration: 'line-through' ,fontWeight:'600'}}>{data.originalPrice}</Box>
@@ -44,6 +44,6 @@ export default function Drawerproducts() {
                     </Box>
                 </Box>
             ))}
-        </div>
+        </>
     );
 }

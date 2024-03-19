@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import Images from "../../assets/images/Images"
+import {Images} from "../../assets/images/index"
 
 
 
@@ -65,7 +65,7 @@ export default function CarCards() {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
             {cardsData.map((elem,index)=>(
-        <Grid item xs={12} md={index == 4 ? 12 : 6} lg={2.4} sx={{position:"relative" , overflow:"hidden"}}>
+        <Grid key={index} item xs={12} md={index == 4 ? 12 : 6} lg={2.4} sx={{position:"relative" , overflow:"hidden"}}>
 
             
           <Box sx={{backgroundColor:`${elem.bg}` ,minHeight:"365px", padding:"15px", width:"100%",position:"relative" , overflow:"hidden"}} >

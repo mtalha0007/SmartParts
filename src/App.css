@@ -4,4 +4,10 @@
         max-width: 120px !important;
     }
 }
-  
+/* //FOr SLider Arrows */
+.slick-prev ,.slick-next{
+    background-color: #df6a2d !important;
+    border-radius: 50% !important;
+}
+
+

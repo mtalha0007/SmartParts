@@ -19,6 +19,7 @@ export default function () {
       <Box
         sx={{
           display: "flex",
+          width:"100%",
           gap:"20px",
           "@media screen and (max-width:1024px)": {
             flexDirection: "row-reverse",
