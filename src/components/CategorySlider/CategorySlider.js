@@ -8,13 +8,14 @@ import { Box } from "@mui/material";
 import {Images} from "../../assets/images/index";
 import ReactStars from "react-stars";
 
-export default class Responsive extends Component {
-  render() {
+export default function CategorySlider({backgroundColor ,color}) {
+
+   
     var settings = {
       dots: false,
       infinite: true,
       speed: 500,
-      // autoplay: "true",
+      autoplay: "true",
       slidesToShow: 4,
       slidesToScroll: 1,
       initialSlide: 0,
@@ -185,7 +186,7 @@ export default class Responsive extends Component {
                     </Box>
                   </Box>
                 </Card.Title>
-                  <Button style={{width:"100%" ,border:"none", backgroundColor:"#f7f7f8" ,color:"black",fontSize:"13px"}}> Add to Cart</Button>
+                  <Button style={{width:"100%" ,border:"none", backgroundColor:backgroundColor ,color:color,fontSize:"13px"}}> Add to Cart</Button>
               </Card.Body>
             </Card>
           </Box>
@@ -194,5 +195,5 @@ export default class Responsive extends Component {
         </Slider>
       </Box>
     );
-  }
+  
 }

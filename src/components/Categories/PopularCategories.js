@@ -85,7 +85,7 @@ export default function PopularCategories() {
 
       <Box sx={{width:"90%"  ,margin:"25px auto"}}>
  
-        <CategorySlider/>
+        <CategorySlider backgroundColor="#f7f7f8" color="black"/>
         
         </Box>
     </>
