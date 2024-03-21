@@ -10,7 +10,7 @@ export default function PopularProducts() {
         sx={{
           display: "flex",
           padding: "0 10px",
-          gap: "40px",
+          gap: "25px",
           alignItems: "center",
           flexWrap: "wrap",
         }}
@@ -19,7 +19,7 @@ export default function PopularProducts() {
         <Box
           sx={{
             display: "flex",
-            gap: "30px",
+            gap: "10px",
             alignItems: "center",
             cursor: "pointer",
             "@media screen and (max-width:767px)": {
@@ -180,7 +180,7 @@ export default function PopularProducts() {
       <Box
         sx={{ width: { md: "90%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
       >
-        <CategorySlider backgroundColor="#df6a2d"  color="white" />
+        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
       </Box>
     </Box>
   );

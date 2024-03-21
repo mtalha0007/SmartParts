@@ -4,7 +4,7 @@ import { MdOutlineArrowOutward } from "react-icons/md";
 
 export default function AdBanner() {
   return (
-    <Box className="container" sx={{marginTop:"25px"}}>
+    <Box className="" sx={{marginTop:"25px", padding:"10px"}}>
       <Box
         className="row"
         sx={{

@@ -29,8 +29,9 @@ export default function CarBanner() {
         flexDirection: { lg: "row", md: "row", sm: "column", xs: "column" },
       }}
     >
-      {carBannerDetails.map((elem) => (
+      {carBannerDetails.map((elem,index) => (
         <Box
+        key={index}
           sx={{
             display: "flex",
             justifyContent: "center",

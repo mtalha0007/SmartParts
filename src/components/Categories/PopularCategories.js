@@ -6,7 +6,7 @@ import { Svgs } from "../../assets/images/index";
 export default function PopularCategories() {
   return (
     <>
-      <Box sx={{ display: "flex", gap: "30px", alignItems: "center" ,flexWrap:"wrap",}}>
+      <Box sx={{ display: "flex", gap: "15px", alignItems: "center" ,flexWrap:"wrap",}}>
         <Box component={"h4"}>Popular Categories</Box>
         <Box sx={{
            display: "flex", gap: "20px", alignItems: "center" ,cursor:"pointer",
@@ -85,7 +85,7 @@ export default function PopularCategories() {
 
       <Box sx={{width:"90%"  ,margin:"25px auto"}}>
  
-        <CategorySlider backgroundColor="#f7f7f8" color="black"/>
+        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#f7f7f8" color="black"/>
         
         </Box>
     </>

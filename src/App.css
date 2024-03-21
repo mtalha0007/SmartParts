@@ -5,9 +5,20 @@
     }
 }
 /* //FOr SLider Arrows */
-.slick-prev ,.slick-next{
+
+.slick-prev {
     background-color: #df6a2d !important;
     border-radius: 50% !important;
+    position: absolute !important;
+    left: 8px !important;
+    z-index: 1 !important;
+}
+.slick-next {
+    background-color: #df6a2d !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    right: 8px !important;
+    z-index: 1 !important;
 }
 
 

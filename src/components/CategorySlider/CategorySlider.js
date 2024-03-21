@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -8,7 +8,7 @@ import { Box } from "@mui/material";
 import {Images} from "../../assets/images/index";
 import ReactStars from "react-stars";
 
-export default function CategorySlider({backgroundColor ,color}) {
+export default function CategorySlider({backgroundColor ,color,slidesToShow,imgWidth}) {
 
    
     var settings = {
@@ -16,14 +16,14 @@ export default function CategorySlider({backgroundColor ,color}) {
       infinite: true,
       speed: 500,
       autoplay: "true",
-      slidesToShow: 4,
+      slidesToShow: slidesToShow,
       slidesToScroll: 1,
       initialSlide: 0,
       responsive: [
         {
           breakpoint: 1030,
           settings: {
-            slidesToShow: 3,
+            slidesToShow: slidesToShow,
             slidesToScroll: 1,
             infinite: true,
             dots: false,
@@ -106,6 +106,7 @@ export default function CategorySlider({backgroundColor ,color}) {
               15%
               </Box>
               <Card.Img
+              style={{width:imgWidth ,margin:"0 auto"}}
                 variant="top"
                 src={elem.image}
               />

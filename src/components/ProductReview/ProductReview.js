@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import { Box } from "@mui/material";
 import { Images } from "../../assets/images/index";
 import ReactStars from "react-stars";
-
+import { FaArrowRight } from "react-icons/fa";
 export default function ProductReview() {
   var settings = {
     dots: false,
@@ -78,7 +78,50 @@ export default function ProductReview() {
     
   ];
   return (
-    <Box sx={{width:"90% "  ,margin:"25px auto "}}>
+    <Box sx={{padding:"10px",margin:"25px auto "}}>
+       <Box
+        sx={{
+          display: "flex",
+          alignItems:"center",
+          // padding: "0 10px",
+          gap: "40px",
+          alignItems: "center",
+          flexWrap: "wrap",
+          justifyContent:"space-between "
+        }}
+      >
+        <Box sx={{ display: "flex",
+          alignItems:"center",}}>
+
+        <Box component={"h4"}>Products Reviews</Box>
+        <Box sx={{color:"#808080" ,fontSize:"12px" ,paddingLeft:"20px",marginLeft:"20px" ,borderLeft:"2px solid #eee" }}>Our references are very valuable, the result of a great effort...</Box>
+        </Box>
+         
+        <Box
+          sx={{
+            borderRadius: "20px",
+            border:"1px solid #eaebed",
+            padding: "7px 15px",
+            cursor: "pointer",
+            fontSize: "13px",
+            fontWeight: "400",
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+            "&:hover": {
+              backgroundColor: "#f7f7f8",
+            
+            },
+          }}
+        >
+          <Box>All Reviews</Box>
+          <Box  component={"span"}>
+            <FaArrowRight />
+          </Box>
+        </Box>
+      </Box>
+
+      <Box sx={{width:"90% ",margin:"10px auto"}}>
       <Slider {...settings}>
         {CardDetails.map((elem, index) => (
           <Box key={index}>
@@ -131,6 +174,7 @@ export default function ProductReview() {
           </Box>
         ))}
       </Slider>
+      </Box> 
     </Box>
   );
 }

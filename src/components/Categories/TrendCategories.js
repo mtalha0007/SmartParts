@@ -40,7 +40,7 @@ const trendCategories = [
     },
 ]
   return (
-    <Box>
+    <Box >
       <Box component={"h4"}>Trend Categories</Box>
       <Box sx={{ 
         marginTop: "10px" ,
