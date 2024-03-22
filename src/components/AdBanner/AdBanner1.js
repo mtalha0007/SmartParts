@@ -4,22 +4,22 @@ import { MdOutlineArrowOutward } from "react-icons/md";
 
 export default function AdBanner() {
   return (
-    <Box className="" sx={{marginTop:"25px", padding:"10px"}}>
+    <Box className="" sx={{mt:"25px", p:"10px"}}>
       <Box
         className="row"
         sx={{
-          padding: "10px",
+          p: "10px",
           backgroundColor: "#fff7ea",
           borderRadius: "5px",
-          margin:"0 auto"
+          m:"0 auto"
         }}
       >
-        <Box className="col-lg-8 col-sm-12" sx={{padding:"25px"}}>
+        <Box className="col-lg-8 col-sm-12" sx={{p:"25px"}}>
           <Box
             sx={{
               display: "flex",
               gap: "15px",
-              marginTop: "15px",
+              mt: "15px",
               flexDirection: { sm: "row", xs: "column" },
             }}
           >
@@ -28,7 +28,7 @@ export default function AdBanner() {
                 backgroundColor: "#6c3428",
                 letterSpacing: "1px",
                 borderRadius: "30px",
-                padding: "5px 15px",
+                p: "5px 15px",
                 textAlign: "center",
                 color: "white",
                 fontSize: "10px",
@@ -43,7 +43,7 @@ export default function AdBanner() {
                 backgroundColor: "#f4ead5",
                 letterSpacing: "1px",
                 borderRadius: "30px",
-                padding: "5px 15px",
+                p: "5px 15px",
                 textAlign: "center",
                 color: "black",
                 fontSize: "10px",
@@ -54,7 +54,7 @@ export default function AdBanner() {
               PROMOTION PRICES
             </Box>
           </Box>
-          <Box component={"h4"} sx={{ color: "#7d4b3f", marginTop: "15px" }}>
+          <Box component={"h4"} sx={{ color: "#7d4b3f", mt: "15px" }}>
             Get 30% discount on all engine oils!
           </Box>
           <Box
@@ -70,7 +70,7 @@ export default function AdBanner() {
             <Box>
               <Box
                 component={"span"}
-                sx={{ color: "#7d4b3f", fontSize: "12px", marginRight: "10px" }}
+                sx={{ color: "#7d4b3f", fontSize: "12px", mr: "10px" }}
               >
                 ✓
               </Box>
@@ -79,7 +79,7 @@ export default function AdBanner() {
             <Box>
               <Box
                 component={"span"}
-                sx={{ color: "#7d4b3f", fontSize: "12px", marginRight: "10px" }}
+                sx={{ color: "#7d4b3f", fontSize: "12px", mr: "10px" }}
               >
                 ✓
               </Box>
@@ -88,7 +88,7 @@ export default function AdBanner() {
             <Box>
               <Box
                 component={"span"}
-                sx={{ color: "#7d4b3f", fontSize: "12px", marginRight: "10px" }}
+                sx={{ color: "#7d4b3f", fontSize: "12px", mr: "10px" }}
               >
                 ✓
               </Box>
@@ -96,7 +96,7 @@ export default function AdBanner() {
             </Box>
           </Box>
         </Box>
-        <Box className="col-md-6 col-lg-4" sx={{marginTop:"24px"}} >
+        <Box className="col-md-6 col-lg-4" sx={{mt:"24px"}} >
           <Box
             sx={{
               display: "flex",
@@ -104,7 +104,7 @@ export default function AdBanner() {
               alignItems: "center",
               gap: "10px",
               borderRadius: "30px",
-              padding: "18px 30px",
+              p: "18px 30px",
               fontSize: "15px",
               fontWeight: "600",
               backgroundColor: "#f4ead5",

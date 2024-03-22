@@ -3,13 +3,13 @@ import React from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 export default function AdBanner() {
   return (
-    <Box sx={{ marginTop: "25px", padding: "10px" }}>
+    <Box sx={{ mt: "25px", p: "10px" }}>
       <Box
         sx={{
           backgroundColor: "#fee9ed",
           borderRadius: "5px",
-          margin: "0 auto",
-          paddingTop:"10px",
+          m: "0 auto",
+          pt:"10px",
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
@@ -25,14 +25,14 @@ export default function AdBanner() {
                 sx={{
                   fontSize: "45px",
                   position: "absolute",
-                  marginleft: "7px",
+                  ml: "7px",
                 }}
               >
                 %
               </Box>
               <Box
                 component={"span"}
-                sx={{ fontSize: "18px", left: "inherit", marginLeft: "7px" }}
+                sx={{ fontSize: "18px", left: "inherit", ml: "7px" }}
               >
                 OFF
               </Box>
@@ -53,7 +53,7 @@ export default function AdBanner() {
               alignItems: "center",
               gap: "10px",
               borderRadius: "30px",
-              padding: "18px 30px",
+              p: "18px 30px",
               fontSize: "15px",
               fontWeight: "600",
               backgroundColor: "#b20808",

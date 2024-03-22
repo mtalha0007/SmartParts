@@ -4,7 +4,7 @@ import { Svgs } from "../../assets/images";
 
 export default function FeedBack() {
   return (
-    <Box sx={{ padding: "10px" ,marginTop:"60px" }}>
+    <Box sx={{ p: "10px" ,mt:"60px" ,position:"absolute" ,width:"100%" }}>
       <Box
         sx={{
           display: "flex",
@@ -13,7 +13,7 @@ export default function FeedBack() {
           alignItems: "center",
           backgroundColor: "#efefef",
           borderRadius:{lg:"50px" ,md:"50px" ,sm:"0px"},
-          padding: "40px",
+          p: "40px",
         }}
       >
         <Box
@@ -33,14 +33,14 @@ export default function FeedBack() {
           </Box>
         </Box>
 
-        <Box sx={{ paddingTop: "10px", display: "flex"  }}>
+        <Box sx={{ pt: "10px", display: "flex"  }}>
           <input
             style={{
               border: "none",
               borderTopLeftRadius: "20px",
               borderBottomLeftRadius: "20px",
-              padding: "5px",
-              paddingRight: "0",
+              p: "5px",
+              pr: "0",
               backgroundColor:"white",
             //   width:{lg:"auto" ,md:"100%"}
             }}
@@ -55,8 +55,8 @@ export default function FeedBack() {
               borderTopRightRadius: "20px",
               fontWeight: "bold",
               fontSize: "10px",
-              padding: "9px",
-              paddingLeft: "5px",
+              p: "9px",
+              pl: "5px",
             }}
           >
             SUBMIT

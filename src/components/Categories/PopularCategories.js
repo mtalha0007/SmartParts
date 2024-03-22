@@ -9,7 +9,7 @@ export default function PopularCategories() {
       <Box sx={{ display: "flex", gap: "15px", alignItems: "center" ,flexWrap:"wrap",}}>
         <Box component={"h4"}>Popular Categories</Box>
         <Box sx={{
-           display: "flex", gap: "20px", alignItems: "center" ,cursor:"pointer",
+           display: "flex", gap: "18px", alignItems: "center" ,cursor:"pointer",
           '@media screen and (max-width:767px)':{
            display:"none",
      }
@@ -24,7 +24,7 @@ export default function PopularCategories() {
         >
           All Products
         </Box>
-        <Box sx={{display: "flex", gap: "10px", alignItems: "center" ,cursor:"pointer"}}>
+        <Box sx={{display: "flex", gap: "8px", alignItems: "center" ,cursor:"pointer"}}>
         <Box  dangerouslySetInnerHTML={{__html:Svgs["suspension"]}} ></Box>
           <Box
             sx={{
@@ -36,7 +36,7 @@ export default function PopularCategories() {
             Suspension
           </Box>
         </Box>
-        <Box sx={{ display: "flex", gap: "10px", alignItems: "center",cursor:"pointer" }}>
+        <Box sx={{ display: "flex", gap: "8px", alignItems: "center",cursor:"pointer" }}>
         
            
               <Box  dangerouslySetInnerHTML={{__html:Svgs["brake"]}} ></Box>
@@ -51,7 +51,7 @@ export default function PopularCategories() {
             Brake Calipers
           </Box>
         </Box>
-        <Box sx={{ display: "flex", gap: "10px", alignItems: "center",cursor:"pointer" }}>
+        <Box sx={{ display: "flex", gap: "8px", alignItems: "center",cursor:"pointer" }}>
         <Box  dangerouslySetInnerHTML={{__html:Svgs["engine"]}} ></Box>
           <Box
             sx={{
@@ -63,7 +63,7 @@ export default function PopularCategories() {
             Engine Oil
           </Box>
         </Box>
-        <Box sx={{ display: "flex", gap: "10px", alignItems: "center",cursor:"pointer" }}>
+        <Box sx={{ display: "flex", gap: "8px", alignItems: "center",cursor:"pointer" }}>
         <Box  dangerouslySetInnerHTML={{__html:Svgs["fans"]}} ></Box>
           <Box
             sx={{
@@ -76,16 +76,16 @@ export default function PopularCategories() {
           </Box>
         </Box>
       </Box>
-        <Box sx={{borderRadius:"20px",padding:"7px 15px",cursor:"pointer" ,color:"white",fontSize:"13px",fontWeight:"400" ,backgroundColor:"#df6a2d",display:"flex",gap:"10px",alignItems:"center", "&:hover": {
+        <Box sx={{borderRadius:"20px",p:"7px 13px",cursor:"pointer" ,color:"white",fontSize:"13px",fontWeight:"400" ,backgroundColor:"#df6a2d",display:"flex",gap:"8px",alignItems:"center", "&:hover": {
               backgroundColor: "#1e96fc",
               color:"white"
             },}}><Box>All Categories</Box> <Box sx={{color:"white"}} component={"span"}><FaArrowRight/></Box>
             </Box>
       </Box>
 
-      <Box sx={{width:"90%"  ,margin:"25px auto"}}>
+      <Box sx={{width:"90%"  ,m:"25px auto"}}>
  
-        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#f7f7f8" color="black"/>
+        <CategorySlider imgWidth="150px" slidesToShow={4} backgroundColor="#f7f7f8" color="black"/>
         
         </Box>
     </>

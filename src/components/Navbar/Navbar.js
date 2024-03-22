@@ -3,17 +3,14 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
-import { LiaShoppingBagSolid } from "react-icons/lia";
-import { TbRotateClockwise } from "react-icons/tb";
-import { FaRegHeart, FaRegUserCircle } from "react-icons/fa";
 import {Images} from "../../assets/images/index";
 import Avatar from "@mui/material/Avatar";
 import { GrHomeRounded } from "react-icons/gr";
 import "../../App.css";
 import Searchbar from "../SearchBar/Searchbar";
 import { Divider } from "@mui/material";
+import Badges from "../Badges/Badges";
 
 function PrimarySearchAppBar() {
   return (
@@ -94,33 +91,7 @@ function PrimarySearchAppBar() {
             </Avatar>
           </Box>
          {/* ICONS with Badge */}
-          <Box sx={{ display: "flex", gap: "10px" }}>
-            <IconButton sx={{ maxWidth: "24px" }}>
-              <Badge  badgeContent={4} color="error">
-                <LiaShoppingBagSolid />
-              </Badge>
-            </IconButton>
-            <IconButton
-              sx={{
-                "@media screen and (max-width:1024px)": {
-                  display: "none",
-                },
-                maxWidth: "24px",
-              }}
-            >
-              <Badge badgeContent={1} color="error">
-                <TbRotateClockwise />
-              </Badge>
-            </IconButton>
-            <IconButton sx={{ maxWidth: "24px" }}>
-              <Badge badgeContent={1} color="error">
-                <FaRegHeart />
-              </Badge>
-            </IconButton>
-            <IconButton>
-              <FaRegUserCircle />
-            </IconButton>
-          </Box>
+         <Badges />
       
 
         </Toolbar>

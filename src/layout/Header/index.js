@@ -153,6 +153,7 @@ function Header() {
         >
           <Box>
             <Dropdown
+            fontSize={"10px"}
               title={"LANGUAGES"}
               keyValue1={"English"}
               keyValue2={"Hindhi"}
@@ -161,6 +162,7 @@ function Header() {
           </Box>
           <Box>
             <Dropdown
+              fontSize={"10px"}
               title={"CURRENCY"}
               keyValue1={"USD"}
               keyValue2={"GBP"}
@@ -169,6 +171,7 @@ function Header() {
           </Box>
           <Box>
             <Dropdown
+              fontSize={"10px"}
               title={"QUICK HELP"}
               keyValue1={"ORDER TRACKING"}
               keyValue2={"CONTACT"}

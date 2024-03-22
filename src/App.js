@@ -11,11 +11,15 @@ import ProductReview from "./components/ProductReview/ProductReview";
 import DoubleSLider from "./components/DoubleSlider/DoubleSlider";
 import FeedBack from "./components/FeedBack/FeedBack"
 import EditorReview from "./components/EditorReview/EditorReview";
+import Footer from "./layout/Footer/index";
+import FixedHeader from "./components/FixedHeader/FixedHeader";
+
 export default function App() {
   return (
     <>
       <Header />
       <PrimarySearchAppBar />
+      <FixedHeader />
       <SlideSection />
       <CarCard />
       <CategoriesSection />
@@ -27,6 +31,7 @@ export default function App() {
       <DoubleSLider/>
       <EditorReview/>
       <FeedBack/>
+      <Footer />
     </>
   );
 }
