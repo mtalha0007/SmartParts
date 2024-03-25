@@ -9,6 +9,7 @@ import CategoryHeader from "../components/Categories/CategoryHeader"
 import Footer from "../layout/Footer/index";
 import FeedBack from "../components/FeedBack/FeedBack";
 import Cart from '../components/Cart/Cart';
+import ProductDetails from '../components/ProductDetails/ProductDetails';
 
 function AppRouter() {
   return (
@@ -21,6 +22,7 @@ function AppRouter() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/account" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/product" element={<ProductDetails />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <FeedBack/>

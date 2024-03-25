@@ -9,7 +9,7 @@ export default function index() {
         <Box sx={{display: {sm: 'none' ,xs:"none" ,md:"flex"}}}><TrendCategories padding="5px" border="1px solid #eaebed" borderRadius="50px"/></Box>
         <Box sx={{
           width:{ xs:"100%", md:"78%"},
-          m:"0 auto" ,
+          margin:"0 auto" ,
           display:"flex",
           flexDirection:"column",
         }}>

@@ -2,7 +2,8 @@ import { Box, Divider, Grid, Input } from "@mui/material";
 import React from "react";
 import { Svgs, Images } from "../../assets/images";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
+import CategorySlider from "../CategorySlider/CategorySlider"
+import ProductReview from "../ProductReview/ProductReview"
 export default function Cart() {
   return (
     <>
@@ -134,12 +135,14 @@ export default function Cart() {
                     </Box>
                     <Input
                       value={"1"}
-                      disableUnderline
+                      disableUnderline                 
                       sx={{
-                        textAlign: "center",
                         width: "80px",
                         border: "1px solid #eaebed",
                         height: "100%",
+                        '& input': {
+                          textAlign: "center",
+                        }
                       }}
                     />
                     <Box
@@ -243,7 +246,7 @@ export default function Cart() {
         <Box sx={{backgroundColor:"#fff3ed",mt:2,padding:'10px'}}>
         <Box sx={{fontSize:"14px" ,color:"#df6a2d"}}>Shipping</Box>
         <Box sx={{fontSize:"14px" ,color:"#df6a2d"}}>Enter your address to view shipping options.</Box>
-        <Box sx={{fontSize:"14px" }}>Calculate Shipping</Box>
+        <Box sx={{fontSize:"13px" }}>Calculate Shipping</Box>
         </Box>
         <Box sx={{display:"flex",mt:2 ,justifyContent:"space-between"}}>
             <Box sx={{fontSize:'13px',fontWeight:"500"}}>TOTAL</Box>
@@ -255,6 +258,17 @@ export default function Cart() {
          </Box>
         </Grid>
       </Grid>
+
+      <Box sx={{mb:4 ,p:1  }}  component={"h4"}>You May Be Interested In...</Box>
+      <Box
+        sx={{ width: { md: "90%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
+      >
+        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
+      </Box>
+
+      <Box>
+        <ProductReview/>
+      </Box>
     </>
   );
 }

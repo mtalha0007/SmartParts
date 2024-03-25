@@ -89,7 +89,7 @@ function AnchorTemporaryDrawer() {
                 Featured Products
               </Box>
               <Box>
-                <Drawerproducts />
+                <Drawerproducts display2="flex" padding="20px"/>
               </Box>
             </Box>
           </Drawer>
