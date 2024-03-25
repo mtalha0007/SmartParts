@@ -20,5 +20,7 @@
     right: 8px !important;
     z-index: 1 !important;
 }
-
-
+/* ///Tabs */
+.css-1aquho2-MuiTabs-indicator{
+    display: none !important;
+}

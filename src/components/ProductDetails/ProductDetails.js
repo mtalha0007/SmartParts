@@ -1,20 +1,23 @@
-import { Box, Input } from "@mui/material";
+import { Box, Divider, Input } from "@mui/material";
 import React from "react";
 import { Images, Svgs } from "../../assets/images";
 import ReactStars from "react-stars";
 import { TbRotateClockwise } from "react-icons/tb";
 import { FaRegHeart } from "react-icons/fa";
 import Drawerproducts from "../DrawerProducts/Drawerproducts";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp,FaFacebookF ,FaTwitter,FaPinterestP,FaLinkedinIn,FaTelegramPlane ,FaViber    } from "react-icons/fa";
 import { LiaShoppingBagSolid } from "react-icons/lia";
-
 import Coupon from "../Coupon/Coupon";
+import ProductTab from "./ProductTab";
+import Dropdown from "../DropDown/Dropdown"
+import CategorySlider from "../CategorySlider/CategorySlider";
 
 export default function ProductDetails() {
   return (
-    <Box sx={{ display: "flex", padding: "20px 10px" }}>
-      <Box sx={{ display: "flex" }}>
-        <Box sx={{ width: "520px" }}>
+    <>
+    <Box sx={{ display: "flex",justifyContent:"center", padding: "20px 10px" }}>
+      <Box sx={{ display: "flex",gap:"10px",flexDirection:{xs:"column",md:"row"} ,width:{xs:"100%",md:"auto"} }}>
+        <Box sx={{ width: {xs:"100%",md:"480px"} }}>
           <img
             style={{
               width: "100%",
@@ -23,13 +26,17 @@ export default function ProductDetails() {
               borderRadius: "5px",
               background: "#eaebed",
               padding: "20px",
+              position: "sticky",
+               top: "120px", 
             }}
             src={Images.product2}
           />
+          
         </Box>
 
+        <Box>
         <Box sx={{ position: "sticky", top: "120px", padding: "0 10px" }}>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex" ,mt:{xs:"15px",md:"0px"} }}>
             <Box
               style={{
                 cursor: "pointer",
@@ -347,10 +354,125 @@ export default function ProductDetails() {
            <Box sx={{fontSize:"12px",padding:"1px"}}><Box component={"span"} sx={{fontWeight:"600"}}>TAG: </Box>TRANSMISSION</Box>
            <Box sx={{fontSize:"12px",padding:"1px"}}><Box component={"span"} sx={{fontWeight:"600"}}>BRANDS: </Box> DENSO, GATES</Box>
          </Box>
+         <Box sx={{mt:2}}>
+         <Box  sx={{display:"flex",gap:"10px",fontSize:"12px",padding:"1px"}}>
+           <Box  sx={{fontWeight:"600"}}>SHARE: </Box> 
+        <Box sx={{display:"flex",alignItems:"center",gap:"3px"}}>
+        <Box sx={{backgroundColor:"#3b5998",cursor:"pointer" ,color:"white",borderRadius:"50%",width: "25px",height: "25px",display: "flex",justifyContent: "center",alignItems: "center",}}>
+        <FaFacebookF/>
+          </Box> 
+        <Box sx={{backgroundColor:"#1da1f2",cursor:"pointer" ,color:"white",borderRadius:"50%",width: "25px",height: "25px",display: "flex",justifyContent: "center",alignItems: "center",}}>
+        <FaTwitter />
+          </Box> 
+        <Box sx={{backgroundColor:"#e60023",cursor:"pointer" ,color:"white",borderRadius:"50%",width: "25px",height: "25px",display: "flex",justifyContent: "center",alignItems: "center",}}>
+        <FaPinterestP />
+          </Box> 
+        <Box sx={{backgroundColor:"#0077b5",cursor:"pointer" ,color:"white",borderRadius:"50%",width: "25px",height: "25px",display: "flex",justifyContent: "center",alignItems: "center",}}>
+        <FaLinkedinIn   />
+          </Box> 
+        <Box sx={{backgroundColor:"#25d366",cursor:"pointer" ,color:"white",borderRadius:"50%",width: "25px",height: "25px",display: "flex",justifyContent: "center",alignItems: "center",}}>
+        <FaWhatsapp   />
+          </Box> 
+        <Box sx={{backgroundColor:"#0088cc",cursor:"pointer" ,color:"white",borderRadius:"50%",width: "25px",height: "25px",display: "flex",justifyContent: "center",alignItems: "center",}}>
+        <FaTelegramPlane    />
+          </Box> 
+        <Box sx={{backgroundColor:"#7360f2",cursor:"pointer" ,color:"white",borderRadius:"50%",width: "25px",height: "25px",display: "flex",justifyContent: "center",alignItems: "center",}}>
+        <FaViber     />
+          </Box> 
+       
+        
+        </Box>
+         </Box>
+         </Box>
+         <Box  sx={{
+              mt: 2,
+              backgroundColor: "#f7f7f8",
+              padding: "10px 15px",
+              borderRadius: "5px",
+              border:'1px solid #eaebed'
+
+            }}
+          >
+            <Box sx={{color:"#c28e00",fontSize:"30px",display: "flex", justifyContent: "center",marginBottom: "10px"}}>
+              <img src={Images.payment} />
+              </Box>
+            <Box>
+              <Box  sx={{textAlign:"center", color: "#4e4e4e", fontSize: "14px", fontWeight: "600" }} >
+              GUARANTEED SAFE & SECURE CHECKOUT
+              </Box>
+            
+            </Box>
+          </Box>
         </Box>
 
-        <Box>3</Box>
+        </Box>
+        <Box sx={{display:{xs:"none",md:"flex"}}}>
+           <Box sx={{border:"1px solid #eaebed"}}>
+           <Box sx={{ padding: "30px 10px " ,borderBottom:"1px solid #eaebed", display: "flex",justifyContent:"center"  }}>
+          <input
+            style={{
+              border: "1px solid #eaebed",
+              padding: "10px 6px",
+              pr: 0,
+              backgroundColor:"white",
+            
+            }}
+            placeholder="Search Products"
+          />
+          <Box
+            component={"span"}
+            sx={{
+              backgroundColor: "#df6a2d",
+              color: "white",    
+              fontWeight: "bold",
+              fontSize: "12px",
+              display:"flex",
+              justifyContent:"center",
+              alignItems:"center",
+              padding: "9px",
+              
+            }}
+          >
+            SEARCH
+          </Box>
+        </Box>
+           <Box sx={{fontSize:"18px", padding: "30px 10px",fontWeight:"600" ,borderBottom:"1px solid #eaebed"  }}>
+          Products Categories
+          
+          <Box sx={{mt:2,border:"2px solid #eaebed ",padding:"10px"}}>
+          <Dropdown
+                  fontSize={"13px"}
+                  title={"Select a category "}
+                  keyValue1={"English"}
+                  keyValue2={"Hindhi"}
+                  keyValue3={"GERMANY"}
+                />
+          </Box>
+        </Box>
+          <Box sx={{mt:2,borderBottom:"1px solid #eaebed ",padding:"10px"}}>
+          <Box
+                sx={{ fontSize: "18px", fontWeight: "600", padding: "10px" }}
+              >
+                Featured Products
+              </Box>
+            <Drawerproducts/>
+          </Box>
+       
+           </Box>
+    
+          
+        </Box>
       </Box>
     </Box>
+      <Box sx={{border:"1px solid #eaebed",margin:'10px',borderRadius:"5px"}}>
+         <ProductTab/> 
+      </Box>
+      <Box sx={{mb:4 ,p:1  }}  component={"h4"}>You May Also Like...</Box>
+      <Box
+        sx={{ width: { md: "90%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
+      >
+        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
+      </Box>
+      </>
   );
 }
