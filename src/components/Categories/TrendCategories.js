@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import {Images} from "../../assets/images/index";
-export default function TrendCategories() {
+export default function TrendCategories({display,borderRadius,border,padding ,borderBottom}) {
 const trendCategories = [
     {
         title:"All Products",
@@ -41,7 +41,7 @@ const trendCategories = [
 ]
   return (
     <Box >
-      <Box component={"h4"}>Trend Categories</Box>
+      <Box component={"h4"} sx={{display:display}}>Trend Categories</Box>
       <Box sx={{ 
         marginTop: "10px" ,
         display:"flex" ,
@@ -52,9 +52,10 @@ const trendCategories = [
         <Box
         key={index}
           sx={{
-            border: " 1px solid #eaebed",
-            borderRadius: "50px",
-            padding: "5px",
+            border:border,
+            borderRadius: borderRadius,
+            borderBottom:borderBottom,
+            padding: padding,
             cursor:"pointer",
             "&:hover": {
               backgroundColor: "#df6a2d",

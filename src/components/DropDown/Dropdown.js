@@ -3,7 +3,7 @@ import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { Box } from "@mui/material";
 
-function Mydropdown({ title, keyValue1, keyValue2, keyValue3, keyValue4 ,fontSize }) {
+function Mydropdown({color, title, keyValue1, keyValue2, keyValue3, keyValue4 ,fontSize }) {
   //*for Hovered Text
   const [isHovered, setIsHovered] = useState(false);
 
@@ -11,53 +11,53 @@ function Mydropdown({ title, keyValue1, keyValue2, keyValue3, keyValue4 ,fontSiz
     {
       key: "1",
       label: (
-        <a
+        <Box
           style={{ fontSize: fontSize}}
           target="_blank"
           rel="noopener noreferrer"
           href=""
         >
           {keyValue1}
-        </a>
+        </Box>
       ),
     },
     {
       key: "2",
       label: (
-        <a
+        <Box
           style={{ fontSize: fontSize}}
           target="_blank"
           rel="noopener noreferrer"
           href=""
         >
           {keyValue2}
-        </a>
+        </Box>
       ),
     },
     {
       key: "3",
       label: (
-        <a
+        <Box
           style={{ fontSize: fontSize}}
           target="_blank"
           rel="noopener noreferrer"
           href=""
         >
           {keyValue3}
-        </a>
+        </Box>
       ),
     },
     {
       key: "4",
       label: (
-        <a
+        <Box
           style={{ fontSize: fontSize}}
           target="_blank"
           rel="noopener noreferrer"
           href=""
         >
           {keyValue4}
-        </a>
+        </Box>
       ),
     },
   ];
@@ -83,7 +83,7 @@ function Mydropdown({ title, keyValue1, keyValue2, keyValue3, keyValue4 ,fontSiz
           >
             <Box
               sx={{
-                color: isHovered ? "#4e4e4e" : "#000000",
+                color: color,
                 transition: isHovered ? "transform 0.3s ease-in-out" : "",
                 transform: isHovered ? "rotateX(360deg)" : "",
                 textDecoration: "none",

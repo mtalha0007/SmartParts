@@ -13,12 +13,14 @@ import FeedBack from "./components/FeedBack/FeedBack"
 import EditorReview from "./components/EditorReview/EditorReview";
 import Footer from "./layout/Footer/index";
 import FixedHeader from "./components/FixedHeader/FixedHeader";
+import CategoryHeader from "./components/Categories/CategoryHeader";
 
 export default function App() {
   return (
     <>
       <Header />
       <PrimarySearchAppBar />
+      <CategoryHeader/>
       <FixedHeader />
       <SlideSection />
       <CarCard />

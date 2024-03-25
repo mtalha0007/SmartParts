@@ -18,13 +18,10 @@ export default function PopularProducts() {
         <Box component={"h4"}>Popular Products</Box>
         <Box
           sx={{
-            display: "flex",
             gap: "10px",
             alignItems: "center",
             cursor: "pointer",
-            "@media screen and (max-width:767px)": {
-              display: "none",
-            },
+            display:{xs:"none",sm:"flex"}
           }}
         >
           <Box

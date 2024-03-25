@@ -29,9 +29,11 @@ export default function Searchbar({display , marginTop , width}) {
         },
       }));
   return (
-    <Search sx={{display:"flex",justifyContent:"center" ,marginTop:{marginTop}, backgroundColor:"#f7f7f8" ,"@media screen and (max-width:1024px)":{
+    <Search sx={{display:"flex",justifyContent:"center" ,marginTop:{marginTop}, backgroundColor:"#f7f7f8" ,
+    "@media screen and (max-width:1024px)":{
         display:{display},
-      } }}>
+      }
+       }}>
       <StyledInputBase
         sx={{width}}
         placeholder="Search For Products"

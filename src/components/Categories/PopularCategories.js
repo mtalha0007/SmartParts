@@ -9,10 +9,9 @@ export default function PopularCategories() {
       <Box sx={{ display: "flex", gap: "15px", alignItems: "center" ,flexWrap:"wrap",}}>
         <Box component={"h4"}>Popular Categories</Box>
         <Box sx={{
-           display: "flex", gap: "18px", alignItems: "center" ,cursor:"pointer",
-          '@media screen and (max-width:767px)':{
-           display:"none",
-     }
+            gap: "18px", alignItems: "center" ,cursor:"pointer",
+             display:{xs:"none",sm:"flex"}
+    
         }}>
         <Box
           sx={{

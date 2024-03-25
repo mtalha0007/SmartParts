@@ -11,6 +11,7 @@ import "../../App.css";
 import Searchbar from "../SearchBar/Searchbar";
 import { Divider } from "@mui/material";
 import Badges from "../Badges/Badges";
+import  AnchorTemporaryDrawer from "../Drawer/Drawer"
 
 function PrimarySearchAppBar() {
   return (
@@ -30,6 +31,7 @@ function PrimarySearchAppBar() {
         </Box>
         <Toolbar
           sx={{
+            padding:"0px",
             gap: "15px",
             "@media screen and (max-width:1024px)": {
               gap: "0px",
@@ -51,7 +53,7 @@ function PrimarySearchAppBar() {
               display: "none",
             }}
           >
-            <MenuIcon />
+             <AnchorTemporaryDrawer />
           </IconButton>
           {/* SearchBar and IconButton for Mobile */}
           <img

@@ -11,6 +11,7 @@ export default function () {
         display: "flex",
         gap: "20px",
         padding: "30px",
+        // flexDirection:{xs:"column-reverse",lg:"column"}
         "@media screen and (max-width:1024px)": {
           flexDirection: "column-reverse",
         },
@@ -21,6 +22,7 @@ export default function () {
           display: "flex",
           width:"100%",
           gap:"20px",
+          // flexDirection:{sm:"row " ,xs:"column-reverse"},
           "@media screen and (max-width:1024px)": {
             flexDirection: "row-reverse",
           },
@@ -32,6 +34,7 @@ export default function () {
         <Box
           sx={{
             width: "60%",
+            // width:{xs:"100%",sm:"60%"},
             "@media screen and (max-width:600px)": {
               width: "100%",
             },
