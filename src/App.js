@@ -14,7 +14,8 @@ import EditorReview from "./components/EditorReview/EditorReview";
 import Footer from "./layout/Footer/index";
 import FixedHeader from "./components/FixedHeader/FixedHeader";
 import CategoryHeader from "./components/Categories/CategoryHeader";
-
+import Login from "./layout/Login/index"
+// import AppRouter from "./routes/index"
 export default function App() {
   return (
     <>
@@ -22,7 +23,9 @@ export default function App() {
       <PrimarySearchAppBar />
       <CategoryHeader/>
       <FixedHeader />
-      <SlideSection />
+      {/* <AppRouter/> */}
+      <Login />
+      {/* <SlideSection />
       <CarCard />
       <CategoriesSection />
       <CarBanner />
@@ -31,7 +34,7 @@ export default function App() {
       <ProductReview />
       <AdBanner2 />
       <DoubleSLider/>
-      <EditorReview/>
+      <EditorReview/> */}
       <FeedBack/>
       <Footer />
     </>
