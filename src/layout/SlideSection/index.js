@@ -11,7 +11,7 @@ export default function () {
         display: "flex",
         gap: "20px",
         padding: "30px",
-        // flexDirection:{xs:"column-reverse",lg:"column"}
+        // flexDirection:{xs:"column-reverse",md:"row"}
         "@media screen and (max-width:1024px)": {
           flexDirection: "column-reverse",
         },
@@ -22,7 +22,7 @@ export default function () {
           display: "flex",
           width:"100%",
           gap:"20px",
-          // flexDirection:{sm:"row " ,xs:"column-reverse"},
+          // flexDirection:{sm:"column-reverse" ,md:"row-reverse",lg:"row"},
           "@media screen and (max-width:1024px)": {
             flexDirection: "row-reverse",
           },

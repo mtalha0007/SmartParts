@@ -88,9 +88,7 @@ function Header() {
           {/* ///importing Drawer */}
           <Box
             sx={{
-              "@media screen and (max-width:1024px)": {
-                display: "none",
-              },
+              display:{xs:"none",md:"flex"}
             }}
           >
             <AnchorTemporaryDrawer />
@@ -118,9 +116,8 @@ function Header() {
           </Box>
           <Box
             sx={{
-              "@media screen and (max-width:1024px)": {
-                display: "none",
-              },
+              display:{xs:"none",md:"flex"}
+             
             }}
           >
             <Box
