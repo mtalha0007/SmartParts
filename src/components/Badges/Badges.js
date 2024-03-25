@@ -1,5 +1,5 @@
 import { IconButton, Menu, MenuItem, Box } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import Badge from "@mui/material/Badge";
 import { LiaShoppingBagSolid } from "react-icons/lia";
@@ -10,7 +10,7 @@ export default function Badges() {
   ///For Hover
   const [anchorEl, setAnchorEl] = useState(null);
  
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -18,14 +18,20 @@ export default function Badges() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+  ///navigate t0 login page
   const handleNavigate =() =>{
-  // navigate("/account")
+  navigate("/account")
+  }
+
+  ////NAvigate to Cart Page
+  const handleNavigateToCart =() =>{
+  navigate("/cart")
   }
   return (
     <Box>
       <Box sx={{ display: "flex", gap: "10px" }}>
         <IconButton sx={{ maxWidth: "24px" }}>
-          <Badge badgeContent={4} color="error">
+          <Badge onClick={handleNavigateToCart} badgeContent={4} color="error">
             <LiaShoppingBagSolid />
           </Badge>
         </IconButton>

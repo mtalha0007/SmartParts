@@ -11,7 +11,7 @@ import { FaFacebookF, FaGoogle } from "react-icons/fa";
 
 function LoginPage() {
   return (
-    <Grid container sx={{ margin: "0 auto" }} className="container" spacing={2}>
+    <Grid container sx={{ margin: "0 auto",width:"100%" }} className="container" spacing={2}>
       <Grid item xs={12} md={6}>
         <Box sx={{ width: "100%" }}>
           <Box component={"h3"} sx={{ textAlign: "left" }}>
@@ -22,7 +22,9 @@ function LoginPage() {
           </Box>
           <TextField
             variant="outlined"
-            sx={{ mb: 1, padding: "12px 0px", width: "100%" }}
+            sx={{ mb: 1, padding: "12px 0px", width: "90%",
+           
+          }}
           />
           <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
             Password *
@@ -30,7 +32,7 @@ function LoginPage() {
           <TextField
             variant="outlined"
             type="password"
-            sx={{ padding: "12px 0px", width: "100%" }}
+            sx={{ padding: "12px 0px", width: "90%" }}
           />
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <FormControlLabel
@@ -54,6 +56,10 @@ function LoginPage() {
               fontSize: "12px",
               fontWeight: "400",
               backgroundColor: "#df6a2d",
+              "&:hover": {
+                backgroundColor: "#df6a2d",
+                color: "white",
+              },
             }}
           >
             Login
@@ -70,7 +76,7 @@ function LoginPage() {
           >
             Lost your password?
           </Box>
-          <Box sx={{mt:2}} className="col-5">
+          <Box sx={{mt:2 ,mb:10}} className="col-5">
             <Box
               sx={{
                 backgroundColor: "#4b70ab",
@@ -100,7 +106,7 @@ function LoginPage() {
                 textAlign: "left",
                 borderRadius:"5px",
                 fontSize:"13px"
-
+               
 
               }}
             >
@@ -120,7 +126,7 @@ function LoginPage() {
           </Box>
           <TextField
             variant="outlined"
-            sx={{ mb: 1, padding: "12px 0px", width: "100%" }}
+            sx={{ mb: 1, padding: "12px 0px", width: "90%" }}
           />
           <Box
             sx={{
@@ -151,6 +157,10 @@ function LoginPage() {
                 fontSize: "12px",
                 fontWeight: "400",
                 backgroundColor: "#df6a2d",
+                "&:hover": {
+                  backgroundColor: "#df6a2d",
+                  color: "white",
+                },
               }}
             >
               Register

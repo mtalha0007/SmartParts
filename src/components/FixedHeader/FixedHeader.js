@@ -5,10 +5,14 @@ import Badges from "../Badges/Badges";
 import { IconButton } from "@mui/material";
 import Dropdown from "../DropDown/Dropdown";
 import  AnchorTemporaryDrawer from "../Drawer/Drawer" 
+import { useNavigate } from "react-router-dom";
 export default function FixedHeader() {
   //* For Visible of Header
   const [isVisible, setIsVisible] = useState(false);
-
+  const navigate = useNavigate()
+  const handleNavigate = () => {
+   navigate("/")
+  }
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop =
@@ -57,7 +61,7 @@ export default function FixedHeader() {
         >
           <AnchorTemporaryDrawer />
         </IconButton>
-        <img className="logo" style={{ maxWidth: "180px" }} src={Images.logo} />
+        <img className="logo" style={{ maxWidth: "180px",cursor:"pointer" }} onClick={handleNavigate} c src={Images.logo} />
       </Box>
 
       <Box

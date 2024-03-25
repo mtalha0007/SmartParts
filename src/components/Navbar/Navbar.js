@@ -12,8 +12,15 @@ import Searchbar from "../SearchBar/Searchbar";
 import { Divider } from "@mui/material";
 import Badges from "../Badges/Badges";
 import  AnchorTemporaryDrawer from "../Drawer/Drawer"
+import { useNavigate } from "react-router-dom";
 
 function PrimarySearchAppBar() {
+
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+   navigate("/")
+  }
   return (
     <Box sx={{ flexGrow: 1, backgroundColor: "none" }}>
       <AppBar position="static" sx={{ backgroundColor: "white" , padding:"15px" , boxShadow:"none" }}>
@@ -57,8 +64,9 @@ function PrimarySearchAppBar() {
           </IconButton>
           {/* SearchBar and IconButton for Mobile */}
           <img
+           onClick={handleNavigate}
             className="logo"
-            style={{ maxWidth: "180px" }}
+            style={{ maxWidth: "180px" ,cursor:"pointer" }}
             src={Images.logo}
           />
 
