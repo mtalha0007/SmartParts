@@ -3,7 +3,7 @@ import React from 'react'
 import TrendCategories from '../../components/Categories/TrendCategories'
 import PopularCategories from '../../components/Categories/PopularCategories'
 
-export default function index() {
+export default function index({data}) {
   return (
     <Box sx={{display:"flex",gap:"10px" ,padding:"10px"}}>
         <Box sx={{display: {sm: 'none' ,xs:"none" ,md:"flex"}}}><TrendCategories padding="5px" border="1px solid #eaebed" borderRadius="50px"/></Box>
@@ -13,7 +13,7 @@ export default function index() {
           display:"flex",
           flexDirection:"column",
         }}>
-          <PopularCategories/>
+          <PopularCategories  data={data}/>
           </Box>
     </Box>
   )

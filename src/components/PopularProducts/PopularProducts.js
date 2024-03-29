@@ -3,7 +3,7 @@ import CategorySlider from "../CategorySlider/CategorySlider";
 import { Box } from "@mui/material";
 import { Svgs } from "../../assets/images/index";
 import { FaArrowRight } from "react-icons/fa";
-export default function PopularProducts() {
+export default function PopularProducts({data}) {
   return (
     <Box sx={{ marginTop: "30px" }}>
       <Box
@@ -177,7 +177,7 @@ export default function PopularProducts() {
       <Box
         sx={{ width: { md: "90%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
       >
-        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
+        <CategorySlider data={data} imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
       </Box>
     </Box>
   );

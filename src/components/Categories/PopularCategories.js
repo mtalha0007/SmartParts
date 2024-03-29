@@ -3,7 +3,7 @@ import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import CategorySlider from "../../components/CategorySlider/CategorySlider";
 import { Svgs } from "../../assets/images/index";
-export default function PopularCategories() {
+export default function PopularCategories({data}) {
   return (
     <>
       <Box sx={{ display: "flex", gap: "15px", alignItems: "center" ,flexWrap:"wrap",}}>
@@ -84,7 +84,7 @@ export default function PopularCategories() {
 
       <Box sx={{width:"90%"  ,m:"25px auto"}}>
  
-        <CategorySlider imgWidth="150px" slidesToShow={4} backgroundColor="#f7f7f8" color="black"/>
+        <CategorySlider data={data} imgWidth="150px" slidesToShow={4} backgroundColor="#f7f7f8" color="black"/>
         
         </Box>
     </>

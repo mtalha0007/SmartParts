@@ -2,16 +2,21 @@ import React from "react";
 import CategorySlider from "../CategorySlider/CategorySlider";
 import { Box } from "@mui/material";
 import { FaArrowRight } from "react-icons/fa";
-export default function DoubleSlider() {
+export default function DoubleSlider({ data }) {
+  console.log(data, "ssadskjasjdks");
   return (
-    <Box sx={{
+    <Box
+      sx={{
         display: "flex",
         flexDirection: { xs: "column", sm: "column", md: "row", lg: "row" },
         padding: "10px",
       }}
     >
-      <Box sx={{ width: { md: "50%", sm: "85%", xs: "85%" }, margin: "30px auto" }} >
-        <Box sx={{
+      <Box
+        sx={{ width: { md: "50%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
+      >
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -24,14 +29,18 @@ export default function DoubleSlider() {
           </Box>
         </Box>
         <CategorySlider
+          data={data}
           imgWidth="120px"
           slidesToShow={3}
           backgroundColor="#df6a2d"
           color="white"
         />
       </Box>
-      <Box sx={{ width: { md: "50%", sm: "85%", xs: "85%" }, margin: "30px auto" }} >
-        <Box sx={{
+      <Box
+        sx={{ width: { md: "50%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
+      >
+        <Box
+          sx={{
             display: "flex",
             justifyContent: "space-between",
             padding: "10px",
@@ -43,6 +52,7 @@ export default function DoubleSlider() {
           </Box>
         </Box>
         <CategorySlider
+          data={data}
           imgWidth="120px"
           slidesToShow={3}
           backgroundColor="#df6a2d"

@@ -11,8 +11,14 @@ import Coupon from "../Coupon/Coupon";
 import ProductTab from "./ProductTab";
 import Dropdown from "../DropDown/Dropdown"
 import CategorySlider from "../CategorySlider/CategorySlider";
+import CartProduct from "../Cart/CartProduct";
+import {useNavigate } from "react-router-dom";
 
 export default function ProductDetails() {
+const navigate = useNavigate()
+  const handleNavigate =()=>{
+    navigate("/")
+  }
   return (
     <>
     <Box sx={{ display: "flex",justifyContent:"center", padding: "20px 10px" }}>
@@ -37,8 +43,11 @@ export default function ProductDetails() {
         <Box>
         <Box sx={{ position: "sticky", top: "120px", padding: "0 10px" }}>
           <Box sx={{ display: "flex" ,mt:{xs:"15px",md:"0px"} }}>
+           
             <Box
+             onClick={handleNavigate}
               style={{
+                textDecoration:"none",
                 cursor: "pointer",
                 padding: "0",
                 maxWidth: "100%",
@@ -50,6 +59,7 @@ export default function ProductDetails() {
             >
               Home
             </Box>
+            
             <Box
               sx={{
                 cursor: "pointer",
@@ -456,6 +466,10 @@ export default function ProductDetails() {
                 Featured Products
               </Box>
             <Drawerproducts/>
+          </Box>
+          <Box sx={{width:"10px" ,padding:'10px'}}>
+            <Box  component={"h6"}>Cart</Box>
+                <CartProduct alignItems="none" flexDirection="column" margin="10px 50px" display="none" />                                            
           </Box>
        
            </Box>

@@ -1,16 +1,33 @@
-import React from "react";
+import React ,{useState ,useEffect} from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Box } from "@mui/material";
-import {Images} from "../../assets/images/index";
 import ReactStars from "react-stars";
+import productServices from "../../services/productServices";
 
-export default function CategorySlider({backgroundColor ,color,slidesToShow,imgWidth}) {
 
-   
+
+
+export default function CategorySlider({backgroundColor ,color,slidesToShow,imgWidth,data}) {
+  
+  // const [cardDetails, setCardDetails] = useState([]);
+  // const getProductData = async () => {
+  //   try {
+  //     const productData = await productServices.getProductData()
+  //     setCardDetails(productData.data.result) 
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+  
+  // useEffect(() => {
+  
+  // getProductData();
+  // }, [])
+  
     var settings = {
       dots: false,
       infinite: true,
@@ -47,48 +64,48 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
       ],
     };
 
-    const CardDetails = [
-      {
-        title:"Bling Rhinestones Car Steering Wheel",
-        image: Images.sliderImage1,
-        discountedPrice:"$9.99",
-        originalPrice: "$41.99",
-      },
-      {
-        title:"Multi-Vehicle Automatic Transmission Fluid",
-        image: Images.sliderImage2,
-        discountedPrice:"$11.99",
-        originalPrice: "$7.99",
-      },
-      {
-        title:"Mercedes Transmission Filter",
-        image: Images.sliderImage3,
-        discountedPrice:"$25.99",
-        originalPrice: "$21.99",
-      },
-      {
-        title:"RIDEX 3707A0009 Gear knob 28P85",
-        image: Images.sliderImage4,
-        discountedPrice:"$162.99",
-        originalPrice: "$151.99",
-      },
-      {
-        title:"Duralast Clutch NU31023B023B 23B",
-        image: Images.sliderImage5,
-        discountedPrice:"$89.99",
-        originalPrice: "$120.99",
-      },
-      {
-        title:"Duralast Gold Tie Rod End GES3663",
-        image: Images.sliderImage6,
-        discountedPrice:"$51.99",
-        originalPrice: "$57.99",
-      },
-    ];
+    // const CardDetails = [
+    //   {
+    //     title:"Bling Rhinestones Car Steering Wheel",
+    //     image: Images.sliderImage1,
+    //     discountedPrice:"$9.99",
+    //     originalPrice: "$41.99",
+    //   },
+    //   {
+    //     title:"Multi-Vehicle Automatic Transmission Fluid",
+    //     image: Images.sliderImage2,
+    //     discountedPrice:"$11.99",
+    //     originalPrice: "$7.99",
+    //   },
+    //   {
+    //     title:"Mercedes Transmission Filter",
+    //     image: Images.sliderImage3,
+    //     discountedPrice:"$25.99",
+    //     originalPrice: "$21.99",
+    //   },
+    //   {
+    //     title:"RIDEX 3707A0009 Gear knob 28P85",
+    //     image: Images.sliderImage4,
+    //     discountedPrice:"$162.99",
+    //     originalPrice: "$151.99",
+    //   },
+    //   {
+    //     title:"Duralast Clutch NU31023B023B 23B",
+    //     image: Images.sliderImage5,
+    //     discountedPrice:"$89.99",
+    //     originalPrice: "$120.99",
+    //   },
+    //   {
+    //     title:"Duralast Gold Tie Rod End GES3663",
+    //     image: Images.sliderImage6,
+    //     discountedPrice:"$51.99",
+    //     originalPrice: "$57.99",
+    //   },
+    // ];
     return (
       <Box>
         <Slider {...settings}>
-        {CardDetails.map((elem ,index)=>(
+        {data?.length > 0 && data?.map((elem ,index)=>(
           <Box key={index}>
             <Card
             className="col-md-11 col-sm-12 "
@@ -108,7 +125,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
               <Card.Img
               style={{width:imgWidth ,margin:"0 auto"}}
                 variant="top"
-                src={elem.image}
+                src={elem.picture}
               />
               <Card.Body>
                 <Card.Title>
@@ -121,7 +138,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
                   >
                     <Box>
                       <Box sx={{ fontSize: "12px" }}>
-                        {elem.title}
+                        {elem.category_id.name}
                       </Box>
                       <Box
                         sx={{ display: "flex", gap: "5px", marginTop: "10px" }}
@@ -134,7 +151,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
                             fontWeight: "600",
                           }}
                         >
-                          {elem.discountedPrice}
+                         ${elem.discounted_price }
                         </Box>
                         <Box
                           sx={{
@@ -143,7 +160,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
                             fontWeight: "600",
                           }}
                         >
-                         {elem.originalPrice}
+                        ${elem.price}
                         </Box>
                       </Box>
                       <Box sx={{ marginTop: "10px" }}>
