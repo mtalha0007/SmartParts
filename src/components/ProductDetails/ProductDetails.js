@@ -14,7 +14,7 @@ import CategorySlider from "../CategorySlider/CategorySlider";
 import CartProduct from "../Cart/CartProduct";
 import {useNavigate } from "react-router-dom";
 
-export default function ProductDetails() {
+export default function ProductDetails({data}) {
 const navigate = useNavigate()
   const handleNavigate =()=>{
     navigate("/")
@@ -485,7 +485,7 @@ const navigate = useNavigate()
       <Box
         sx={{ width: { md: "90%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
       >
-        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
+        <CategorySlider data={data} imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
       </Box>
       </>
   );

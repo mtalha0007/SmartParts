@@ -1,6 +1,6 @@
 import { IconButton, Menu, MenuItem, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Badge from "@mui/material/Badge";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { TbRotateClockwise } from "react-icons/tb";
@@ -9,6 +9,9 @@ import { FaRegHeart, FaRegUserCircle } from "react-icons/fa";
 export default function Badges() {
   ///For Hover
   const [anchorEl, setAnchorEl] = useState(null);
+  
+ 
+  
  
   const navigate = useNavigate();
 
@@ -31,7 +34,7 @@ export default function Badges() {
     <Box>
       <Box sx={{ display: "flex", gap: "10px" }}>
         <IconButton onClick={handleNavigateToCart} sx={{ maxWidth: "24px" }}>
-          <Badge  badgeContent={4} color="error">
+          <Badge  badgeContent={2} color="error">
             <LiaShoppingBagSolid />
           </Badge>
         </IconButton>
