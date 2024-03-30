@@ -6,27 +6,10 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Box } from "@mui/material";
 import ReactStars from "react-stars";
-import productServices from "../../services/productServices";
+import { Images } from "../../assets/images";
 
-
-
-
-export default function CategorySlider({backgroundColor ,color,slidesToShow,imgWidth,data}) {
+export default function CategorySlider({backgroundColor ,color,slidesToShow,imgWidth,data,addToCart}) {
   
-  // const [cardDetails, setCardDetails] = useState([]);
-  // const getProductData = async () => {
-  //   try {
-  //     const productData = await productServices.getProductData()
-  //     setCardDetails(productData.data.result) 
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
-  
-  // useEffect(() => {
-  
-  // getProductData();
-  // }, [])
   
     var settings = {
       dots: false,
@@ -125,7 +108,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
               <Card.Img
               style={{width:imgWidth ,margin:"0 auto"}}
                 variant="top"
-                src={elem.picture}
+                src={Images.product2}
               />
               <Card.Body>
                 <Card.Title>
@@ -204,7 +187,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
                     </Box>
                   </Box>
                 </Card.Title>
-                  <Button style={{width:"100%" ,border:"none", backgroundColor:backgroundColor ,color:color,fontSize:"13px"}}> Add to Cart</Button>
+                  <Button onClick={() => addToCart(elem)} style={{width:"100%" ,border:"none", backgroundColor:backgroundColor ,color:color,fontSize:"13px"}}> Add to Cart</Button>
               </Card.Body>
             </Card>
           </Box>

@@ -1,11 +1,30 @@
-import { Box, Divider, Grid, Input } from "@mui/material";
-import React from "react";
-import { Svgs, Images } from "../../assets/images";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { Box, Grid } from "@mui/material";
+import React,{useState} from "react";
+import { Svgs} from "../../assets/images";
 import CategorySlider from "../CategorySlider/CategorySlider"
 import ProductReview from "../ProductReview/ProductReview"
 import CartProduct from "./CartProduct";
-export default function Cart() {
+export default function Cart({data}) {
+  // for cartData  
+  const [cartData, setCartData] = useState([]);
+ 
+
+  const addToCart = (selectedProduct) => {
+    setCartData(currentCartData => [...currentCartData, selectedProduct]);
+    console.log('Adding to cart:', selectedProduct);
+   
+    
+  };
+  
+  const handleDeleteProduct = (productId) => {
+    setCartData(currentCartData => 
+      currentCartData.filter(product => product.category_id._id !== productId)
+      );
+      
+   
+  };
+  
+
   return (
     <>
       <Grid
@@ -14,7 +33,7 @@ export default function Cart() {
         gap="10px"
         
       >
-        <Grid xs={12} md={8}>
+        <Grid item xs={12} md={8}>
           <Box
             sx={{
               border: "1px solid #df6a2d",
@@ -79,72 +98,12 @@ export default function Cart() {
               borderRadius: "0 0 5px 5px",
             }}
           >
-            <CartProduct alignItems="center" />
-            <Divider />
-
-            <Box
-              sx={{
-                padding: "10px",
-                display: "flex",
-                justifyContent: "space-between",
-                flexDirection: { xs: "column", md: "row" },
-              }}
-            >
-              <Box
-                sx={{
-                  padding: "10px",
-                  gap: "15px",
-                  display: "flex",
-                  flexDirection: { xs: "column", md: "row" },
-                }}
-              >
-                <Input
-                  disableUnderline
-                  placeholder={"Coupon Code"}
-                  sx={{
-                    fontSize: "13px",
-                    padding: "5px",
-                    textAlign: "center",
-                    width: "100%",
-                    // width: {sx:"100%",md:"170px"},
-                    border: "2px solid #eaebed",
-                  }}
-                />
-                <Box
-                  sx={{
-                    backgroundColor: "#df6a2d",
-                    color: "white",
-                    fontSize: "13px",
-                    padding: "9px 0",
-                    textAlign: "center",
-                    width: "100%",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                  }}
-                >
-                  Apply Coupons
-                </Box>
-              </Box>
-              <Box sx={{ padding: "10px 10px" }}>
-                <Box
-                  sx={{
-                    padding: "10px 10px",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    fontSize: "13px",
-                    textAlign: "center",
-                    backgroundColor: "#1e96fc",
-                    color: "white",
-                  }}
-                >
-                  Update Cart
-                </Box>
-              </Box>
-            </Box>
+            <CartProduct cartData={cartData} onDelete={handleDeleteProduct} alignItems="center" />
+            
           </Box>
         </Grid>
 
-        <Grid xs={12} md={3.8}>
+        <Grid item xs={12} md={3.8}>
          <Box sx={{border:"2px solid #eaebed" ,padding:"30px",borderRadius:"5px"}}>
         <Box component={"h5"}>
             Cart Totals
@@ -173,7 +132,7 @@ export default function Cart() {
       <Box
         sx={{ width: { md: "90%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
       >
-        <CategorySlider imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
+        <CategorySlider data={data} addToCart={addToCart} imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
       </Box>
 
       <Box>
