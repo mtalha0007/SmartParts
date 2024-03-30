@@ -122,7 +122,7 @@ export default function Cart() {
                     cursor: "pointer",
                   }}
                 >
-                  Apply Coupon
+                  Apply Coupons
                 </Box>
               </Box>
               <Box sx={{ padding: "10px 10px" }}>
