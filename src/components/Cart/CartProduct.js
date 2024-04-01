@@ -1,33 +1,27 @@
-import React, { useState } from "react";
+
+import React, { useContext, useState } from "react";
 import { Box, Grid, Input, IconButton, Divider } from "@mui/material";
 import { Images } from "../../assets/images";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-function CartProduct({alignItems, display, flexDirection, margin, cartData, onDelete,onUpdate}) {
-  const {register,getValues,setValue,formState: { errors },} = useForm();
-  
-  const handleCalc = (operation, id) => {
-    let currentValue = +getValues(`count${id?.category_id?._id}`)+1;
-    let currentValue1 = +getValues(`count${id?.category_id?._id}`);
-    if (operation === "add") {
-      currentValue = +getValues(`count${id?.category_id?._id}`)+1;
-        setValue(`count${id?.category_id?._id}`, currentValue ); 
-        console.log(currentValue * id.discounted_price); 
-    } else if (operation === "sub") {
-      
-        if (currentValue1 > 1) {
-          currentValue1 = +getValues(`count${id?.category_id?._id}`)-1;
-            setValue(`count${id?.category_id?._id}`, currentValue1 );
-            console.log(currentValue1 * id.discounted_price);
-        } else {
-            setValue(`count${id?.category_id?._id}`, 1);
-        }
-      }
-      let result = currentValue* id.discounted_price + currentValue1* id.discounted_price;
-      console.log("TOTAL",result)
-};
+import { ContextApi } from "../../store/context";
+function CartProduct({alignItems, display, flexDirection, margin, cartData,}) {
+
+  const { state, dispatch } = useContext(ContextApi);
+  console.log("state ==>> ", state.cart_items);
+
+function DeleteProduct(_id) {
+  dispatch({ type: 'DELETE_PRODUCT', payload: { _id } })
+}
+function IncrementQuantity(_id) {
+  dispatch({ type: 'INCREMENT_PRODUCT', payload: { _id } })
+}
+
+function DecrementQuantity(_id) {
+  dispatch({ type: 'DECREMENT_PRODUCT', payload: { _id } })
+}
 
   const navigate = useNavigate();
   const handleNavigateHome = () => {
@@ -46,8 +40,8 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
       }}
       spacing={2}
     >
-      {cartData?.length > 0 ? (
-        cartData?.map((elem, index) => (
+      { state.cart_items?.length > 0 ? (
+         state.cart_items?.map((elem, index) => (
           <React.Fragment key={index}>
             <Grid item xs={12} md={6}>
               <Box sx={{ display: "flex", alignItems: "center", gap: "15px" }}>
@@ -67,7 +61,7 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
                     fontWeight: "500",
                   }}
                 >
-                  <Box>{elem?.category_id?.name}</Box>
+                  <Box>{elem?.name}</Box>
                   <Box sx={{ color: "#b20808" }}>${elem?.discounted_price}</Box>
                 </Box>
               </Box>
@@ -87,7 +81,7 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
                 }}
               >
                 <Box display="flex">
-                  {/* Quantity Increment/Decrement and Display */}
+                 
                   <Box
                     component="span"
                     sx={{
@@ -95,13 +89,13 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
                       padding: "4px 6px",
                       cursor: "pointer",
                     }}
-                    onClick={() => handleCalc("add", elem)}
+                    onClick={() => IncrementQuantity(elem._id)}
                   >
                     +
                   </Box>
                   <Input
                   readOnly
-                  value={1}
+                  value={elem.quantity}
                     type="number"
                     disableUnderline
                     sx={{
@@ -109,7 +103,7 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
                       border: "1px solid #eaebed",
                       "& input": { textAlign: "center" },
                     }}
-                    {...register(`count${elem?.category_id?._id}`)}
+                 
                   />
                   <Box
                     component="span"
@@ -118,7 +112,8 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
                       padding: "4px 6px",
                       cursor: "pointer",
                     }}
-                    onClick={() => handleCalc("sub", elem)}
+                    onClick={() => DecrementQuantity(elem._id)}
+                    
                   >
                     -
                   </Box>
@@ -129,7 +124,8 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
                   ${elem?.discounted_price}
                 </Box>
                 <Box
-                  onClick={() => onDelete(elem?.category_id?._id)}
+                onClick={() => DeleteProduct(elem._id)}
+                 
                   sx={{
                     fontSize: "17px",
                     color: "#ababab",
@@ -176,71 +172,7 @@ function CartProduct({alignItems, display, flexDirection, margin, cartData, onDe
           </Box>
         </Box>
       )}
-      {/* {!cartData.length == 0 && (
-        <>
-          <Box
-            sx={{
-              width: "100%",
-              padding: "10px",
-              display: "flex",
-              justifyContent: "space-between",
-              flexDirection: { xs: "column", md: "row" },
-            }}
-          >
-            <Box
-              sx={{
-                padding: "10px",
-                gap: "15px",
-                display: "flex",
-                flexDirection: { xs: "column", md: "row" },
-              }}
-            >
-              <Input
-                disableUnderline
-                placeholder={"Coupon Code"}
-                sx={{
-                  fontSize: "13px",
-                  padding: "5px",
-                  textAlign: "center",
-                  width: "100%",
-                  // width: {sx:"100%",md:"170px"},
-                  border: "2px solid #eaebed",
-                }}
-              />
-              <Box
-                sx={{
-                  backgroundColor: "#df6a2d",
-                  color: "white",
-                  fontSize: "13px",
-                  padding: "9px 0",
-                  textAlign: "center",
-                  width: "100%",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                Apply Coupons
-              </Box>
-            </Box>
-            <Box sx={{ padding: "10px 10px" }}>
-              <Box
-            
-                sx={{
-                  padding: "10px 10px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  fontSize: "13px",
-                  textAlign: "center",
-                  backgroundColor: "#1e96fc",
-                  color: "white",
-                }}
-              >
-                Update Cart
-              </Box>
-            </Box>
-          </Box>
-        </>
-      )} */}
+      
     </Grid>
   );
 }
