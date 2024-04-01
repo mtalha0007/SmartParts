@@ -1,37 +1,30 @@
 import { Box, Grid } from "@mui/material";
-import React,{useState} from "react";
-import { Svgs} from "../../assets/images";
-import CategorySlider from "../CategorySlider/CategorySlider"
-import ProductReview from "../ProductReview/ProductReview"
+import React, { useState, useContext } from "react";
+import { Svgs } from "../../assets/images";
+import CategorySlider from "../CategorySlider/CategorySlider";
+import ProductReview from "../ProductReview/ProductReview";
 import CartProduct from "./CartProduct";
-export default function Cart({data}) {
-  // for cartData  
+import { ContextApi } from "../../store/context";
+export default function Cart({ data, result }) {
+  // for cartData
   const [cartData, setCartData] = useState([]);
+  const { state, dispatch } = useContext(ContextApi);
+  
+  function SubTotal() {
+    let total = 0
+    for (let i = 0; i < state.cart_items.length; i++) {
+        total += (state.cart_items[i].discounted_price * state.cart_items[i].quantity)
+    }
+    return total
+  }
  
-
-  const addToCart = (selectedProduct) => {
-    setCartData(currentCartData => [...currentCartData, selectedProduct]);
-    console.log('Adding to cart:', selectedProduct);
-   
-    
-  };
-  
-  const handleDeleteProduct = (productId) => {
-    setCartData(currentCartData => 
-      currentCartData.filter(product => product.category_id._id !== productId)
-      );
-      
-   
-  };
-  
 
   return (
     <>
       <Grid
-       container
+        container
         sx={{ paddingLeft: "0px", margin: "40px auto", width: "90%" }}
         gap="10px"
-        
       >
         <Grid item xs={12} md={8}>
           <Box
@@ -98,45 +91,84 @@ export default function Cart({data}) {
               borderRadius: "0 0 5px 5px",
             }}
           >
-            <CartProduct cartData={cartData} onDelete={handleDeleteProduct} alignItems="center" />
-            
+            <CartProduct
+              cartData={cartData}
+              // onDelete={handleDeleteProduct}
+              alignItems="center"
+            />
           </Box>
         </Grid>
 
         <Grid item xs={12} md={3.8}>
-         <Box sx={{border:"2px solid #eaebed" ,padding:"30px",borderRadius:"5px"}}>
-        <Box component={"h5"}>
-            Cart Totals
-        </Box>
-        <Box sx={{display:"flex",mt:2 ,justifyContent:"space-between"}}>
-            <Box sx={{fontSize:'13px',fontWeight:"500"}}>SUBTOTAL</Box>
-            <Box sx={{fontSize:'13px',fontWeight:"500",color:"#b20808"}}>$7.99</Box>
-        </Box>
-        <Box sx={{backgroundColor:"#fff3ed",mt:2,padding:'10px'}}>
-        <Box sx={{fontSize:"14px" ,color:"#df6a2d"}}>Shipping</Box>
-        <Box sx={{fontSize:"14px" ,color:"#df6a2d"}}>Enter your address to view shipping options.</Box>
-        <Box sx={{fontSize:"13px" }}>Calculate Shipping</Box>
-        </Box>
-        <Box sx={{display:"flex",mt:2 ,justifyContent:"space-between"}}>
-            <Box sx={{fontSize:'13px',fontWeight:"500"}}>TOTAL</Box>
-            <Box sx={{fontSize:'13px',fontWeight:"500",color:"#b20808"}}>$7.99</Box>
-        </Box>
-        <Box sx={{mt:2,backgroundColor:"#df6a2d",color:"white",textAlign:"center" ,borderRadius:"5px",padding:"10px"}}>
-            Proceed to checkout
-        </Box>
-         </Box>
+          <Box
+            sx={{
+              border: "2px solid #eaebed",
+              padding: "30px",
+              borderRadius: "5px",
+            }}
+          >
+            <Box component={"h5"}>Cart Totals</Box>
+            <Box
+              sx={{ display: "flex", mt: 2, justifyContent: "space-between" }}
+            >
+              <Box sx={{ fontSize: "13px", fontWeight: "500" }}>SUBTOTAL</Box>
+              <Box
+                sx={{ fontSize: "13px", fontWeight: "500", color: "#b20808" }}
+              >
+                ${SubTotal()}
+              </Box>
+            </Box>
+            <Box sx={{ backgroundColor: "#fff3ed", mt: 2, padding: "10px" }}>
+              <Box sx={{ fontSize: "14px", color: "#df6a2d" }}>Shipping</Box>
+              <Box sx={{ fontSize: "14px", color: "#df6a2d" }}>
+                Enter your address to view shipping options.
+              </Box>
+              <Box sx={{ fontSize: "13px" }}>Calculate Shipping</Box>
+            </Box>
+            <Box
+              sx={{ display: "flex", mt: 2, justifyContent: "space-between" }}
+            >
+              <Box sx={{ fontSize: "13px", fontWeight: "500" }}>TOTAL</Box>
+              <Box
+                sx={{ fontSize: "13px", fontWeight: "500", color: "#b20808" }}
+              >
+                ${SubTotal()}
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                mt: 2,
+                backgroundColor: "#df6a2d",
+                color: "white",
+                textAlign: "center",
+                borderRadius: "5px",
+                padding: "10px",
+              }}
+            >
+              Proceed to checkout
+            </Box>
+          </Box>
         </Grid>
       </Grid>
 
-      <Box sx={{mb:4 ,p:1  }}  component={"h4"}>You May Be Interested In...</Box>
+      <Box sx={{ mb: 4, p: 1 }} component={"h4"}>
+        You May Be Interested In...
+      </Box>
       <Box
         sx={{ width: { md: "90%", sm: "85%", xs: "85%" }, margin: "30px auto" }}
       >
-        <CategorySlider data={data} addToCart={addToCart} imgWidth="200px" slidesToShow={4} backgroundColor="#df6a2d"  color="white" />
+        <CategorySlider
+          data={data}
+          // addToCart={addToCart}
+          imgWidth="200px"
+          slidesToShow={4}
+          backgroundColor="#df6a2d"
+          color="white"
+        />
       </Box>
 
       <Box>
-        <ProductReview/>
+        <ProductReview />
       </Box>
     </>
   );
