@@ -7,7 +7,12 @@ import CartProduct from "./CartProduct";
 export default function Cart({data}) {
   // for cartData  
   const [cartData, setCartData] = useState([]);
- 
+  const [inputData, setInputData] = useState(1)
+  let totalPrice = 0; 
+  let myCartData = cartData.map(elem => {
+    totalPrice += elem.discounted_price;
+    return elem; 
+  });
 
   const addToCart = (selectedProduct) => {
     setCartData(currentCartData => [...currentCartData, selectedProduct]);
@@ -24,7 +29,20 @@ export default function Cart({data}) {
    
   };
   
+  const handleIncreament=()=>{
+    setInputData(inputData + 1)
+   
+  }
+  const handleDecreament=()=>{
+    setInputData(inputData - 1)
 
+  }
+  const handleUptate=()=>{
+      totalPrice *=inputData
+      return totalPrice 
+      console.log(totalPrice)
+
+  }
   return (
     <>
       <Grid
@@ -98,7 +116,7 @@ export default function Cart({data}) {
               borderRadius: "0 0 5px 5px",
             }}
           >
-            <CartProduct cartData={cartData} onDelete={handleDeleteProduct} alignItems="center" />
+            <CartProduct cartData={cartData} onDelete={handleDeleteProduct} onUpdate={handleUptate} onAdd={handleIncreament} onRemove ={handleDecreament} inputData={inputData} alignItems="center" />
             
           </Box>
         </Grid>
@@ -110,7 +128,7 @@ export default function Cart({data}) {
         </Box>
         <Box sx={{display:"flex",mt:2 ,justifyContent:"space-between"}}>
             <Box sx={{fontSize:'13px',fontWeight:"500"}}>SUBTOTAL</Box>
-            <Box sx={{fontSize:'13px',fontWeight:"500",color:"#b20808"}}>$7.99</Box>
+            <Box sx={{fontSize:'13px',fontWeight:"500",color:"#b20808"}}>${totalPrice}</Box>
         </Box>
         <Box sx={{backgroundColor:"#fff3ed",mt:2,padding:'10px'}}>
         <Box sx={{fontSize:"14px" ,color:"#df6a2d"}}>Shipping</Box>
@@ -119,7 +137,7 @@ export default function Cart({data}) {
         </Box>
         <Box sx={{display:"flex",mt:2 ,justifyContent:"space-between"}}>
             <Box sx={{fontSize:'13px',fontWeight:"500"}}>TOTAL</Box>
-            <Box sx={{fontSize:'13px',fontWeight:"500",color:"#b20808"}}>$7.99</Box>
+            <Box sx={{fontSize:'13px',fontWeight:"500",color:"#b20808"}}>${totalPrice}</Box>
         </Box>
         <Box sx={{mt:2,backgroundColor:"#df6a2d",color:"white",textAlign:"center" ,borderRadius:"5px",padding:"10px"}}>
             Proceed to checkout

@@ -1,11 +1,16 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { Box, Grid, Input ,IconButton,Divider} from '@mui/material';
 import { Images } from '../../assets/images';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { LiaShoppingBagSolid } from "react-icons/lia";
-function CartProduct({ alignItems, display, flexDirection, margin, cartData ,onDelete }) {
-  
-  
+import { useNavigate } from 'react-router-dom';
+function CartProduct({ alignItems, display, flexDirection, margin, cartData ,onDelete ,onAdd,onRemove,onUpdate ,inputData}) {
+ 
+  const navigate = useNavigate()
+  const handleNavigateHome =()=>{
+         navigate("/")
+  }
+
 
   return (
     <Grid
@@ -64,11 +69,12 @@ function CartProduct({ alignItems, display, flexDirection, margin, cartData ,onD
                     padding: "4px 6px",
                     cursor: "pointer",
                   }}
+                  onClick={onAdd}
                 >
                   +
                 </Box>
                 <Input
-                  value="1" // Placeholder value; consider managing quantity in state
+                  value={inputData=inputData} 
                   disableUnderline
                   sx={{
                     width: "80px",
@@ -83,6 +89,8 @@ function CartProduct({ alignItems, display, flexDirection, margin, cartData ,onD
                     padding: "4px 6px",
                     cursor: "pointer",
                   }}
+                  onClick={onRemove}
+
                 >
                   -
                 </Box>
@@ -115,7 +123,7 @@ function CartProduct({ alignItems, display, flexDirection, margin, cartData ,onD
         <Box>
         Your cart currently is empty
         </Box>
-        <Box sx={{width:"140px",margin:"9px auto",padding:"6px",textAlign:"center",color:"white",backgroundColor:"#df6a2d" ,borderRadius:"5px"}}>
+        <Box onClick={handleNavigateHome}  sx={{width:"140px",cursor:"pointer",margin:"9px auto",padding:"6px",textAlign:"center",color:"white",backgroundColor:"#df6a2d" ,borderRadius:"5px"}}>
         Return to Shop
         </Box>
         </Box>}
@@ -167,6 +175,7 @@ function CartProduct({ alignItems, display, flexDirection, margin, cartData ,onD
               </Box>
               <Box sx={{ padding: "10px 10px" }}>
                 <Box
+                onClick={()=>onUpdate()}
                   sx={{
                     padding: "10px 10px",
                     borderRadius: "5px",

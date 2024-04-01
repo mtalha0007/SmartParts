@@ -134,7 +134,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
                             fontWeight: "600",
                           }}
                         >
-                         ${elem.discounted_price }
+                         ${elem.price }
                         </Box>
                         <Box
                           sx={{
@@ -143,7 +143,7 @@ export default function CategorySlider({backgroundColor ,color,slidesToShow,imgW
                             fontWeight: "600",
                           }}
                         >
-                        ${elem.price}
+                        ${elem.discounted_price}
                         </Box>
                       </Box>
                       <Box sx={{ marginTop: "10px" }}>
