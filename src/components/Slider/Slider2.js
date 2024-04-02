@@ -12,12 +12,16 @@ function DarkVariantExample1() {
           <Box sx={{fontWeight:"bold" , color:"white" ,textAlign:"left",marginTop:"10px", fontSize:"35px"}}>Interior Accessories</Box>
           <Box sx={{fontWeight:"600" , color:"white" , lineHeight:"30px",fontSize:"17px" ,marginTop:"15px", textAlign:"justify"}}>Headphones are a type of audio equipment that are worn on or over the ears to listen to music, podcasts, audiobooks, and other forms of audio content privately.</Box>
           <Box sx={{display:"flex", gap:"10px" , marginTop:"10px"}}>
-            <Box><Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#df6a2d" ,textTransform:"capitalize"}}>
+            <Box>
+              <Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#df6a2d" ,textTransform:"capitalize"}}>
               Buy SL2300
-            </Button></Box>
-            <Box><Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#072ac8" ,textTransform:"capitalize"}}>
+            </Button>
+            </Box>
+            <Box>
+              <Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#072ac8" ,textTransform:"capitalize"}}>
               All Products
-            </Button></Box>
+            </Button>
+            </Box>
           </Box>
         </Carousel.Caption>
         <img 
@@ -33,12 +37,16 @@ function DarkVariantExample1() {
           <Box sx={{fontWeight:"bold" , color:"white" ,textAlign:"left",marginTop:"10px", fontSize:"35px"}}>Trend Car Rims</Box>
           <Box sx={{fontWeight:"600" , color:"white" , lineHeight:"30px",fontSize:"17px" ,marginTop:"15px", textAlign:"justify"}}>Headphones are a type of audio equipment that are worn on or over the ears to listen to music, podcasts, audiobooks, and other forms of audio content privately.</Box>
           <Box sx={{display:"flex", gap:"10px" , marginTop:"10px"}}>
-            <Box><Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#1e96fc" ,textTransform:"capitalize"}}>
+            <Box>
+              <Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#1e96fc" ,textTransform:"capitalize"}}>
               Buy SL2300
-            </Button></Box>
-            <Box><Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#019267" ,textTransform:"capitalize"}}>
+            </Button>
+            </Box>
+            <Box>
+              <Button   sx={{ width: '100%',color:"white",padding:"5px 18px" ,borderRadius:"5px",backgroundColor:"#019267" ,textTransform:"capitalize"}}>
               All Products
-            </Button></Box>
+            </Button>
+            </Box>
           </Box>
         </Carousel.Caption>
         <img

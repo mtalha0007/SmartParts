@@ -30,9 +30,9 @@ function AnchorTemporaryDrawer() {
     <div>
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <IconButton onClick={toggleDrawer(anchor, true)}>
+          <Box onClick={toggleDrawer(anchor, true)}>
             <MenuIcon />
-          </IconButton>
+          </Box>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

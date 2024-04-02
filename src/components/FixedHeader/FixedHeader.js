@@ -61,7 +61,7 @@ export default function FixedHeader() {
         >
           <AnchorTemporaryDrawer />
         </IconButton>
-        <img className="logo" style={{ maxWidth: "180px",cursor:"pointer" }} onClick={handleNavigate} c src={Images.logo} />
+        <img className="logo" style={{ maxWidth: "180px",cursor:"pointer" }} onClick={handleNavigate}  src={Images.logo} />
       </Box>
 
       <Box

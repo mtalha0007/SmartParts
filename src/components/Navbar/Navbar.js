@@ -66,7 +66,7 @@ function PrimarySearchAppBar() {
           <img
            onClick={handleNavigate}
             className="logo"
-            style={{ maxWidth: "180px" ,cursor:"pointer" }}
+            style={{ maxWidth: "180px" ,cursor:"pointer",marginTop:'6px' }}
             src={Images.logo}
           />
 

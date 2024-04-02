@@ -11,7 +11,7 @@ export default function Badges() {
   ///For Hover
   const [anchorEl, setAnchorEl] = useState(null);
   const { state, dispatch } = useContext(ContextApi);
-  console.log(state , 'ffefw')
+
  
   
  
