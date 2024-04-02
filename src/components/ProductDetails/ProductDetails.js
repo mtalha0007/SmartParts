@@ -469,7 +469,9 @@ const navigate = useNavigate()
           </Box>
           <Box sx={{width:"10px" ,padding:'10px'}}>
             <Box  component={"h6"}>Cart</Box>
+            <Box sx={{margin:"0 auto"}}>
                 <CartProduct alignItems="none" flexDirection="column" margin="10px 50px" display="none" />                                            
+            </Box>
           </Box>
        
            </Box>

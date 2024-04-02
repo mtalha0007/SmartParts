@@ -36,7 +36,7 @@ export default function Badges() {
     <Box>
       <Box sx={{ display: "flex", gap: "10px" }}>
         <IconButton onClick={handleNavigateToCart} sx={{ maxWidth: "24px" }}>
-          <Badge  badgeContent={state.cart_items.length } color="error">
+          <Badge  badgeContent={state.cart_items.length >0   ? state.cart_items.length : "0" } color="error">
             <LiaShoppingBagSolid />
           </Badge>
         </IconButton>

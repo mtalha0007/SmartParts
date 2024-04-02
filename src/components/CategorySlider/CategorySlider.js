@@ -166,7 +166,7 @@ export default function CategorySlider({
                     >
                       <Box>
                         <Box sx={{ fontSize: "12px" }}>
-                          {elem.category_id.name}
+                          {elem.name}
                         </Box>
                         <Box
                           sx={{
