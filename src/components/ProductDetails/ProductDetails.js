@@ -134,7 +134,7 @@ const navigate = useNavigate()
               sx={{ fontSize: "11px", fontWeight: "500" }}
               component={"span"}
             >
-              {" "}
+           
               3 REVIEWS
             </Box>
           </Box>
@@ -194,7 +194,7 @@ const navigate = useNavigate()
               component={"span"}
             >
               $25.99
-            </Box>{" "}
+            </Box>
             <Box sx={{ color: "#b20808", fontSize: "21px" }} component={"span"}>
               $21.99
             </Box>

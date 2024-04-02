@@ -40,7 +40,7 @@ function Header() {
           }}
         >
           <p style={{ margin: "0", padding: "0" }}>
-            30% discount on all products special for November!{" "}
+            30% discount on all products special for November!
           </p>
           <span
             onClick={handleHidden}
@@ -108,7 +108,7 @@ function Header() {
               <FaInstagram />
             </Box>
             <Box>
-              <FaTwitter />{" "}
+              <FaTwitter />
             </Box>
             <Box>
               <FaViber />

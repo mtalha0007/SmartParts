@@ -15,7 +15,6 @@ export default function CategorySlider({
   slidesToShow,
   imgWidth,
   data,
-  addToCart,
 }) {
   const { state, dispatch } = useContext(ContextApi);
 
@@ -69,7 +68,6 @@ export default function CategorySlider({
     ],
   };
 
-  // const CardDetails = [
   //   {
   //     title:"Bling Rhinestones Car Steering Wheel",
   //     image: Images.sliderImage1,
@@ -213,7 +211,7 @@ export default function CategorySlider({
                               sx={{ color: "#5db99e", fontSize: "12px" }}
                             >
                               ✓
-                            </Box>{" "}
+                            </Box>
                             5 Years Guarantee
                           </Box>
                           <Box>
@@ -222,7 +220,7 @@ export default function CategorySlider({
                               sx={{ color: "#5db99e", fontSize: "12px" }}
                             >
                               ✓
-                            </Box>{" "}
+                            </Box>
                             Free Returns
                           </Box>
                           <Box>
@@ -231,7 +229,7 @@ export default function CategorySlider({
                               sx={{ color: "#5db99e", fontSize: "12px" }}
                             >
                               ✓
-                            </Box>{" "}
+                            </Box>
                             Installment Options
                           </Box>
                         </Box>
@@ -248,7 +246,7 @@ export default function CategorySlider({
                       fontSize: "13px",
                     }}
                   >
-                    {" "}
+                    
                     Add to Cart
                   </Button>
                 </Card.Body>

@@ -5,9 +5,8 @@ import CategorySlider from "../CategorySlider/CategorySlider";
 import ProductReview from "../ProductReview/ProductReview";
 import CartProduct from "./CartProduct";
 import { ContextApi } from "../../store/context";
-export default function Cart({ data, result }) {
-  // for cartData
-  const [cartData, setCartData] = useState([]);
+export default function Cart({ data }) {
+
   const { state, dispatch } = useContext(ContextApi);
   
   function SubTotal() {
@@ -92,8 +91,6 @@ export default function Cart({ data, result }) {
             }}
           >
             <CartProduct
-              cartData={cartData}
-              // onDelete={handleDeleteProduct}
               alignItems="center"
             />
           </Box>
@@ -143,6 +140,7 @@ export default function Cart({ data, result }) {
                 textAlign: "center",
                 borderRadius: "5px",
                 padding: "10px",
+                cursor:"pointer"
               }}
             >
               Proceed to checkout
@@ -159,7 +157,6 @@ export default function Cart({ data, result }) {
       >
         <CategorySlider
           data={data}
-          // addToCart={addToCart}
           imgWidth="200px"
           slidesToShow={4}
           backgroundColor="#df6a2d"
