@@ -69,7 +69,7 @@ export default function CategorySlider({
     ],
   };
 
-  // const CardDetails = [
+
   //   {
   //     title:"Bling Rhinestones Car Steering Wheel",
   //     image: Images.sliderImage1,

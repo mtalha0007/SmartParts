@@ -1,56 +1,107 @@
-import React from "react";
-import {
-  Box,
-  Checkbox,
-  Button,
-  TextField,
-  FormControlLabel,
-  Grid,
-} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {Box,Button,TextField,Grid,} from "@mui/material";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import authRegister from "../../services/authRegister";
+import authLogin from "../../services/Login";
+import { useForm } from "react-hook-form";
+import Toastify from 'toastify-js'
 
 function LoginPage() {
+  
+  const {
+    register: registerLogin,
+    handleSubmit: handleLoginSubmit,
+    formState: { errors: loginErrors },
+  } = useForm();
+
+  const Login = async (data) => {
+    try {
+      const response = await authLogin.loginUser(data);
+      console.log("response======>", response)
+      Toastify({
+        text:response?.message ? response?.message :"Invalid Credentials",
+        duration: 2000,
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          background :response?.message ? "green":"red"
+         
+        },
+       
+      }).showToast();
+      
+    } catch (error) {
+      console.error("Login error:", error.response);
+      
+    }
+  };
+  
+
+  const {
+    register: registerSignUp,
+    handleSubmit: handleSignUpSubmit,
+    formState: { errors: signUpErrors },
+  } = useForm();
+  const SignUp = async (data) => {
+    try {
+      const response = await authRegister.registerUser(data);
+      console.log(response);
+      Toastify({
+        text:`${response?.message ? response?.message :"Credentials Already in use"}`,
+        duration: 2000,
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          background :response?.message ? "green":"red"
+         
+        },
+       
+      }).showToast();
+
+    } catch (error) {
+      console.error("Registration error:", error);
+     
+    }
+  };
+ 
+
   return (
-    <Grid container sx={{ margin: "0 auto",width:"100%" }} className="container" spacing={2}>
+    <Grid
+      container
+      sx={{ margin: "0 auto", width: "100%" }}
+      className="container"
+      spacing={2}
+    >
       <Grid item xs={12} md={6}>
         <Box sx={{ width: "100%" }}>
           <Box component={"h3"} sx={{ textAlign: "left" }}>
             Login
           </Box>
+          <form onSubmit={handleLoginSubmit(Login)}>
           <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
-            Username or email address *
+             Email address *
           </Box>
-          <TextField
-            variant="outlined"
-            sx={{ mb: 1, padding: "12px 0px", width: "90%",
-           
-          }}
-          />
-          <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
-            Password *
-          </Box>
-          <TextField
-            variant="outlined"
-            type="password"
-            sx={{ padding: "12px 0px", width: "90%" }}
-          />
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <FormControlLabel
-              control={<Checkbox color="primary" />}
-              sx={{ mr: 0, mb: 1 }}
+            <TextField
+              {...registerLogin('email', { required: 'Email is required' })}
+              error={!!loginErrors.email}
+              helperText={loginErrors.email?.message}
+              variant="outlined"
+              sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
             />
-            <Box
-              sx={{
-                mb: 1,
-                color: "#4e4e4e",
-                fontWeight: "400",
-                fontSize: "13px",
-              }}
-            >
-              Remember Me
-            </Box>
+          <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
+           Password *
           </Box>
+            <TextField
+              {...registerLogin('password', { required: 'password is required' })}
+              error={!!loginErrors.password}
+              helperText={loginErrors.password?.message}
+              variant="outlined"
+              sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
+            /> 
           <Button
+          type="submit"
             variant="contained"
             sx={{
               fontSize: "12px",
@@ -61,9 +112,10 @@ function LoginPage() {
                 color: "white",
               },
             }}
-          >
+            >
             Login
           </Button>
+            </form>
 
           <Box
             sx={{
@@ -76,7 +128,7 @@ function LoginPage() {
           >
             Lost your password?
           </Box>
-          <Box sx={{mt:2 ,mb:10}} className="col-5">
+          <Box sx={{ mt: 2, mb: 10 }} className="col-5">
             <Box
               sx={{
                 backgroundColor: "#4b70ab",
@@ -87,11 +139,13 @@ function LoginPage() {
                 lineHeight: "46px",
                 position: "relative",
                 textAlign: "left",
-                borderRadius:"5px",
-                fontSize:"13px"
+                borderRadius: "5px",
+                fontSize: "13px",
               }}
             >
-              <FaFacebookF style={{margin:"0px 10px 0px 10px", color: "white" }} />
+              <FaFacebookF
+                style={{ margin: "0px 10px 0px 10px", color: "white" }}
+              />
               Login With Facebook
             </Box>
             <Box
@@ -104,13 +158,13 @@ function LoginPage() {
                 lineHeight: "46px",
                 position: "relative",
                 textAlign: "left",
-                borderRadius:"5px",
-                fontSize:"13px"
-               
-
+                borderRadius: "5px",
+                fontSize: "13px",
               }}
             >
-              <FaGoogle style={{margin:"0px 10px 0px 10px", color: "white" }} />
+              <FaGoogle
+                style={{ margin: "0px 10px 0px 10px", color: "white" }}
+              />
               Login With Google +
             </Box>
           </Box>
@@ -121,37 +175,65 @@ function LoginPage() {
           <Box component={"h3"} sx={{ textAlign: "left" }}>
             Register
           </Box>
+          <form onSubmit={handleSignUpSubmit(SignUp)}>
           <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
-            Email Address *
+             Email address *
           </Box>
-          <TextField
-            variant="outlined"
-            sx={{ mb: 1, padding: "12px 0px", width: "90%" }}
-          />
-          <Box
-            sx={{
-              mb: 3,
-              color: "#4e4e4e",
-              fontWeight: "400",
-              fontSize: "13px",
-            }}
-          >
-            A link to set a new password will be sent to your email address.
+            <TextField
+              {...registerSignUp('email', { required: 'Email is required' })}
+              error={!!signUpErrors.email}
+              helperText={signUpErrors.email?.message}
+              variant="outlined"
+              sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
+            />
+          <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
+           Name *
           </Box>
-          <Box
-            sx={{
-              mb: 3,
-              color: "#4e4e4e",
-              fontWeight: "400",
-              fontSize: "13px",
-            }}
-          >
-            Your personal data will be used to support your experience
-            throughout this website, to manage access to your account, and for
-            other purposes described in our privacy policy.
+            <TextField
+              {...registerSignUp('name', { required: 'Name is required' })}
+              error={!!signUpErrors.name}
+              helperText={signUpErrors.name?.message}
+              variant="outlined"
+              sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
+            />
+          <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
+           Phone Number *
           </Box>
-          <Box sx={{ mt: 6 }}>
+            <TextField
+              {...registerSignUp('phone', { required: 'phone number is required' })}
+              error={!!signUpErrors.phone}
+              helperText={signUpErrors.phone?.message}
+              variant="outlined"
+              sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
+            />
+          <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
+           Password *
+          </Box>
+            <TextField
+              {...registerSignUp('password', { required: 'password is required' })}
+              error={!!signUpErrors.password}
+              helperText={signUpErrors.password?.message}
+              variant="outlined"
+              sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
+            />
+          <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
+           Gender *
+          </Box>
+            <TextField
+              {...registerSignUp('gender', { required: 'gender is required' })}
+              error={!!signUpErrors.gender}
+              helperText={signUpErrors.gender?.message}
+              variant="outlined"
+              sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
+            />
+           
+
+            
+          
+          <Box >
             <Button
+            type="submit"
+              // onClick={SignUp}
               variant="contained"
               sx={{
                 fontSize: "12px",
@@ -166,6 +248,7 @@ function LoginPage() {
               Register
             </Button>
           </Box>
+          </form>
         </Box>
       </Grid>
     </Grid>
