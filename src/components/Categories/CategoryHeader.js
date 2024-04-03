@@ -133,7 +133,7 @@ export default function NavigationBar() {
           </Box>
           <Box>
             <Box sx={{ fontSize: "15px", fontWeight: "500" }}>
-              {" "}
+             
               CALL ANYTIME
             </Box>
             <Box sx={{ fontSize: "15px", fontWeight: "500", color: "#1e96fc" }}>

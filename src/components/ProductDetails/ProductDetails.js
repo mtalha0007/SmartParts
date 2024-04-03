@@ -134,7 +134,7 @@ const navigate = useNavigate()
               sx={{ fontSize: "11px", fontWeight: "500" }}
               component={"span"}
             >
-              {" "}
+           
               3 REVIEWS
             </Box>
           </Box>
@@ -194,7 +194,7 @@ const navigate = useNavigate()
               component={"span"}
             >
               $25.99
-            </Box>{" "}
+            </Box>
             <Box sx={{ color: "#b20808", fontSize: "21px" }} component={"span"}>
               $21.99
             </Box>
@@ -469,7 +469,9 @@ const navigate = useNavigate()
           </Box>
           <Box sx={{width:"10px" ,padding:'10px'}}>
             <Box  component={"h6"}>Cart</Box>
+            <Box sx={{margin:"0 auto"}}>
                 <CartProduct alignItems="none" flexDirection="column" margin="10px 50px" display="none" />                                            
+            </Box>
           </Box>
        
            </Box>

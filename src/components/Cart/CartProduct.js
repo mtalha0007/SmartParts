@@ -7,7 +7,7 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ContextApi } from "../../store/context";
-function CartProduct({alignItems, display, flexDirection, margin, cartData,}) {
+function CartProduct({alignItems, display, flexDirection, margin}) {
 
   const { state, dispatch } = useContext(ContextApi);
   console.log("state ==>> ", state.cart_items);
