@@ -1,10 +1,10 @@
 import instance from "../config/axios";
-
+import { ErrorHandler } from "../utils/ErrorHandler";
 
 export const get = async (endPoint, params) => {
     try {
         const result = await instance.get(endPoint, { params: params });
-        if (result.status === 200 || result.status === 206) return result.data;
+        if (result.status === 200 || result.status === 206 ) return result.data;
         else throw result;
     } catch (e) {
         console.log(e)
@@ -14,10 +14,10 @@ export const get = async (endPoint, params) => {
 export const post = async (endPoint, data) => {
     try {
         const result = await instance.post(endPoint, data);
-        if (result.status === 200 || result.status === 206) return result.data;
+        if (result.status === 200 || result.status === 206  ) return result.data;
         else throw result;
     } catch (e) {
-        console.log(e)
+        throw ErrorHandler(e)
     }
 };
 

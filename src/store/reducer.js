@@ -43,6 +43,14 @@ const Reducer = (state, action) => {
 
     default:
       return state;
+
+      case "USER_DATA":
+        return {
+         ...state,
+         userDetails: action.payload,
+        };
+   
+        
   }
 };
 export default Reducer;

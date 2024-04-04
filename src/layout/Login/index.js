@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import {Box,Button,TextField,Grid,} from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import {Box,Button,TextField,Grid, FormControl, InputLabel, Select, MenuItem,} from "@mui/material";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import authRegister from "../../services/authRegister";
 import authLogin from "../../services/Login";
 import { useForm } from "react-hook-form";
 import Toastify from 'toastify-js'
+import { ContextApi } from "../../store/context";
+
 
 function LoginPage() {
-  
+  const { state, dispatch } = useContext(ContextApi);
   const {
     register: registerLogin,
     handleSubmit: handleLoginSubmit,
@@ -16,10 +18,19 @@ function LoginPage() {
 
   const Login = async (data) => {
     try {
-      const response = await authLogin.loginUser(data);
-      console.log("response======>", response)
+      const response = await authLogin.loginUser(data);  
+      console.log(response) 
+      
+      let userData = {
+        data : response
+      }
+      dispatch({ type: "USER_DATA", payload: userData });
+
+      //for localStotage check
+      // const isLogin = localStorage.setItem("token",response?.data?.token ?response?.data?.token:"" )
+      // console.log("response======>", response)
       Toastify({
-        text:response?.message ? response?.message :"Invalid Credentials",
+        text:response?.message,
         duration: 2000,
         gravity: "top", 
         position: "right", 
@@ -32,7 +43,19 @@ function LoginPage() {
       }).showToast();
       
     } catch (error) {
-      console.error("Login error:", error.response);
+      Toastify({
+        text:error,
+        duration: 2000,
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          background :"red"
+         
+        },
+       
+      }).showToast();
+      
       
     }
   };
@@ -48,20 +71,31 @@ function LoginPage() {
       const response = await authRegister.registerUser(data);
       console.log(response);
       Toastify({
-        text:`${response?.message ? response?.message :"Credentials Already in use"}`,
+        text:response?.message,
         duration: 2000,
         gravity: "top", 
         position: "right", 
         stopOnFocus: true, 
         style: {
-          background :response?.message ? "green":"red"
+          background :"green"
          
         },
        
       }).showToast();
 
     } catch (error) {
-      console.error("Registration error:", error);
+      Toastify({
+        text:error,
+        duration: 2000,
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          background :"red"
+         
+        },
+       
+      }).showToast();
      
     }
   };
@@ -219,22 +253,35 @@ function LoginPage() {
           <Box sx={{ color: "#4e4e4e", fontWeight: "400", fontSize: "13px" }}>
            Gender *
           </Box>
-            <TextField
+            {/* <TextField
               {...registerSignUp('gender', { required: 'gender is required' })}
               error={!!signUpErrors.gender}
               helperText={signUpErrors.gender?.message}
               variant="outlined"
               sx={{ mb: 1, padding: '12px 0px', width: '90%' }}
-            />
-           
-
-            
+            /> */}
+        <FormControl fullWidth variant="outlined" sx={{ mb: 1 }}>
+        <Select
+          labelId="gender-label"
+          id="gender"
+          defaultValue="    "
+          sx={{ mb: 1, width: '90%' }}
+          {...registerSignUp('gender', { required: 'gender is required' })}
+          error={!!signUpErrors.gender}
           
+        >
+          <MenuItem value="male">Male</MenuItem>
+          <MenuItem value="female">Female</MenuItem>
+          <MenuItem value="other">Other</MenuItem>
+        </Select>
+        {signUpErrors.gender && (
+          <span style={{ color: '#d32f2f' ,fontSize:"0.8rem",fontWeight:"400",marginTop:"-7px",marginLeft:"14px" }}>{signUpErrors.gender.message}</span>
+        )}
+      </FormControl> 
           <Box >
             <Button
             type="submit"
-              // onClick={SignUp}
-              variant="contained"
+            variant="contained"
               sx={{
                 fontSize: "12px",
                 fontWeight: "400",

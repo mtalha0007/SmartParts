@@ -5,10 +5,12 @@ import CategorySlider from "../CategorySlider/CategorySlider";
 import ProductReview from "../ProductReview/ProductReview";
 import CartProduct from "./CartProduct";
 import { ContextApi } from "../../store/context";
+import Toastify from 'toastify-js'
+
 export default function Cart({ data }) {
 
   const { state, dispatch } = useContext(ContextApi);
-  
+ 
   function SubTotal() {
     let total = 0
     for (let i = 0; i < state.cart_items.length; i++) {
@@ -16,8 +18,42 @@ export default function Cart({ data }) {
     }
     return total
   }
- 
 
+ 
+const CheckOut =()=>{
+  //  const loginToken = localStorage.getItem("token")
+  //  console.log("localStotageloginToken==>" ,loginToken)
+   if(state.userDetails?.data?.data?.token  && state?.cart_items?.length > 0 ){
+     console.log("loginToken==.>" ,state?.userDetails?.data?.data?.token)
+     Toastify({
+      text:"CheckOut",
+      duration: 2000,
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
+      style: {
+        background :"green"
+       
+      },
+     
+    }).showToast();
+     
+   }else{
+    
+    Toastify({
+      text:!state?.userDetails?.data?.data?.token ? "Please Login" : state?.cart_items?.length <= 0 ? "Add Product" : "",
+      duration: 2000,
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
+      style: {
+        background :"red"
+       
+      },
+     
+    }).showToast();
+   }
+}
   return (
     <>
       <Grid
@@ -133,6 +169,7 @@ export default function Cart({ data }) {
               </Box>
             </Box>
             <Box
+             onClick={CheckOut}
               sx={{
                 mt: 2,
                 backgroundColor: "#df6a2d",
