@@ -6,10 +6,12 @@ import authLogin from "../../services/Login";
 import { useForm } from "react-hook-form";
 import Toastify from 'toastify-js'
 import { ContextApi } from "../../store/context";
+import { useNavigate } from "react-router-dom";
 
 
 function LoginPage() {
   const { state, dispatch } = useContext(ContextApi);
+  const navigate = useNavigate()
   const {
     register: registerLogin,
     handleSubmit: handleLoginSubmit,
@@ -41,7 +43,9 @@ function LoginPage() {
         },
        
       }).showToast();
-      
+      setTimeout(() => {
+        navigate("/")
+      }, 2000);
     } catch (error) {
       Toastify({
         text:error,
@@ -55,7 +59,7 @@ function LoginPage() {
         },
        
       }).showToast();
-      
+     
       
     }
   };

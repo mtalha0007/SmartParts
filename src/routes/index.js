@@ -11,6 +11,7 @@ import FeedBack from "../components/FeedBack/FeedBack";
 import Cart from '../components/Cart/Cart';
 import ProductDetails from '../components/ProductDetails/ProductDetails';
 import productServices from '../services/productServices';
+import CheckOut from '../components/Checkout/CheckOut';
 
 function AppRouter() {
   const [cardDetails, setCardDetails] = useState([]);
@@ -38,6 +39,7 @@ function AppRouter() {
         <Route path="/account" element={<Login />} />
         <Route path="/cart" element={<Cart data={cardDetails}/>} />
         <Route path="/product" element={<ProductDetails data={cardDetails} />} />
+        <Route path="/checkout" element={<CheckOut/>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <FeedBack/>

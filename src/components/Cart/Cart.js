@@ -6,11 +6,13 @@ import ProductReview from "../ProductReview/ProductReview";
 import CartProduct from "./CartProduct";
 import { ContextApi } from "../../store/context";
 import Toastify from 'toastify-js'
+import { useNavigate } from "react-router-dom";
+
 
 export default function Cart({ data }) {
-
+ const navigate = useNavigate()
+  // contextAPi 
   const { state, dispatch } = useContext(ContextApi);
- 
   function SubTotal() {
     let total = 0
     for (let i = 0; i < state.cart_items.length; i++) {
@@ -24,7 +26,6 @@ const CheckOut =()=>{
   //  const loginToken = localStorage.getItem("token")
   //  console.log("localStotageloginToken==>" ,loginToken)
    if(state.userDetails?.data?.data?.token  && state?.cart_items?.length > 0 ){
-     console.log("loginToken==.>" ,state?.userDetails?.data?.data?.token)
      Toastify({
       text:"CheckOut",
       duration: 2000,
@@ -37,6 +38,8 @@ const CheckOut =()=>{
       },
      
     }).showToast();
+    navigate("/checkout")
+    
      
    }else{
     
@@ -53,6 +56,7 @@ const CheckOut =()=>{
      
     }).showToast();
    }
+   
 }
   return (
     <>
@@ -182,6 +186,7 @@ const CheckOut =()=>{
             >
               Proceed to checkout
             </Box>
+           
           </Box>
         </Grid>
       </Grid>
