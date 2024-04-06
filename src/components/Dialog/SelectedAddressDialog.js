@@ -13,23 +13,11 @@ import {
 } from "@mui/material";
 
 
-function SelectAddressDialog({
-  open,
-  onClose,
-  addressLists,
-  selectedAddress,
-  addNewAddress,
-}) {
-  console.log(
-    "🚀 ~ file: SelectAddressDialog.js:10 ~ SelectAddressDialog ~ addressLists:",
-    addressLists
-  );
-
-
+function SelectAddressDialog({ open,onClose,addressLists=[],selectedAddress,addNewAddress}) {
+  console.log(" addressLists:",Array.isArray(addressLists));
 
   // *For Delivery Address
-  const [selectedDeliveryAddress, setSelectedDeliveryAddress] =
-    useState(selectedAddress);
+  const [selectedDeliveryAddress, setSelectedDeliveryAddress] =useState(selectedAddress);
 
   useEffect(() => {
     setSelectedDeliveryAddress(selectedAddress);
@@ -37,7 +25,6 @@ function SelectAddressDialog({
 
   return (
     <Dialog
-     
       maxWidth="xs"
       open={open}
       sx={{
@@ -60,7 +47,7 @@ function SelectAddressDialog({
       <DialogTitle
         sx={{ textAlign: "center", fontSize: "18px", fontWeight: 700 }}
       >
-       Addresses
+       Address
       </DialogTitle>
       <DialogContent
         sx={{
@@ -71,16 +58,17 @@ function SelectAddressDialog({
         }}
       >
         <Box>
-          {/* {addressLists.map((item, index) => ( */}
+          {addressLists.length > 0 ? ( 
+          Array.isArray(addressLists) && addressLists.map((item, index) => (
             <Fragment>
               <Box
-                // key={index}
-                // onClick={() =>
-                //   setSelectedDeliveryAddress({
-                //     id: item._id,
-                //     address: item.address,
-                //   })
-                // }
+                key={index.id}
+                onClick={() =>
+                  setSelectedDeliveryAddress({
+                    id: item._id,
+                    address: item.address,
+                  })
+                }
                 sx={{
                   display: "flex",
                   gap: "10px",
@@ -91,29 +79,31 @@ function SelectAddressDialog({
               >
                 <Radio
                   name="address"
-                //   value={item._id}
-                //   checked={selectedDeliveryAddress?.id === item._id}
+                  value={item._id}
+                  checked={selectedDeliveryAddress?.id === item._id}
                 />
                 <Box>
-                  <Typography component={"span"}>Home</Typography>
+                  <Typography component={"span"}>{item.tag}</Typography>
                   <Typography
                     component="p"
                     variant={"body1"}
                     className="text-truncate"
-                    sx={{ fontWeight: 700 }}
+                    sx={{ fontWeight: 700 ,width:'350px',overflow:"hidden" }}
                   >
-                    Address
+                    {item.address}
+                    {/* Address */}
                   </Typography>
                   <Typography component="p" variant={"body1"}>
-                    Area: 6734252
+                    Area: {item.area}
                   </Typography>
                 </Box>
               </Box>
               <Divider />
             </Fragment>
-          {/* ))} */}
+           )))
+           :( <Box sx={{display:'flex',justifyContent:'center',alignItems:'center',height:'200px'}}>No Address</Box>)}
         </Box>
-        <Button sx={{backgroundColor:"#df6a2d" ,color:"white","&:hover":{backgroundColor:"#df6a2d",color:"white"        } }} onClick={() => addNewAddress()}>Add New Address</Button>
+        <Button sx={{backgroundColor:"#df6a2d" ,color:"white","&:hover":{backgroundColor:"#df6a2d",color:"white"        } }} onClick={() => addNewAddress()}>{addressLists.length <= 0 ?"Add New Address":"Change Address"}</Button>
       </DialogContent>
     </Dialog>
   );

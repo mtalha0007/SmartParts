@@ -1,4 +1,4 @@
-import React, { Fragment,useContext, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Add, Close, Favorite, Home, Work } from "@mui/icons-material";
 import {
@@ -11,30 +11,15 @@ import {
   Typography,
   TextField,
   Autocomplete,
-  Button
+  Button,
 } from "@mui/material";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
-
-
 // import usePlacesAutocompleteService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
 import usePlacesAutocomplete from "use-places-autocomplete";
-// import useGoogle from "react-google-autocomplete/lib/usePlacesAutocompleteService";
-// import Geocode from "react-geocode";
-import {
-    setKey,
-    setDefaults,
-    setLanguage,
-    setRegion,
-    fromAddress,
-    fromLatLng,
-    fromPlaceId,
-    setLocationType,
-    geocode,
-    RequestType,
-  } from "react-geocode";
+import { setKey, setRegion, fromAddress, fromLatLng } from "react-geocode";
 
-const googleMapKey =`AIzaSyCsT-b8-J4wnqKYUBFROMPQr_IEYdjNiSg`;
-console.log(googleMapKey)
+const googleMapKey = `AIzaSyCsT-b8-J4wnqKYUBFROMPQr_IEYdjNiSg`;
+
 const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
   const {
     setValue,
@@ -70,11 +55,7 @@ const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
 };
 
 function Map({ newAddress, defaultData }) {
-  console.log("🚀 ~ file: AddressForm.js:69 ~ Map ~ newAddress:", newAddress);
-  console.log("🚀 ~ file: AddressForm.js:69 ~ Map ~ defaultData:", defaultData);
-
-//  
- setKey(googleMapKey);
+  setKey(googleMapKey);
   setRegion("pk");
 
   // *For Map Positions
@@ -84,7 +65,7 @@ function Map({ newAddress, defaultData }) {
 
   // *For Address
   const [address, setAddress] = useState("");
-  console.log("🚀 ~ file: AddressForm.js:91 ~ Map ~ address:", address);
+  console.log("🚀Map ~ address:", address);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -117,7 +98,7 @@ function Map({ newAddress, defaultData }) {
 
   const handleMapLoad = (map) => {
     map.addListener("click", (e) => {
-        fromLatLng(e.latLng.lat(), e.latLng.lng()).then(
+      fromLatLng(e.latLng.lat(), e.latLng.lng()).then(
         (response) => {
           setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
           setAddress(response.results[0].formatted_address);
@@ -131,7 +112,7 @@ function Map({ newAddress, defaultData }) {
 
   const handleMarkerLoad = (marker) => {
     marker.addListener("dragend", (e) => {
-        fromLatLng(e.latLng.lat(), e.latLng.lng()).then(
+      fromLatLng(e.latLng.lat(), e.latLng.lng()).then(
         (response) => {
           setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
           setAddress(response.results[0].formatted_address);
@@ -148,7 +129,7 @@ function Map({ newAddress, defaultData }) {
     if (address === null) {
       return;
     } else {
-        fromAddress(address).then((response) => {
+      fromAddress(address).then((response) => {
         setCenter({
           lat: response.results[0]?.geometry?.location?.lat,
           lng: response.results[0]?.geometry?.location?.lng,
@@ -161,7 +142,7 @@ function Map({ newAddress, defaultData }) {
     }
   };
 
-  useEffect(() =>  {
+  useEffect(() => {
     if (defaultData) {
       setCenter({ lat: defaultData?.latitude, lng: defaultData?.longitude });
       setMarkerPosition({
@@ -188,8 +169,6 @@ function Map({ newAddress, defaultData }) {
     }
   }, [address]);
 
- 
-
   return (
     <Fragment>
       <PlacesAutocomplete
@@ -197,36 +176,38 @@ function Map({ newAddress, defaultData }) {
         address={address}
         geoAddress={geoAddress}
       />
-      { isLoaded ? (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={14}
-        options={options}
-        onLoad={handleMapLoad}
-      >
-        <MarkerF
-          position={markerPosition}
-          draggable={true}
-          onDragEnd={(e) => {
-            setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-          }}
-          onLoad={handleMarkerLoad}
-        />
-      </GoogleMap>
-      ):""}
+      {isLoaded ? (
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={14}
+          options={options}
+          onLoad={handleMapLoad}
+        >
+          <MarkerF
+            position={markerPosition}
+            draggable={true}
+            onDragEnd={(e) => {
+              setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
+            }}
+            onLoad={handleMarkerLoad}
+          />
+        </GoogleMap>
+      ) : (
+        ""
+      )}
     </Fragment>
   );
 }
 
-function AddressForm({ open, onClose, loading, defaultData, save }) {
- 
-
+function AddressForm({ open, onClose, defaultData, save, address: initialAddress }) {
+  console.log("defaultData", defaultData);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
+    getValues,
     reset,
   } = useForm();
 
@@ -236,19 +217,22 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
 
   // *For Submit Form
   const submitForm = (formData) => {
-    try {
-      let obj = {
+    try { 
+      let obj = [
+        {
         ...addressDetail,
         tag: selectedLabel ?? "Other",
         street: formData.street,
         area: formData.area,
         house_building: formData.house,
         apt_room: formData.apt,
-      };
+        }
+      ];
       save(obj);
       reset();
+      console.log("formData===>" ,obj)
     } catch (error) {
-      console.log( error?.message);
+      console.log(error?.message);
     }
   };
 
@@ -261,16 +245,21 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
       setValue("apt", defaultData?.apt_room);
       setValue("label", defaultData?.tag);
     }
-  }, [defaultData]);
-
+  }, [defaultData,setValue]);
+  useEffect(() => {
+    setValue("address", initialAddress);
+    setAddressDetail((prevDetails) => ({
+      ...prevDetails,
+      address: initialAddress,
+    }));
+  }, [initialAddress, setValue]);
   return (
     <Dialog
-     
-      maxWidth="xs"
+      maxWidth="lg"
       open={open}
       sx={{
         "& .MuiDialog-paper": {
-          width: "80%",
+          width: "100%",
           height: "auto",
           borderRadius: 2,
           py: { xs: 1.5, md: 3 },
@@ -279,19 +268,18 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
       }}
     >
       <IconButton
-        color="primary"
         onClick={() => {
           onClose();
           reset();
         }}
-        sx={{ position: "absolute", right: 13, top: 13 }}
+        sx={{ position: "absolute", right: 13, top: 13, color: "#df6a2d" }}
       >
         <Close />
       </IconButton>
       <DialogTitle
         sx={{ textAlign: "center", fontSize: "18px", fontWeight: 700 }}
       >
-        {"deliveryAddress"}
+        {"Delivery Address"}
       </DialogTitle>
       <Box component="form" onSubmit={handleSubmit(submitForm)}>
         <Grid container spacing={1} alignItems={"center"}>
@@ -305,64 +293,69 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
             />
           </Grid>
           <Grid item xs={12} sm={12}>
-            <InputLabel>{"location"}</InputLabel>
+            <InputLabel>Location</InputLabel>
             <TextField
               size={"small"}
               disabled={true}
-              sx={{width:"100%"}}
-              placeholder={"location"}
+              value={getValues("address") || ''}
+              sx={{ width: "100%" }}
+              placeholder="location"
               error={errors?.address?.message}
-              register={register("address", {
+              {...register("address", {
                 required: "location",
               })}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <InputLabel>{"street"}</InputLabel>
+          <Grid item xs={12} sm={12}>
+            <InputLabel>Street</InputLabel>
             <TextField
               size={"small"}
-              placeholder={"street"}
+              sx={{width:"100%"}}
+              placeholder="Street"
               error={errors?.street?.message}
-              register={register("street", {
+              {...register("street", {
                 required: "street",
               })}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <InputLabel>{"area"}</InputLabel>
+          <Grid item xs={12} sm={12}>
+            <InputLabel>Area</InputLabel>
             <TextField
               size={"small"}
-              placeholder={"area"}
+              sx={{width:"100%"}}
+              placeholder="Area"
               error={errors?.area?.message}
-              register={register("area", {
+            {...register("area", {
                 required: "area",
               })}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <InputLabel>{"house"}</InputLabel>
+          <Grid item xs={12} sm={12}>
+            <InputLabel>House</InputLabel>
             <TextField
               size={"small"}
-              placeholder={"house"}
+              sx={{width:"100%"}}
+              placeholder="House"
               error={errors?.house?.message}
-              register={register("house", {
+              {...register("house", {
                 required: "house",
               })}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <InputLabel>{"room"}</InputLabel>
+          <Grid item xs={12} sm={12}>
+            <InputLabel>Room</InputLabel>
             <TextField
               size={"small"}
-              placeholder={"room"}
+              sx={{width:"100%"}}
+              placeholder="Room"
               error={errors?.apt?.message}
-              register={register("apt", {
+              {...register("apt", {
                 required: "room",
               })}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle1">{"addLabel"}</Typography>
+            <Typography variant="subtitle1">Add Label</Typography>
             <Box
               sx={{ display: "flex", gap: "20px", alignItems: "center", my: 1 }}
             >
@@ -375,10 +368,10 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
                     // bgcolor: selectedLabel === "Home" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
-                    //   color:
-                    //     selectedLabel === "Home"
-                    //       ? Colors.white
-                    //       : Colors.tertiary,
+                        color:
+                          selectedLabel === "Home"
+                          ?"#df6a2d"
+                            : "black",
                       width: "32px",
                       height: "32px",
                     },
@@ -399,10 +392,10 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
                     // bgcolor: selectedLabel === "Work" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
-                    //   color:
-                    //     selectedLabel === "Work"
-                    //       ? Colors.white
-                    //       : Colors.tertiary,
+                      color:
+                      selectedLabel === "Work"
+                      ? "#df6a2d"
+                      : "black",
                       width: "32px",
                       height: "32px",
                     },
@@ -423,10 +416,10 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
                     // bgcolor: selectedLabel === "Favorite" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
-                    //   color:
-                    //     selectedLabel === "Favorite"
-                    //       ? Colors.white
-                    //       : Colors.tertiary,
+                      color:
+                          selectedLabel === "Favorite"
+                          ? "#df6a2d"
+                           : "black",
                       width: "32px",
                       height: "32px",
                     },
@@ -447,10 +440,10 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
                     // bgcolor: selectedLabel === "Other" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
-                    //   color:
-                    //     selectedLabel === "Other"
-                    //       ? Colors.white
-                    //       : Colors.tertiary,
+                      color:
+                      selectedLabel === "Other"
+                        ? "#df6a2d"
+                        : "black",
                       width: "32px",
                       height: "32px",
                     },
@@ -466,27 +459,23 @@ function AddressForm({ open, onClose, loading, defaultData, save }) {
           </Grid>
           <Grid item xs={12} sm={12} sx={{ mt: 1 }}>
             <Box sx={{ display: "flex" }}>
-              <Button
-                type={"submit"}
-       
-             >
-                saveContinue
-                </Button>
+              <Button type={"submit"}>Save Continue</Button>
               <Box sx={{ mx: 0.5 }} />
               <Button
-               
                 onClick={() => {
                   onClose();
                   reset();
                 }}
-              >Cancel</Button>
+              >
+                CANCEL
+              </Button>
             </Box>
           </Grid>
         </Grid>
       </Box>
+      
     </Dialog>
   );
 }
 
 export default AddressForm;
-  
