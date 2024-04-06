@@ -10,11 +10,15 @@ import {
 import { ContextApi } from "../../store/context";
 import SelectAddressDialog from "../Dialog/SelectedAddressDialog"
 import AddressForm from "../Dialog/AddressForm";
+
 export default function CheckOut() {
   const { state, dispatch } = useContext(ContextApi);
   const [selectAddressDialog, setSelectAddressDialog] = useState(false);
-  const [selectedDeliveryAddress, setSelectedDeliveryAddress] = useState({});
+  const [ selectedDeliveryAddress, setSelectedDeliveryAddress] = useState({});
   const [addressFormDialog, setAddressFormDialog] = useState(false);
+  const [addressLoading, setAddressLoading] = useState(false);
+  const [addressLists ,setAddressLists] = useState([])
+
   let amount = 0;
   let deliveryCharges = 5;
   function SubTotal() {
@@ -31,6 +35,13 @@ export default function CheckOut() {
   }
 
   const placeOrder = () => {};
+
+  const saveAddress =  (data) => {
+    setAddressLoading(true);
+     setAddressLists(data)
+    console.log("saveAddress" , addressLists)
+    
+  };
   return (
     <Box sx={{ padding: "10px" }}>
       <Box
@@ -73,7 +84,7 @@ export default function CheckOut() {
       >
         <Box component={"h5"}>Delivery Address</Box>
         <TextField
-          // value={selectedDeliveryAddress?.address}
+          value={selectedDeliveryAddress?.address}
           inputProps={{ readOnly: true }}
           onClick={() => setSelectAddressDialog(true)}
           placeholder="Enter Address"
@@ -86,7 +97,7 @@ export default function CheckOut() {
            setSelectAddressDialog(false);
            setSelectedDeliveryAddress(data);
          }}
-         addressLists={"addressLists"}
+         addressLists={addressLists || []}
          addNewAddress={() => {
            setSelectAddressDialog(false);
            setAddressFormDialog(true);
@@ -96,7 +107,7 @@ export default function CheckOut() {
         <AddressForm
         open={addressFormDialog}
         onClose={() => setAddressFormDialog(false)}
-        // save={(data) => saveAddress(data)}
+        save={(data) => saveAddress(data)}
       />
       </Box>
       <Box
