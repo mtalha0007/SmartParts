@@ -31,7 +31,8 @@ export default function CheckOut() {
   function TotalAmount() {
     let totalAmount = 0;
     totalAmount += amount + deliveryCharges;
-    console.log(totalAmount);
+    console.log("totalAmount");
+
     return totalAmount;
   }
 
