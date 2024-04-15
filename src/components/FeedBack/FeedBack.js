@@ -39,6 +39,8 @@ export default function FeedBack() {
               border: "none",
               borderTopLeftRadius: "20px",
               borderBottomLeftRadius: "20px",
+              paddingLeft:"10px",
+              outline:"none",
               p: "5px",
               pr: "0",
               backgroundColor:"white",

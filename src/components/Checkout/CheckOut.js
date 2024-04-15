@@ -13,11 +13,15 @@ import AddressForm from "../Dialog/AddressForm";
 import { useForm } from "react-hook-form";
 
 export default function CheckOut() {
+   // *For Context to get total amount
   const { state, dispatch } = useContext(ContextApi);
+   // *For selectAddressDialog
   const [selectAddressDialog, setSelectAddressDialog] = useState(false);
+  // *For selectedDeliveryAddress value 
   const [ selectedDeliveryAddress, setSelectedDeliveryAddress] = useState({});
+  // *For addressFormDialog  
   const [addressFormDialog, setAddressFormDialog] = useState(false);
-  const [addressLoading, setAddressLoading] = useState(false);
+  // *For addressLists value 
   const [addressLists ,setAddressLists] = useState([])
 
   const {
@@ -99,11 +103,11 @@ const saveAddress = (data) => {
           placeholder="Enter Address"
           variant="outlined"
           sx={{ mb: 1, padding: "12px 0px", width: "100%" }}
-          error={errors?.location?.message}
           {...register("location", {
             required: "Location is required",
           })}
           helperText={errors.location?.message}
+          error={!!errors.location}
       
         />
         {selectAddressDialog && <SelectAddressDialog 

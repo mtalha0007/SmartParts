@@ -14,8 +14,6 @@ import {
 
 
 function SelectAddressDialog({ open,onClose,addressLists=[],selectedAddress,addNewAddress}) {
-  console.log(" addressLists:",Array.isArray(addressLists));
-
   // *For Delivery Address
   const [selectedDeliveryAddress, setSelectedDeliveryAddress] =useState(selectedAddress);
 
@@ -60,9 +58,9 @@ function SelectAddressDialog({ open,onClose,addressLists=[],selectedAddress,addN
         <Box>
           {addressLists.length > 0 ? ( 
           Array.isArray(addressLists) && addressLists.map((item, index) => (
-            <Fragment>
+            <Fragment  key={index}>
               <Box
-                key={index.id}
+               
                 onClick={() =>
                   setSelectedDeliveryAddress({
                     id: item._id,
@@ -80,10 +78,10 @@ function SelectAddressDialog({ open,onClose,addressLists=[],selectedAddress,addN
                 <Radio
                   name="address"
                   value={item._id}
-                  checked={selectedDeliveryAddress?.id === item._id}
+                  checked={selectedDeliveryAddress?.id === item._id }
                   // onClick={() => onClose(selectedDeliveryAddress)}
                 />
-                <Box>
+                <Box  >
                   <Typography component={"span"}>{item.tag}</Typography>
                   <Typography
                     component="p"

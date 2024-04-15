@@ -61,14 +61,18 @@ export default function ProductForm() {
             </Select>
           </Grid>
           <Grid item xs={12} md={12} lg={12}>
-            <Button   sx={{ width: '100%',color:"white",padding:"7px" ,backgroundColor:"#eaaf91" ,textTransform:"capitalize"}}>
+            <Button   sx={{ width: '100%',color:"white",padding:"7px" ,backgroundColor:"#eaaf91" ,textTransform:"capitalize",'&:hover':{
+              backgroundColor:"#eaaf91" 
+            }}}>
               Find Auto Parts
             </Button>
           </Grid>
         </Grid>
       </Box>
       <Grid item xs={12} md={12} lg={12}>
-            <Button   sx={{ width: '100%',color:"white",padding:"7px" ,backgroundColor:"#1e96fc" ,textTransform:"capitalize"}}>
+            <Button   sx={{ width: '100%',color:"white",padding:"7px" ,backgroundColor:"#1e96fc" ,textTransform:"capitalize",'&:hover':{
+              backgroundColor:"#1e96fc" 
+            }}}>
               All Products
             </Button>
           </Grid>

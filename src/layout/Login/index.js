@@ -268,7 +268,7 @@ function LoginPage() {
         <Select
           labelId="gender-label"
           id="gender"
-          defaultValue="    "
+          defaultValue="male"
           sx={{ mb: 1, width: '90%' }}
           {...registerSignUp('gender', { required: 'gender is required' })}
           error={!!signUpErrors.gender}

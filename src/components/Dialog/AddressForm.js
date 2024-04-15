@@ -14,14 +14,14 @@ import {
   Button,
 } from "@mui/material";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
-// import usePlacesAutocompleteService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import { setKey, setRegion, fromAddress, fromLatLng } from "react-geocode";
 
 const googleMapKey = `AIzaSyCsT-b8-J4wnqKYUBFROMPQr_IEYdjNiSg`;
 
 const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
-  const {
+
+    const {
     setValue,
     suggestions: { data },
   } = usePlacesAutocomplete({
@@ -29,7 +29,9 @@ const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
       region: "pk",
       componentRestrictions: { country: "pk" },
     },
+    
   });
+
 
   return (
     <Autocomplete
@@ -39,14 +41,16 @@ const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
       id="combo-box-demo"
       onInputChange={(event, newInputValue) => {
         setValue(newInputValue);
+ 
       }}
       onChange={(event, newValue) => {
-        geoAddress(newValue);
-        setAddress(newValue);
+          geoAddress(newValue);
+          setAddress(newValue);
+ 
       }}
       defaultValue={address}
       value={address}
-      options={data.map((option) => option.description)}
+      options={data.map((option) => option.description) }
       renderInput={(params) => (
         <TextField {...params} label="Enter Your Pin Location" />
       )}
@@ -61,7 +65,7 @@ function Map({ newAddress, defaultData }) {
   // *For Map Positions
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
   const [markerPosition, setMarkerPosition] = useState({ lat: 0, lng: 0 });
-  const [city, setCity] = useState("");
+  // const [city, setCity] = useState("");
 
   // *For Address
   const [address, setAddress] = useState("");
@@ -70,7 +74,8 @@ function Map({ newAddress, defaultData }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: googleMapKey,
-    libraries: ["places"],
+    libraries: ["places"],  
+
   });
 
   const containerStyle = {
@@ -123,14 +128,14 @@ function Map({ newAddress, defaultData }) {
       );
     });
   };
-
+ 
   const geoAddress = (address) => {
     console.log("Address before geocoding:", address);
     if (address === null) {
       return;
     } else {
       fromAddress(address).then((response) => {
-        setCenter({
+        setCenter({ 
           lat: response.results[0]?.geometry?.location?.lat,
           lng: response.results[0]?.geometry?.location?.lng,
         });
@@ -142,6 +147,7 @@ function Map({ newAddress, defaultData }) {
     }
   };
 
+  
   useEffect(() => {
     if (defaultData) {
       setCenter({ lat: defaultData?.latitude, lng: defaultData?.longitude });
@@ -207,7 +213,7 @@ function AddressForm({
   save,
   address: initialAddress,
 }) {
-  console.log("defaultData", defaultData);
+  
   const {
     register,
     handleSubmit,
@@ -219,6 +225,7 @@ function AddressForm({
 
   // *For Address Detail
   const [addressDetail, setAddressDetail] = useState();
+  // *For selectedLabel 
   const [selectedLabel, setSelectedLabel] = useState("");
 
   // *For Submit Form
@@ -252,6 +259,8 @@ function AddressForm({
       setValue("label", defaultData?.tag);
     }
   }, [defaultData, setValue]);
+
+  // *For showing selectedvalue in textField 
   useEffect(() => {
     setValue("address", initialAddress);
     setAddressDetail((prevDetails) => ({
@@ -259,6 +268,7 @@ function AddressForm({
       address: initialAddress,
     }));
   }, [initialAddress, setValue]);
+
   return (
     <Dialog
       maxWidth="lg"
@@ -306,10 +316,11 @@ function AddressForm({
               value={getValues("address") || ""}
               sx={{ width: "100%" }}
               placeholder="location"
-              error={errors?.address?.message}
+              error={!!errors.address}
               {...register("address", {
-                required: "location",
+                required: "location is required",
               })}
+              helperText={errors.address?.message}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -318,10 +329,11 @@ function AddressForm({
               size={"small"}
               sx={{ width: "100%" }}
               placeholder="Street"
-              error={errors?.street?.message}
+              error={!!errors.street}
               {...register("street", {
-                required: "street",
+                required: "street is required",
               })}
+              helperText={errors.street?.message}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -330,10 +342,11 @@ function AddressForm({
               size={"small"}
               sx={{ width: "100%" }}
               placeholder="Area"
-              error={errors?.area?.message}
+              error={!!errors.area}
               {...register("area", {
-                required: "area",
+                required: "area is required",
               })}
+              helperText={errors.area?.message}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -342,10 +355,11 @@ function AddressForm({
               size={"small"}
               sx={{ width: "100%" }}
               placeholder="House"
-              error={errors?.house?.message}
+              error={!!errors.house}
               {...register("house", {
-                required: "house",
+                required: "house is required",
               })}
+              helperText={errors.house?.message}    
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -354,10 +368,11 @@ function AddressForm({
               size={"small"}
               sx={{ width: "100%" }}
               placeholder="Room"
-              error={errors?.apt?.message}
+              error={!!errors.apt}
               {...register("apt", {
-                required: "room",
+                required: "room is required",
               })}
+              helperText={errors.apt?.message}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -370,9 +385,8 @@ function AddressForm({
                   disableRipple
                   onClick={() => setSelectedLabel("Home")}
                   sx={{
-                    p: 1.5,
-                    // bgcolor: selectedLabel === "Home" && Colors.primary,
-                    boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
+                     p: 1.5,
+                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Home" ? "#df6a2d" : "#b7b7b7",
                       width: "32px",
@@ -392,7 +406,6 @@ function AddressForm({
                   onClick={() => setSelectedLabel("Work")}
                   sx={{
                     p: 1.5,
-                    // bgcolor: selectedLabel === "Work" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Work" ? "#df6a2d" : "#b7b7b7",
@@ -412,8 +425,7 @@ function AddressForm({
                   disableRipple
                   onClick={() => setSelectedLabel("Favorite")}
                   sx={{
-                    p: 1.5,
-                    // bgcolor: selectedLabel === "Favorite" && Colors.primary,
+                    p: 1.5,                
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color:
@@ -434,8 +446,7 @@ function AddressForm({
                   disableRipple
                   onClick={() => setSelectedLabel("Other")}
                   sx={{
-                    p: 1.5,
-                    // bgcolor: selectedLabel === "Other" && Colors.primary,
+                    p: 1.5,                 
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Other" ? "#df6a2d" : "#b7b7b7",

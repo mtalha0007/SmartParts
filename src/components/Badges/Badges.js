@@ -26,6 +26,7 @@ export default function Badges() {
   ///navigate t0 login page
   const handleNavigate =() =>{
   navigate("/account")
+  handleMenuClose()
   }
 
   ////NAvigate to Cart Page

@@ -39,12 +39,12 @@ export default function Searchbar({display , marginTop , width}) {
         placeholder="Search For Products"
         inputProps={{ 'aria-label': 'search' }}
       />
-      <select className='dropDown' style={{border:"2px solid #eaebed",textAlign:"center",width:"70px" ,backgroundColor:"#f7f7f8"}}>
+      <select className='dropDown' style={{border:"2px solid #eaebed",outline:"none",textAlign:"center",width:"70px" ,backgroundColor:"#f7f7f8"}}>
         
         <option defaultValue={true }>ALL</option>
         <option>1 </option>
       </select>
-      <Box sx={{border:"2px solid #eaebed" , color:"black" , display:"flex" ,justifyContent:"center" , alignItems:"center" , width:'40px'}}>
+      <Box sx={{border:"2px solid #eaebed" , color:"black",cursor:"pointer" , display:"flex" ,justifyContent:"center" , alignItems:"center" , width:'40px'}}>
       <IoSearch />
       </Box>
     </Search>
