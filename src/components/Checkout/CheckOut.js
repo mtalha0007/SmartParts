@@ -10,43 +10,53 @@ import {
 import { ContextApi } from "../../store/context";
 import SelectAddressDialog from "../Dialog/SelectedAddressDialog"
 import AddressForm from "../Dialog/AddressForm";
+import { useForm } from "react-hook-form";
+
 
 export default function CheckOut() {
   const { state, dispatch } = useContext(ContextApi);
+  //for first address dialog
   const [selectAddressDialog, setSelectAddressDialog] = useState(false);
+  ///selected address
   const [ selectedDeliveryAddress, setSelectedDeliveryAddress] = useState({});
+  //for map dialog
   const [addressFormDialog, setAddressFormDialog] = useState(false);
-  const [addressLoading, setAddressLoading] = useState(false);
+ //for all Addresses
   const [addressLists ,setAddressLists] = useState([])
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   let amount = 0;
   let deliveryCharges = 5;
   function SubTotal() {
     for (let i = 0; i < state.cart_items.length; i++) {
-      amount +=
-        state.cart_items[i].discounted_price * state.cart_items[i].quantity;
+      amount +=  state.cart_items[i].discounted_price * state.cart_items[i].quantity;
     }
     return amount;
   }
   function TotalAmount() {
     let totalAmount = 0;
     totalAmount += amount + deliveryCharges;
-    console.log("totalAmount");
-    console.log("totalAmount");
-
     return totalAmount;
   }
 
-  const placeOrder = () => {};
-
-  const saveAddress =  (data) => {
-    setAddressLoading(true);
-     setAddressLists(data)
-    console.log("saveAddress" , addressLists)
-    
+  
+  const saveAddress = (data) => {
+    setAddressLists(prevAddressLists => [...prevAddressLists, data]);
+    console.log("saveAddress", addressLists);
   };
+  
+  const submitForm = (formData, totalAmount) => {
+    console.log("Form Data:", { formData, totalAmount });
+};
+
+  
   return (
-    <Box sx={{ padding: "10px" }}>
+ 
+    <Box sx={{ padding: "10px" }} component="form" onSubmit={handleSubmit((data) => submitForm(data, TotalAmount()))}>
       <Box
         sx={{
           border: "2px solid #eaebed",
@@ -77,7 +87,7 @@ export default function CheckOut() {
           </Box>
         </Box>
       </Box>
-      <Box
+      <Box  
         sx={{
           border: "2px solid #eaebed",
           padding: "30px",
@@ -93,6 +103,12 @@ export default function CheckOut() {
           placeholder="Enter Address"
           variant="outlined"
           sx={{ mb: 1, padding: "12px 0px", width: "100%" }}
+          error={errors?.location?.message}
+          {...register("location", {
+            required: "Location is required",
+          })}
+          helperText={errors.location?.message}
+      
         />
         {selectAddressDialog && <SelectAddressDialog 
          open={selectAddressDialog}
@@ -127,17 +143,31 @@ export default function CheckOut() {
             value="credit_card"
             control={<Radio />}
             label="Debit-Credit Card"
+            {...register("paymentMethod", {
+              required: "Payment method is required",
+            })}
+            error={errors?.paymentMethod?.message}
+            
           />
           <FormControlLabel
-            value="paypal"
+            value="cash"
             control={<Radio />}
             label="Pay On Delivery"
+            {...register("paymentMethod", {
+              required: "Payment method is required",
+            })}
+            error={errors?.paymentMethod?.message}
+           
           />
         </RadioGroup>
+        {errors.paymentMethod && (
+          <span style={{ color: '#d32f2f' ,fontSize:"0.8rem",fontWeight:"400",marginTop:"-7px",marginLeft:"14px" }}>{errors.paymentMethod.message}</span>
+        )}
       </Box>
      
-      <Box
-        onClick={placeOrder}
+      <Button
+     
+      type={"submit"}
         sx={{
           mt: 2,
           backgroundColor: "#df6a2d",
@@ -145,11 +175,16 @@ export default function CheckOut() {
           textAlign: "center",
           borderRadius: "5px",
           padding: "10px",
+          width: "100%",
           cursor: "pointer",
+          '&:hover':{
+            backgroundColor: "#df6a2d",
+          color: "white",
+          }
         }}
       >
         Confirm Order
-      </Box>
+    </Button>
     </Box>
   );
 }
