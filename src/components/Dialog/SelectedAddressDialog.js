@@ -81,6 +81,7 @@ function SelectAddressDialog({ open,onClose,addressLists=[],selectedAddress,addN
                   name="address"
                   value={item._id}
                   checked={selectedDeliveryAddress?.id === item._id}
+                  // onClick={() => onClose(selectedDeliveryAddress)}
                 />
                 <Box>
                   <Typography component={"span"}>{item.tag}</Typography>
@@ -88,7 +89,7 @@ function SelectAddressDialog({ open,onClose,addressLists=[],selectedAddress,addN
                     component="p"
                     variant={"body1"}
                     className="text-truncate"
-                    sx={{ fontWeight: 700 ,width:'350px',overflow:"hidden" }}
+                    sx={{ fontWeight: 700 ,width:'300px',overflow:"hidden" }}
                   >
                     {item.address}
                     {/* Address */}
@@ -103,7 +104,7 @@ function SelectAddressDialog({ open,onClose,addressLists=[],selectedAddress,addN
            )))
            :( <Box sx={{display:'flex',justifyContent:'center',alignItems:'center',height:'200px'}}>No Address</Box>)}
         </Box>
-        <Button sx={{backgroundColor:"#df6a2d" ,color:"white","&:hover":{backgroundColor:"#df6a2d",color:"white"        } }} onClick={() => addNewAddress()}>{addressLists.length <= 0 ?"Add New Address":"Change Address"}</Button>
+        <Button sx={{backgroundColor:"#df6a2d" ,color:"white","&:hover":{backgroundColor:"#df6a2d",color:"white"        } }} onClick={() => addNewAddress()}>Add New Address</Button>
       </DialogContent>
     </Dialog>
   );

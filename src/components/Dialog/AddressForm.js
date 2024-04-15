@@ -200,7 +200,13 @@ function Map({ newAddress, defaultData }) {
   );
 }
 
-function AddressForm({ open, onClose, defaultData, save, address: initialAddress }) {
+function AddressForm({
+  open,
+  onClose,
+  defaultData,
+  save,
+  address: initialAddress,
+}) {
   console.log("defaultData", defaultData);
   const {
     register,
@@ -217,20 +223,20 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
 
   // *For Submit Form
   const submitForm = (formData) => {
-    try { 
-      let obj = [
-        {
+    try {
+      let obj = {
         ...addressDetail,
+        _id: Math.floor(Math.random() * 1000000),
         tag: selectedLabel ?? "Other",
         street: formData.street,
         area: formData.area,
         house_building: formData.house,
         apt_room: formData.apt,
-        }
-      ];
+      };
       save(obj);
+      onClose();
       reset();
-      console.log("formData===>" ,obj)
+      console.log("formData===>", obj);
     } catch (error) {
       console.log(error?.message);
     }
@@ -245,7 +251,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
       setValue("apt", defaultData?.apt_room);
       setValue("label", defaultData?.tag);
     }
-  }, [defaultData,setValue]);
+  }, [defaultData, setValue]);
   useEffect(() => {
     setValue("address", initialAddress);
     setAddressDetail((prevDetails) => ({
@@ -297,7 +303,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
             <TextField
               size={"small"}
               disabled={true}
-              value={getValues("address") || ''}
+              value={getValues("address") || ""}
               sx={{ width: "100%" }}
               placeholder="location"
               error={errors?.address?.message}
@@ -310,7 +316,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
             <InputLabel>Street</InputLabel>
             <TextField
               size={"small"}
-              sx={{width:"100%"}}
+              sx={{ width: "100%" }}
               placeholder="Street"
               error={errors?.street?.message}
               {...register("street", {
@@ -322,10 +328,10 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
             <InputLabel>Area</InputLabel>
             <TextField
               size={"small"}
-              sx={{width:"100%"}}
+              sx={{ width: "100%" }}
               placeholder="Area"
               error={errors?.area?.message}
-            {...register("area", {
+              {...register("area", {
                 required: "area",
               })}
             />
@@ -334,7 +340,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
             <InputLabel>House</InputLabel>
             <TextField
               size={"small"}
-              sx={{width:"100%"}}
+              sx={{ width: "100%" }}
               placeholder="House"
               error={errors?.house?.message}
               {...register("house", {
@@ -346,7 +352,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
             <InputLabel>Room</InputLabel>
             <TextField
               size={"small"}
-              sx={{width:"100%"}}
+              sx={{ width: "100%" }}
               placeholder="Room"
               error={errors?.apt?.message}
               {...register("apt", {
@@ -355,7 +361,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Typography variant="subtitle1">Add Label</Typography>
+            {/* <Typography variant="subtitle1">Add Label</Typography> */}
             <Box
               sx={{ display: "flex", gap: "20px", alignItems: "center", my: 1 }}
             >
@@ -368,10 +374,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
                     // bgcolor: selectedLabel === "Home" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
-                        color:
-                          selectedLabel === "Home"
-                          ?"#df6a2d"
-                            : "black",
+                      color: selectedLabel === "Home" ? "#df6a2d" : "#b7b7b7",
                       width: "32px",
                       height: "32px",
                     },
@@ -392,10 +395,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
                     // bgcolor: selectedLabel === "Work" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
-                      color:
-                      selectedLabel === "Work"
-                      ? "#df6a2d"
-                      : "black",
+                      color: selectedLabel === "Work" ? "#df6a2d" : "#b7b7b7",
                       width: "32px",
                       height: "32px",
                     },
@@ -417,9 +417,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color:
-                          selectedLabel === "Favorite"
-                          ? "#df6a2d"
-                           : "black",
+                        selectedLabel === "Favorite" ? "#df6a2d" : "#b7b7b7",
                       width: "32px",
                       height: "32px",
                     },
@@ -440,10 +438,7 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
                     // bgcolor: selectedLabel === "Other" && Colors.primary,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
-                      color:
-                      selectedLabel === "Other"
-                        ? "#df6a2d"
-                        : "black",
+                      color: selectedLabel === "Other" ? "#df6a2d" : "#b7b7b7",
                       width: "32px",
                       height: "32px",
                     },
@@ -459,9 +454,25 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
           </Grid>
           <Grid item xs={12} sm={12} sx={{ mt: 1 }}>
             <Box sx={{ display: "flex" }}>
-              <Button type={"submit"}>Save Continue</Button>
+              <Button
+                sx={{
+                width:"50%",
+                  backgroundColor: "#df6a2d",
+                  color: "white",
+                  "&:hover": { backgroundColor: "#df6a2d", color: "white" },
+                }}
+                type={"submit"}
+              >
+                Save
+              </Button>
               <Box sx={{ mx: 0.5 }} />
               <Button
+               sx={{
+                width:"50%",
+                backgroundColor: "#df6a2d",
+                color: "white",
+                "&:hover": { backgroundColor: "#df6a2d", color: "white" },
+              }}
                 onClick={() => {
                   onClose();
                   reset();
@@ -473,7 +484,6 @@ function AddressForm({ open, onClose, defaultData, save, address: initialAddress
           </Grid>
         </Grid>
       </Box>
-      
     </Dialog>
   );
 }

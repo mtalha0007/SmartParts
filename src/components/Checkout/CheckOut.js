@@ -12,51 +12,46 @@ import SelectAddressDialog from "../Dialog/SelectedAddressDialog"
 import AddressForm from "../Dialog/AddressForm";
 import { useForm } from "react-hook-form";
 
-
 export default function CheckOut() {
   const { state, dispatch } = useContext(ContextApi);
-  //for first address dialog
   const [selectAddressDialog, setSelectAddressDialog] = useState(false);
-  ///selected address
   const [ selectedDeliveryAddress, setSelectedDeliveryAddress] = useState({});
-  //for map dialog
   const [addressFormDialog, setAddressFormDialog] = useState(false);
- //for all Addresses
+  const [addressLoading, setAddressLoading] = useState(false);
   const [addressLists ,setAddressLists] = useState([])
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   let amount = 0;
   let deliveryCharges = 5;
   function SubTotal() {
     for (let i = 0; i < state.cart_items.length; i++) {
-      amount +=  state.cart_items[i].discounted_price * state.cart_items[i].quantity;
+      amount +=
+        state.cart_items[i].discounted_price * state.cart_items[i].quantity;
     }
     return amount;
   }
   function TotalAmount() {
     let totalAmount = 0;
     totalAmount += amount + deliveryCharges;
-    return totalAmount;
+     return totalAmount;
   }
 
-  
-  const saveAddress = (data) => {
-    setAddressLists(prevAddressLists => [...prevAddressLists, data]);
-    console.log("saveAddress", addressLists);
-  };
-  
   const submitForm = (formData, totalAmount) => {
     console.log("Form Data:", { formData, totalAmount });
     
 };
 
-  
+
+const saveAddress = (data) => {
+  setAddressLists(prevAddressLists => [...prevAddressLists, data]);
+  console.log("saveAddress", addressLists);
+};
+
   return (
- 
     <Box sx={{ padding: "10px" }} component="form" onSubmit={handleSubmit((data) => submitForm(data, TotalAmount()))}>
       <Box
         sx={{
@@ -88,7 +83,7 @@ export default function CheckOut() {
           </Box>
         </Box>
       </Box>
-      <Box  
+      <Box
         sx={{
           border: "2px solid #eaebed",
           padding: "30px",
