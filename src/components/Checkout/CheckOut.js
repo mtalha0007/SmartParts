@@ -51,6 +51,7 @@ export default function CheckOut() {
   
   const submitForm = (formData, totalAmount) => {
     console.log("Form Data:", { formData, totalAmount });
+    
 };
 
   
