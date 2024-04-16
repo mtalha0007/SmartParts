@@ -7,7 +7,7 @@ export const get = async (endPoint, params) => {
         if (result.status === 200 || result.status === 206 ) return result.data;
         else throw result;
     } catch (e) {
-        console.log(e)
+        throw ErrorHandler(e)
     }
 };
 
@@ -27,7 +27,7 @@ export const patch = async (endPoint, data) => {
         if (result.status === 200 || result.status === 206) return result.data;
         else throw result;
     } catch (e) {
-        console.log(e)
+        throw ErrorHandler(e)
     }
 };
 
@@ -37,6 +37,6 @@ export const deleted = async (endPoint, params) => {
         if (result.status === 200 || result.status === 206) return result.data;
         else throw result;
     } catch (e) {
-        console.log(e)
+        throw ErrorHandler(e)
     }
 };

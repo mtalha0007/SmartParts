@@ -16,6 +16,8 @@ import {
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import { setKey, setRegion, fromAddress, fromLatLng } from "react-geocode";
+import addressPostServices from "../../services/adressServices";
+
 
 const googleMapKey = `AIzaSyCsT-b8-J4wnqKYUBFROMPQr_IEYdjNiSg`;
 
@@ -227,18 +229,23 @@ function AddressForm({
   const [addressDetail, setAddressDetail] = useState();
   // *For selectedLabel 
   const [selectedLabel, setSelectedLabel] = useState("");
+  //*For context to get user Token
+  
 
   // *For Submit Form
-  const submitForm = (formData) => {
+  const submitForm = async (formData) => {
     try {
-      let obj = {
+      // const response = await addressPostServices.createAddress(obj);
+      // console.log(response);
+      var obj = {
         ...addressDetail,
-        _id: Math.floor(Math.random() * 1000000),
+        // _id: Math.floor(Math.random() * 1000000),
         tag: selectedLabel ?? "Other",
         street: formData.street,
         area: formData.area,
         house_building: formData.house,
         apt_room: formData.apt,
+       
       };
       save(obj);
       onClose();

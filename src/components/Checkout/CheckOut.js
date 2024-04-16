@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -11,6 +11,8 @@ import { ContextApi } from "../../store/context";
 import SelectAddressDialog from "../Dialog/SelectedAddressDialog"
 import AddressForm from "../Dialog/AddressForm";
 import { useForm } from "react-hook-form";
+import addressPostServices from "../../services/adressServices";
+import PlaceOrderServices from "../../services/placeOrderServices";
 
 export default function CheckOut() {
    // *For Context to get total amount
@@ -31,6 +33,7 @@ export default function CheckOut() {
   } = useForm();
   let amount = 0;
   let deliveryCharges = 5;
+  let totalAmount = 0;
   function SubTotal() {
     for (let i = 0; i < state.cart_items.length; i++) {
       amount +=
@@ -39,22 +42,81 @@ export default function CheckOut() {
     return amount;
   }
   function TotalAmount() {
-    let totalAmount = 0;
     totalAmount += amount + deliveryCharges;
      return totalAmount;
   }
 
-  const submitForm = (formData, totalAmount) => {
-    console.log("Form Data:", { formData, totalAmount });
-    
-};
+  // const submitForm = async (formData, totalAmount) => {
+  //   // console.log("Form Data:", { formData, totalAmount });
+  //   const products = [];
+  //   state.cart_items.forEach((e) => {
+  //     let obj = {
+  //       product_id: e?._id,
+  //       qty: e?.quantity,
+  //       product_price:e?.discounted_price > 0 ? e?.discounted_price : e?.price,
+  //     };
+  //     products.push(obj);
+  //   });
+
+  //   let obj = {
+  //     products: products,
+  //     total_amount: totalAmount,
+  //     address_id: selectedDeliveryAddress?.id,
+  //   }
+  //   console.log(obj)
+  //   const response = await PlaceOrderServices.postOrder(obj);
+  //   console.log(response)
+  //   };
 
 
-const saveAddress = (data) => {
-  setAddressLists(prevAddressLists => [...prevAddressLists, data]);
+
+// const saveAddress = async (data) => {
+//   try {
+//     const responseCode  = await addressPostServices.createAddress(data);
+//     if (responseCode === 200) {
+//       setAddressLists( data);
+//       getAddressLists();
+//       setAddressFormDialog(false);
+//     } else {
+//       console.error("Unexpected response code:", responseCode);
+//     }
+//   } catch (error) {
+//     console.error("Error saving address:", error);
+//   } finally {
+//     console.log("saveAddress", addressLists);
+//   }
+// };
+const saveAddress = async (data) => {
+  try{
+  console.log(data)
+  const responseCode  = await addressPostServices.createAddress(data);
+  console.log(responseCode)
+  getAddressLists() 
   console.log("saveAddress", addressLists);
+  }catch(error){
+    console.log("catch error====>" ,error)
+  }
 };
 
+const getAddressLists = async () => {
+  try {
+    const { responseCode, data } = await addressPostServices.getAddress();
+    if (responseCode === 200) {
+      setAddressLists(data.result);
+      setSelectedDeliveryAddress({
+        id: data?.result[0]?._id,
+        address: data?.result[0]?.address,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    
+  }
+};
+useEffect(()=>{
+getAddressLists();
+},[1000 ])
+ 
   return (
     <Box sx={{ padding: "10px" }} component="form" onSubmit={handleSubmit((data) => submitForm(data, TotalAmount()))}>
       <Box

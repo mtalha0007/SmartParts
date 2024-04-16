@@ -22,6 +22,7 @@ function LoginPage() {
     try {
       const response = await authLogin.loginUser(data);  
       console.log(response) 
+      localStorage.setItem("token" , response.data.token)
       
       let userData = {
         data : response
