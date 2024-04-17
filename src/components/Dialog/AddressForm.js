@@ -22,42 +22,46 @@ const googleMapKey = `AIzaSyCsT-b8-J4wnqKYUBFROMPQr_IEYdjNiSg`;
 
 
 const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
-
     const {
+      ready,
     setValue, 
-    suggestions: { data },
+    suggestions: { status ,data },
   } = usePlacesAutocomplete({
     requestOptions: {
       region: "pk",
       componentRestrictions: { country: "pk" },
-    },
-    
-  });
-    
+    },  
+    debounce: 300,
+  }); 
+
+  
+  console.log("status==>" ,status)
   return (
-    <Box>
-    <Autocomplete
-      sx={{ my: 2 }}
-      size="small"
-      fullWidth
-      id="combo-box-demo"
-      onChange={(event, newValue) => {
-          geoAddress(newValue);
-          setAddress(newValue);
-          
-        }}
+    <Fragment>
+      {data && (
+      <Autocomplete
+        sx={{ my: 2 }}
+        size="small"
+        fullWidth
+        id="combo-box-demo"
+        disabled={!ready}
         onInputChange={(event, newInputValue) => {
           setValue(newInputValue);
-          
         }}
-      defaultValue={address}
-      value={address}
-      options={data.map((option) => option.description) }
-      renderInput={(params) => (
-        <TextField   {...params} label="Enter Your Pin Location" />
+        onChange={(event, newValue) => {
+          geoAddress(newValue);
+          setAddress(newValue);     
+        }}
+         
+        defaultValue={address}
+        value={address}
+        options={ data.map((option) => option.description) }
+        renderInput={(params) => (
+          <TextField    {...params} label="Enter Your Pin Location" />
+        )}
+       />
       )}
-     />
-    </Box>
+    </Fragment>
   );
 };
 
@@ -117,6 +121,8 @@ function Map({ newAddress, defaultData }) {
       );
     });
   };
+ 
+  
 
   const handleMarkerLoad = (marker) => {
     marker.addListener("dragend", (e) => {
@@ -267,13 +273,13 @@ function AddressForm({
   }, [defaultData, setValue]);
 
   // *For showing selectedvalue in textField 
-  useEffect(() => {
-    setValue("address", initialAddress);
-    setAddressDetail((prevDetails) => ({
-      ...prevDetails,
-      address: initialAddress,
-    }));
-  }, [initialAddress, setValue]);
+  // useEffect(() => {
+  //   setValue("address", initialAddress);
+  //   setAddressDetail((prevDetails) => ({
+  //     ...prevDetails,
+  //     address: initialAddress,
+  //   }));
+  // }, [initialAddress, setValue]);
 
   return (
     <Dialog
