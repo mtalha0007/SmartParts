@@ -13,6 +13,7 @@ import AddressForm from "../Dialog/AddressForm";
 import { useForm } from "react-hook-form";
 import addressPostServices from "../../services/adressServices";
 import PlaceOrderServices from "../../services/placeOrderServices";
+import Toastify from 'toastify-js'
 
 export default function CheckOut() {
    // *For Context to get total amount
@@ -33,59 +34,72 @@ export default function CheckOut() {
   } = useForm();
   let amount = 0;
   let deliveryCharges = 5;
-  let totalAmount = 0;
+
   function SubTotal() {
     for (let i = 0; i < state.cart_items.length; i++) {
-      amount +=
-        state.cart_items[i].discounted_price * state.cart_items[i].quantity;
+      amount += state.cart_items[i].discounted_price * state.cart_items[i].quantity;
     }
     return amount;
-  }
-  function TotalAmount() {
+    }
+    
+    function TotalAmount() {
+    let totalAmount = 0;
     totalAmount += amount + deliveryCharges;
      return totalAmount;
   }
 
-  // const submitForm = async (formData, totalAmount) => {
-  //   // console.log("Form Data:", { formData, totalAmount });
-  //   const products = [];
-  //   state.cart_items.forEach((e) => {
-  //     let obj = {
-  //       product_id: e?._id,
-  //       qty: e?.quantity,
-  //       product_price:e?.discounted_price > 0 ? e?.discounted_price : e?.price,
-  //     };
-  //     products.push(obj);
-  //   });
+  const submitForm = async (formData, totalAmount) => { 
+    const products = [];
+    //create obj for products and push to products array
+    state.cart_items.forEach((data) => {
+      let productObj = {
+        product_id: data?.productId,
+        qty: data?.quantity,
+        product_price: data?.discounted_price > 0 ? data?.discounted_price : data?.price,
+      };
+      products.push(productObj);
+    });
 
-  //   let obj = {
-  //     products: products,
-  //     total_amount: totalAmount,
-  //     address_id: selectedDeliveryAddress?.id,
-  //   }
-  //   console.log(obj)
-  //   const response = await PlaceOrderServices.postOrder(obj);
-  //   console.log(response)
-  //   };
+    let obj = {
+      products: products,
+      total_amount: totalAmount,
+      address_id: selectedDeliveryAddress?.id,
+      delivery_charges: deliveryCharges,
+    }
+    ///add object to api
+    try{
+
+      const response = await PlaceOrderServices.postOrder(obj);
+    console.log(response)
+    Toastify({
+      text:response?.message,
+      duration: 2000,
+      gravity: "top", 
+      position: "right", 
+      stopOnFocus: true, 
+      style: {
+        background : "green"
+       
+      },
+     
+    }).showToast();
+    }catch(error){
+      Toastify({
+        text:"Something went wrong",
+        duration: 2000,
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+          background :"red"
+         
+        },
+       
+      }).showToast();
+    }
+    };
 
 
-
-// const saveAddress = async (data) => {
-//   try {
-//     const responseCode  = await addressPostServices.createAddress(data);
-//     if (responseCode === 200) {
-//       setAddressLists( data);
-//       getAddressLists();
-//       setAddressFormDialog(false);
-//     } else {
-//       console.error("Unexpected response code:", responseCode);
-//     }
-//   } catch (error) {
-//     console.error("Error saving address:", error);
-//   } finally {
-//     console.log("saveAddress", addressLists);
-//   }
-// };
 const saveAddress = async (data) => {
   try{
   console.log(data)
@@ -160,7 +174,9 @@ getAddressLists();
         <Box component={"h5"}>Delivery Address</Box>
         <TextField
           value={selectedDeliveryAddress?.address}
+          defaultValue ={selectedDeliveryAddress?.address}
           inputProps={{ readOnly: true }}
+          autoFocus={true}
           onClick={() => setSelectAddressDialog(true)}
           placeholder="Enter Address"
           variant="outlined"

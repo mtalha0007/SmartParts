@@ -89,6 +89,7 @@ function PrimarySearchAppBar() {
                 },
                 "@media screen and (max-width:480px)": {
                   width: "28px",
+                  display:"none",
                   height: "30px",
                   top: "10px",
                 },

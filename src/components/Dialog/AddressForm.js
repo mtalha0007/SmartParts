@@ -16,15 +16,15 @@ import {
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import { setKey, setRegion, fromAddress, fromLatLng } from "react-geocode";
-import addressPostServices from "../../services/adressServices";
 
 
 const googleMapKey = `AIzaSyCsT-b8-J4wnqKYUBFROMPQr_IEYdjNiSg`;
 
+
 const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
 
     const {
-    setValue,
+    setValue, 
     suggestions: { data },
   } = usePlacesAutocomplete({
     requestOptions: {
@@ -33,30 +33,31 @@ const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
     },
     
   });
-
-
+    
   return (
+    <Box>
     <Autocomplete
       sx={{ my: 2 }}
       size="small"
       fullWidth
       id="combo-box-demo"
-      onInputChange={(event, newInputValue) => {
-        setValue(newInputValue);
- 
-      }}
       onChange={(event, newValue) => {
           geoAddress(newValue);
           setAddress(newValue);
- 
-      }}
+          
+        }}
+        onInputChange={(event, newInputValue) => {
+          setValue(newInputValue);
+          
+        }}
       defaultValue={address}
       value={address}
       options={data.map((option) => option.description) }
       renderInput={(params) => (
-        <TextField {...params} label="Enter Your Pin Location" />
+        <TextField   {...params} label="Enter Your Pin Location" />
       )}
-    />
+     />
+    </Box>
   );
 };
 
@@ -71,7 +72,7 @@ function Map({ newAddress, defaultData }) {
 
   // *For Address
   const [address, setAddress] = useState("");
-  console.log("🚀Map ~ address:", address);
+  console.log("Map address=====>", address);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -132,7 +133,7 @@ function Map({ newAddress, defaultData }) {
   };
  
   const geoAddress = (address) => {
-    console.log("Address before geocoding:", address);
+    
     if (address === null) {
       return;
     } else {
@@ -228,19 +229,17 @@ function AddressForm({
   // *For Address Detail
   const [addressDetail, setAddressDetail] = useState();
   // *For selectedLabel 
-  const [selectedLabel, setSelectedLabel] = useState("");
+  const [ selectedLabel, setSelectedLabel] = useState("");
   //*For context to get user Token
   
 
   // *For Submit Form
   const submitForm = async (formData) => {
     try {
-      // const response = await addressPostServices.createAddress(obj);
-      // console.log(response);
       var obj = {
         ...addressDetail,
         // _id: Math.floor(Math.random() * 1000000),
-        tag: selectedLabel ?? "Other",
+        tag: selectedLabel ? selectedLabel : "Others",  
         street: formData.street,
         area: formData.area,
         house_building: formData.house,

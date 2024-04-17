@@ -59,6 +59,7 @@ export default function FeedBack() {
               fontSize: "10px",
               p: "9px",
               pl: "5px",
+              cursor:"pointer"
             }}
           >
             SUBMIT

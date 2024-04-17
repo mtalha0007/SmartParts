@@ -29,9 +29,6 @@ function LoginPage() {
       }
       dispatch({ type: "USER_DATA", payload: userData });
 
-      //for localStotage check
-      // const isLogin = localStorage.setItem("token",response?.data?.token ?response?.data?.token:"" )
-      // console.log("response======>", response)
       Toastify({
         text:response?.message,
         duration: 2000,
@@ -39,14 +36,14 @@ function LoginPage() {
         position: "right", 
         stopOnFocus: true, 
         style: {
-          background :response?.message ? "green":"red"
-         
-        },
-       
+          background :response?.message ? "green":"red"  
+        },  
       }).showToast();
+
       setTimeout(() => {
         navigate("/")
       }, 2000);
+      
     } catch (error) {
       Toastify({
         text:error,
