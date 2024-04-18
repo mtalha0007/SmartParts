@@ -398,7 +398,7 @@ function AddressForm({
                   <Home />
                 </IconButton>
                 <Typography variant="body1" sx={{ textAlign: "center", mt: 1 }}>
-                  {"home"}
+                  {"Home"}
                 </Typography>
               </Box>
               <Box>
@@ -418,7 +418,7 @@ function AddressForm({
                   <Work />
                 </IconButton>
                 <Typography variant="body1" sx={{ textAlign: "center", mt: 1 }}>
-                  {"work"}
+                  {"Work"}
                 </Typography>
               </Box>
               <Box>
@@ -439,7 +439,7 @@ function AddressForm({
                   <Favorite />
                 </IconButton>
                 <Typography variant="body1" sx={{ textAlign: "center", mt: 1 }}>
-                  {"favourite"}
+                  {"Favourite"}
                 </Typography>
               </Box>
               <Box>
@@ -459,7 +459,7 @@ function AddressForm({
                   <Add />
                 </IconButton>
                 <Typography variant="body1" sx={{ textAlign: "center", mt: 1 }}>
-                  {"other"}
+                  {"Other"}
                 </Typography>
               </Box>
             </Box>
