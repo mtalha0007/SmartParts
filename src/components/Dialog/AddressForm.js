@@ -17,28 +17,23 @@ import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import { setKey, setRegion, fromAddress, fromLatLng } from "react-geocode";
 
-
 const googleMapKey = `AIzaSyCsT-b8-J4wnqKYUBFROMPQr_IEYdjNiSg`;
 
-
 const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
-    const {
-      ready,
-    setValue, 
-    suggestions: { status ,data },
+  const {
+    ready,
+    setValue,
+    suggestions: { status, data },
   } = usePlacesAutocomplete({
     requestOptions: {
       region: "pk",
       componentRestrictions: { country: "pk" },
-    },  
+    },
     debounce: 300,
-  }); 
+  });
 
-  
-  console.log("status==>" ,status)
   return (
     <Fragment>
-      {data && (
       <Autocomplete
         sx={{ my: 2 }}
         size="small"
@@ -50,17 +45,15 @@ const PlacesAutocomplete = ({ address, geoAddress, setAddress }) => {
         }}
         onChange={(event, newValue) => {
           geoAddress(newValue);
-          setAddress(newValue);     
+          setAddress(newValue);
         }}
-         
         defaultValue={address}
         value={address}
-        options={ data.map((option) => option.description) }
+        options={data.map((option) => option.description)}
         renderInput={(params) => (
-          <TextField    {...params} label="Enter Your Pin Location" />
+          <TextField {...params} label="Enter Your Pin Location" />
         )}
-       />
-      )}
+      />
     </Fragment>
   );
 };
@@ -81,8 +74,7 @@ function Map({ newAddress, defaultData }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: googleMapKey,
-    libraries: ["places"],  
-
+    libraries: ["places"],
   });
 
   const containerStyle = {
@@ -121,8 +113,6 @@ function Map({ newAddress, defaultData }) {
       );
     });
   };
- 
-  
 
   const handleMarkerLoad = (marker) => {
     marker.addListener("dragend", (e) => {
@@ -137,14 +127,13 @@ function Map({ newAddress, defaultData }) {
       );
     });
   };
- 
+
   const geoAddress = (address) => {
-    
     if (address === null) {
       return;
     } else {
       fromAddress(address).then((response) => {
-        setCenter({ 
+        setCenter({
           lat: response.results[0]?.geometry?.location?.lat,
           lng: response.results[0]?.geometry?.location?.lng,
         });
@@ -156,7 +145,6 @@ function Map({ newAddress, defaultData }) {
     }
   };
 
-  
   useEffect(() => {
     if (defaultData) {
       setCenter({ lat: defaultData?.latitude, lng: defaultData?.longitude });
@@ -186,28 +174,31 @@ function Map({ newAddress, defaultData }) {
 
   return (
     <Fragment>
-      <PlacesAutocomplete
-        setAddress={setAddress}
-        address={address}
-        geoAddress={geoAddress}
-      />
       {isLoaded ? (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={14}
-          options={options}
-          onLoad={handleMapLoad}
-        >
-          <MarkerF
-            position={markerPosition}
-            draggable={true}
-            onDragEnd={(e) => {
-              setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-            }}
-            onLoad={handleMarkerLoad}
+        <>
+          <PlacesAutocomplete
+            setAddress={setAddress}
+            address={address}
+            geoAddress={geoAddress}
           />
-        </GoogleMap>
+
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={14}
+            options={options}
+            onLoad={handleMapLoad}
+          >
+            <MarkerF
+              position={markerPosition}
+              draggable={true}
+              onDragEnd={(e) => {
+                setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
+              }}
+              onLoad={handleMarkerLoad}
+            />
+          </GoogleMap>
+        </>
       ) : (
         ""
       )}
@@ -222,7 +213,6 @@ function AddressForm({
   save,
   address: initialAddress,
 }) {
-  
   const {
     register,
     handleSubmit,
@@ -234,10 +224,8 @@ function AddressForm({
 
   // *For Address Detail
   const [addressDetail, setAddressDetail] = useState();
-  // *For selectedLabel 
-  const [ selectedLabel, setSelectedLabel] = useState("");
-  //*For context to get user Token
-  
+  // *For selectedLabel
+  const [selectedLabel, setSelectedLabel] = useState("");
 
   // *For Submit Form
   const submitForm = async (formData) => {
@@ -245,12 +233,11 @@ function AddressForm({
       var obj = {
         ...addressDetail,
         // _id: Math.floor(Math.random() * 1000000),
-        tag: selectedLabel ? selectedLabel : "Others",  
+        tag: selectedLabel ? selectedLabel : "Others",
         street: formData.street,
         area: formData.area,
         house_building: formData.house,
         apt_room: formData.apt,
-       
       };
       save(obj);
       onClose();
@@ -272,7 +259,7 @@ function AddressForm({
     }
   }, [defaultData, setValue]);
 
-  // *For showing selectedvalue in textField 
+  // *For showing selectedvalue in textField
   // useEffect(() => {
   //   setValue("address", initialAddress);
   //   setAddressDetail((prevDetails) => ({
@@ -309,6 +296,7 @@ function AddressForm({
       >
         {"Delivery Address"}
       </DialogTitle>
+
       <Box component="form" onSubmit={handleSubmit(submitForm)}>
         <Grid container spacing={1} alignItems={"center"}>
           <Grid item xs={12} sm={12}>
@@ -320,6 +308,7 @@ function AddressForm({
               defaultData={defaultData}
             />
           </Grid>
+
           <Grid item xs={12} sm={12}>
             <InputLabel>Location</InputLabel>
             <TextField
@@ -371,7 +360,7 @@ function AddressForm({
               {...register("house", {
                 required: "house is required",
               })}
-              helperText={errors.house?.message}    
+              helperText={errors.house?.message}
             />
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -397,8 +386,8 @@ function AddressForm({
                   disableRipple
                   onClick={() => setSelectedLabel("Home")}
                   sx={{
-                     p: 1.5,
-                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
+                    p: 1.5,
+                    boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Home" ? "#df6a2d" : "#b7b7b7",
                       width: "32px",
@@ -437,7 +426,7 @@ function AddressForm({
                   disableRipple
                   onClick={() => setSelectedLabel("Favorite")}
                   sx={{
-                    p: 1.5,                
+                    p: 1.5,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color:
@@ -458,7 +447,7 @@ function AddressForm({
                   disableRipple
                   onClick={() => setSelectedLabel("Other")}
                   sx={{
-                    p: 1.5,                 
+                    p: 1.5,
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Other" ? "#df6a2d" : "#b7b7b7",
@@ -479,7 +468,7 @@ function AddressForm({
             <Box sx={{ display: "flex" }}>
               <Button
                 sx={{
-                width:"50%",
+                  width: "50%",
                   backgroundColor: "#df6a2d",
                   color: "white",
                   "&:hover": { backgroundColor: "#df6a2d", color: "white" },
@@ -490,12 +479,12 @@ function AddressForm({
               </Button>
               <Box sx={{ mx: 0.5 }} />
               <Button
-               sx={{
-                width:"50%",
-                backgroundColor: "#df6a2d",
-                color: "white",
-                "&:hover": { backgroundColor: "#df6a2d", color: "white" },
-              }}
+                sx={{
+                  width: "50%",
+                  backgroundColor: "#df6a2d",
+                  color: "white",
+                  "&:hover": { backgroundColor: "#df6a2d", color: "white" },
+                }}
                 onClick={() => {
                   onClose();
                   reset();

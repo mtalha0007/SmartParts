@@ -188,7 +188,7 @@ getAddressLists();
           error={!!errors.location}
       
         />
-        {selectAddressDialog && <SelectAddressDialog 
+        <SelectAddressDialog 
          open={selectAddressDialog}
          onClose={(data) => {
            setSelectAddressDialog(false);
@@ -200,7 +200,7 @@ getAddressLists();
            setAddressFormDialog(true);
          }}
          selectedAddress={selectedDeliveryAddress}
-        />}
+        />
         <AddressForm
         open={addressFormDialog}
         onClose={() => setAddressFormDialog(false)}
