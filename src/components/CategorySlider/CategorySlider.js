@@ -18,7 +18,7 @@ export default function CategorySlider({
   addToCart,
 }) {
   const { state, dispatch } = useContext(ContextApi);
-
+  const baseUrl = process.env.REACT_APP_BASE_URL
   function AddToCart(elem) {
     let cartData = {
       _id: Math.floor(Math.random() * 1000000),
@@ -153,9 +153,10 @@ export default function CategorySlider({
                   15%
                 </Box>
                 <Card.Img
-                  style={{ width: imgWidth, margin: "0 auto" }}
+                  style={{ width: imgWidth, margin: "0 auto",height:"150px" }}
                   variant="top"
-                  src={Images.product2}
+                  // src={Images.product2}
+                  src={baseUrl + elem.picture[0]}
                 />
                 <Card.Body>
                   <Card.Title>
@@ -168,7 +169,7 @@ export default function CategorySlider({
                     >
                       <Box>
                         <Box sx={{ fontSize: "12px" }}>
-                          {elem.category_id.name}
+                          {elem.name}
                         </Box>
                         <Box
                           sx={{
