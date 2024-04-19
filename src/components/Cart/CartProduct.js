@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ContextApi } from "../../store/context";
 function CartProduct({alignItems, display, flexDirection, margin}) {
-
+  const baseUrl = process.env.REACT_APP_BASE_URL
   const { state, dispatch } = useContext(ContextApi);
   console.log("state ==>> ", state.cart_items);
 
@@ -49,7 +49,7 @@ function DecrementQuantity(_id) {
                   {/* Assuming Images.product2 is valid for each product; otherwise, consider using elem.image */}
                   <img
                     style={{ width: "70px" }}
-                    src={Images.product2}
+                    src={baseUrl + elem.image}
                     alt="Product"
                   />
                 </Box>
