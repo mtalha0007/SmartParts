@@ -24,3 +24,10 @@
 .css-1aquho2-MuiTabs-indicator{
     display: none !important;
 }
+.paginator{
+    gap:30px
+}
+.p-paginator-pages{
+    display: flex;
+    gap: 15px;
+}

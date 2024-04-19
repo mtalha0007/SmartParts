@@ -33,6 +33,9 @@ export default function Badges() {
   const handleNavigateToCart =() =>{
   navigate("/cart")
   }
+  const handleNavigateToOrders =() =>{
+  navigate("/orders")
+  }
   return (
     <Box>
       <Box sx={{ display: "flex", gap: "10px" }}>
@@ -41,13 +44,13 @@ export default function Badges() {
             <LiaShoppingBagSolid />
           </Badge>
         </IconButton>
-        <IconButton
+        <IconButton   onClick={handleNavigateToOrders}
           sx={{
             display: { lg: "flex", xs: "none" },
             maxWidth: "24px",
           }}
         >
-          <Badge badgeContent={1} color="error">
+          <Badge  badgeContent={1} color="error">
             <TbRotateClockwise />
           </Badge>
         </IconButton>

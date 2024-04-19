@@ -12,7 +12,7 @@ import Cart from '../components/Cart/Cart';
 import ProductDetails from '../components/ProductDetails/ProductDetails';
 import productServices from '../services/productServices';
 import CheckOut from '../components/Checkout/CheckOut';
-
+import Order from "../components/Orders/Order"
 function AppRouter() {
   const [cardDetails, setCardDetails] = useState([]);
   const getProductData = async () => {
@@ -40,6 +40,7 @@ function AppRouter() {
         <Route path="/cart" element={<Cart data={cardDetails}/>} />
         <Route path="/product" element={<ProductDetails data={cardDetails} />} />
         <Route path="/checkout" element={<CheckOut/>} />
+        <Route path="/orders" element={<Order/>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <FeedBack/>
