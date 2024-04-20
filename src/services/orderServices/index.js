@@ -6,10 +6,10 @@ const orderServices = {
     const data = await get(routes.getOrders, params);
     return data;
   },
-//   createAuctionHouse: async (obj) => {
-//     const data = await post(routes.createAuctionHouse, obj);
-//     return data;
-//   },
+  getOrderById: async (id) => {
+    const data = await get(routes.getOrderById  + `?id=${id}`);
+    return data;
+  },
 //   updateAuctionHouse: async (obj) => {
 //     const data = await patch(routes.updateAuctionHouse, obj);
 //     return data;
