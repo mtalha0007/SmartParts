@@ -113,6 +113,7 @@ export default function OrderDetailDialog({ open, onClose, orderDetail }) {
             </Box>
           </Card>
         </Box>
+        {orderDetail?.result?.productDetails?.length !== 0 && (
         <Box
         sx={{
             mt:7,
@@ -154,7 +155,7 @@ export default function OrderDetailDialog({ open, onClose, orderDetail }) {
 </Root>
 
       </Box>
-
+        )}
         <Box
         sx={{
             mt:2,
