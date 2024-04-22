@@ -1,35 +1,28 @@
-import React ,{ useEffect ,useState } from 'react';
-import { styled } from '@mui/system';
+import React, { useContext, useEffect, useState } from "react";
+import { styled } from "@mui/system";
 import {
   TablePagination,
   tablePaginationClasses as classes,
-} from '@mui/base/TablePagination';
-import orderServices from "../../services/orderServices"
+} from "@mui/base/TablePagination";
+import orderServices from "../../services/orderServices";
 import { IoEyeOutline } from "react-icons/io5";
-import OrderDetailDialog from '../Dialog/OrderDetailDialog';
+import OrderDetailDialog from "../Dialog/OrderDetailDialog";
+import { ContextApi } from "../../store/context";
+import moment from "moment";
 export default function TableUnstyled() {
   const [page, setPage] = useState(0);
+  //*For set rowsPerPage
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  //*For set orderdata coming from api
   const [order, setOrder] = useState([]);
+  //*For set orderdata with id  coming from api
   const [orderDetail, setOrderDetail] = useState([]);
+  //*For opening and closing Dialog
   const [orderDetailDialog, setOrderDetailDialog] = useState(false);
-  const getOrderData = async () => {
-      try {
-          const orderedData = await orderServices.getOrders();
-          setOrder(orderedData?.data?.result);
-          
-      } catch (error) {
-          console.error("Error fetching data:", error);
-      }
-  };
-
-  useEffect(() => {
-      getOrderData();
-  }, []);
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - order.length) : 0;
-
+  //*For totalOrders
+  const [totalOrders, setTotalOrders] = useState(0);
+  //*For set orderdata in Context
+  const { state, dispatch } = useContext(ContextApi);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -38,92 +31,125 @@ export default function TableUnstyled() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  
-  const viewOrderDetail = async (id)=>{
-    try {
-        const response = await orderServices.getOrderById(id);
-        console.log(response)
-        setOrderDetail(response?.data);
-        setOrderDetailDialog(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const param = {
+          page: page + 1,
+          perPage: rowsPerPage,
+        };
+        const orderedData = await orderServices.getOrders(param);
+        setOrder(orderedData?.data?.result);
+        setTotalOrders(orderedData?.data?.count);
+        dispatch({ type: "ADD_ORDER", payload: orderedData });
       } catch (error) {
-        console.log(error)
+        console.error("Error fetching data:", error);
       }
-  }
+    };
+
+    fetchData();
+  }, [page, rowsPerPage]);
+
+  const viewOrderDetail = async (id) => {
+    try {
+      const response = await orderServices.getOrderById(id);
+      console.log(response);
+      setOrderDetail(response?.data);
+      setOrderDetailDialog(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
- 
-    <OrderDetailDialog
+      <OrderDetailDialog
         open={orderDetailDialog}
         onClose={() => setOrderDetailDialog(false)}
         orderDetail={orderDetail}
-        
       />
-    <Root sx={{ maxWidth: '100%', width: "100%",overflowX:"scroll" }}>
-      <table aria-label="custom pagination table">
-        <thead>
-          <tr>
-            <th style={{textAlign:"center"}}>Order ID</th>
-            <th style={{textAlign:"center"}}>Amount</th>
-            <th style={{textAlign:"center"}}>Status</th>
-            <th style={{textAlign:"center"}}>Date And Time</th>
-            <th style={{textAlign:"center"}}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {order.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
-            <TableRow key={row.order_id} striped={index % 2 !== 0} >
-              <td style={{ width: 160 ,textAlign:"center" ,padding:'15px' }} >
-                {row.order_id}
-              </td>
-              <td style={{ width: 160  ,textAlign:"center",padding:'15px' }} >
-                {"$" + row.total_amount}
-              </td>
-              <td style={{ width: 160  ,textAlign:"center",padding:'15px' }} >
-                {row.status.name}
-              </td>
-              <td style={{ width: 160 ,textAlign:"center",padding:'15px'  }} >
-                {row.createdAt}
-              </td>
-              <td style={{ width: 160 ,textAlign:"center",padding:'15px'  ,cursor:"pointer" }} >
-             <IoEyeOutline onClick={()=>{viewOrderDetail(row._id)}}/>
-              </td>
-            </TableRow>
-          ))}
-          {emptyRows > 0 && (
-            <tr style={{ height: 41 * emptyRows }}>
-              <td colSpan={5} aria-hidden />
+      <Root
+        sx={{
+          maxWidth: "100%",
+          width: "100%",
+          overflowX: { xs: "scroll", sm: "hidden" },
+        }}
+      >
+        <table aria-label="custom pagination table">
+          <thead>
+            <tr>
+              <th style={{ textAlign: "center" }}>Order ID</th>
+              <th style={{ textAlign: "center" }}>Amount</th>
+              <th style={{ textAlign: "center" }}>Status</th>
+              <th style={{ textAlign: "center" }}>Date And Time</th>
+              <th style={{ textAlign: "center" }}>Actions</th>
             </tr>
-          )}
-        </tbody>
-        <tfoot>
-          <tr>
-            <CustomTablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={5}
-              count={order.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  'aria-label': 'rows per page',
-                },
-                actions: {
-                  showFirstButton: true,
-                  showLastButton: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </tr>
-        </tfoot>
-      </table>
-    </Root>
+          </thead>
+          <tbody>
+            {order.map((row, index) => (
+              <TableRow key={row.order_id} striped={index % 2 !== 0}>
+                <td
+                  style={{ width: 160, textAlign: "center", padding: "15px" }}
+                >
+                  {row.order_id}
+                </td>
+                <td
+                  style={{ width: 160, textAlign: "center", padding: "15px" }}
+                >
+                  {"$" + row.total_amount}
+                </td>
+                <td
+                  style={{ width: 160, textAlign: "center", padding: "15px" }}
+                >
+                  {row.status.name}
+                </td>
+                <td
+                  style={{ width: 160, textAlign: "center", padding: "15px" }}
+                >
+                  {moment(row?.createdAt).format("DD-MM-YYYY hh:mm A")}
+                </td>
+                <td
+                  style={{
+                    width: 160,
+                    textAlign: "center",
+                    padding: "15px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <IoEyeOutline
+                    onClick={() => {
+                      viewOrderDetail(row._id);
+                    }}
+                  />
+                </td>
+              </TableRow>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <CustomTablePagination
+                rowsPerPageOptions={[
+                  5,
+                  10,
+                  25,
+                  { label: "All", value: totalOrders },
+                ]}
+                colSpan={5}
+                count={totalOrders}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </tr>
+          </tfoot>
+        </table>
+      </Root>
     </>
   );
 }
 
-const Root = styled('div')(
+const Root = styled("div")(
   ({ theme }) => `
   table {
     font-family: 'IBM Plex Sans', sans-serif;
@@ -134,23 +160,27 @@ const Root = styled('div')(
 
   td,
   th {
-    border: 1px solid ${theme.palette.mode === 'dark' ? '#333' : '#ddd'};
+    border: 1px solid ${theme.palette.mode === "dark" ? "#333" : "#ddd"};
     text-align: left;
     padding: 8px;
   }
 
   th {
-    background-color: ${theme.palette.mode === 'dark' ? '#111' : '#f2f2f2'};
+    background-color: rgb(239 240 246);
   }
-  `,
+  `
 );
 
-const TableRow = styled('tr')(
+const TableRow = styled("tr")(
   ({ theme, striped }) => `
-    background-color: ${striped ? (theme.palette.mode === 'dark' ? '#333' : '#f9f9f9') : 'transparent'};
-    &:hover {
-      background-color: ${theme.palette.mode === 'dark' ? '#666' : '#f2f2f2'};
-    }
+    background-color: ${
+      striped
+        ? theme.palette.mode === "dark"
+          ? "#333"
+          : "rgb(239 240 246)"
+        : "transparent"
+    };
+
   `
 );
 

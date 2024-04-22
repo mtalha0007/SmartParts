@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import addressPostServices from "../../services/adressServices";
 import PlaceOrderServices from "../../services/placeOrderServices";
 import Toastify from 'toastify-js'
+import { useNavigate } from "react-router-dom";
 
 export default function CheckOut() {
    // *For Context to get total amount
@@ -26,7 +27,8 @@ export default function CheckOut() {
   const [addressFormDialog, setAddressFormDialog] = useState(false);
   // *For addressLists value 
   const [addressLists ,setAddressLists] = useState([])
-
+  // *For Navigation
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -83,6 +85,7 @@ export default function CheckOut() {
       },
      
     }).showToast();
+    navigate("/orders")
     }catch(error){
       Toastify({
         text:"Something went wrong",

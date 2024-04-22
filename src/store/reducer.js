@@ -49,6 +49,11 @@ const Reducer = (state, action) => {
          ...state,
          userDetails: action.payload,
         };
+      case "ADD_ORDER":
+        return {
+         ...state,
+         orderedDetails: action.payload,
+        };
    
         
   }

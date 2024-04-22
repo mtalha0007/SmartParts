@@ -69,44 +69,6 @@ export default function CategorySlider({
     ],
   };
 
-
-  //   {
-  //     title:"Bling Rhinestones Car Steering Wheel",
-  //     image: Images.sliderImage1,
-  //     discountedPrice:"$9.99",
-  //     originalPrice: "$41.99",
-  //   },
-  //   {
-  //     title:"Multi-Vehicle Automatic Transmission Fluid",
-  //     image: Images.sliderImage2,
-  //     discountedPrice:"$11.99",
-  //     originalPrice: "$7.99",
-  //   },
-  //   {
-  //     title:"Mercedes Transmission Filter",
-  //     image: Images.sliderImage3,
-  //     discountedPrice:"$25.99",
-  //     originalPrice: "$21.99",
-  //   },
-  //   {
-  //     title:"RIDEX 3707A0009 Gear knob 28P85",
-  //     image: Images.sliderImage4,
-  //     discountedPrice:"$162.99",
-  //     originalPrice: "$151.99",
-  //   },
-  //   {
-  //     title:"Duralast Clutch NU31023B023B 23B",
-  //     image: Images.sliderImage5,
-  //     discountedPrice:"$89.99",
-  //     originalPrice: "$120.99",
-  //   },
-  //   {
-  //     title:"Duralast Gold Tie Rod End GES3663",
-  //     image: Images.sliderImage6,
-  //     discountedPrice:"$51.99",
-  //     originalPrice: "$57.99",
-  //   },
-  // ];
   return (
     <Box>
       <Slider {...settings}>

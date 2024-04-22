@@ -46,7 +46,8 @@ const trendCategories = [
         marginTop: "10px" ,
         display:"flex" ,
          flexDirection:"column" ,
-         gap:"5px"
+         gap:"5px",
+         mt:3
         }}>
       {trendCategories.map((elem ,index)=>(
         <Box
@@ -56,6 +57,7 @@ const trendCategories = [
             borderRadius: borderRadius,
             borderBottom:borderBottom,
             padding: padding,
+            
             cursor:"pointer",
             "&:hover": {
               backgroundColor: "#df6a2d",

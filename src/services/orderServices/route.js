@@ -1,5 +1,5 @@
 const routes = {
-    getOrders: 'v1/orders?page=1&perPage=10',
+    getOrders: 'v1/orders',
     getOrderById:"v1/orders/getById"
     };
     

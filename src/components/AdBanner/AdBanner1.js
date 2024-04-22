@@ -11,7 +11,8 @@ export default function AdBanner() {
           p: "10px",
           backgroundColor: "#fff7ea",
           borderRadius: "5px",
-          m:"0 auto"
+          m:"0 auto",
+          alignItems:'center'
         }}
       >
         <Box className="col-lg-8 col-sm-12" sx={{p:"25px"}}>
@@ -96,7 +97,7 @@ export default function AdBanner() {
             </Box>
           </Box>
         </Box>
-        <Box className="col-md-6 col-lg-4" sx={{mt:"24px"}} >
+        <Box className="col-md-6 col-lg-4" >
           <Box
             sx={{
               display: "flex",

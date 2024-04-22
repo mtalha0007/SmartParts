@@ -3,10 +3,12 @@ import Reducer from "./reducer";
 
 let cartData = [];
 let userData = [];
+let orderedData = [];
 
 let data = {
   cart_items: cartData,
   userDetails : userData,
+  orderedDetails : orderedData,
 };
 export const ContextApi = createContext({ state: data, dispatch: () => null });
 

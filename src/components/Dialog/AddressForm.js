@@ -270,7 +270,7 @@ function AddressForm({
 
   return (
     <Dialog
-      maxWidth="lg"
+      maxWidth="md"
       open={open}
       sx={{
         "& .MuiDialog-paper": {
@@ -298,8 +298,8 @@ function AddressForm({
       </DialogTitle>
 
       <Box component="form" onSubmit={handleSubmit(submitForm)}>
-        <Grid container spacing={1} alignItems={"center"}>
-          <Grid item xs={12} sm={12}>
+        <Grid container spacing={1} >
+          <Grid item xs={12} sm={6}>
             <Map
               newAddress={(data) => {
                 setAddressDetail(data);
@@ -308,79 +308,87 @@ function AddressForm({
               defaultData={defaultData}
             />
           </Grid>
+          <Grid item sx={{marginTop:"-7px"}} xs={12} sm={6}>
+            <Grid item xs={12} sm={12}>
+              <InputLabel>Location</InputLabel>
+              <TextField
+                size={"small"}
+                disabled={true}
+                value={getValues("address") || ""}
+                sx={{ width: "100%" }}
+                placeholder="location"
+                error={!!errors.address}
+                {...register("address", {
+                  required: "location is required",
+                })}
+                helperText={errors.address?.message}
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <InputLabel>Street</InputLabel>
+                  <TextField
+                    size={"small"}
+                    sx={{ width: "100%" }}
+                    placeholder="Street"
+                    error={!!errors.street}
+                    {...register("street", {
+                      required: "street is required",
+                    })}
+                    helperText={errors.street?.message}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6 }>
+                  <InputLabel>Area</InputLabel>
+                  <TextField
+                    size={"small"}
+                    sx={{ width: "100%" }}
+                    placeholder="Area"
+                    error={!!errors.area}
+                    {...register("area", {
+                      required: "area is required",
+                    })}
+                    helperText={errors.area?.message}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <InputLabel>House</InputLabel>
+                  <TextField
+                    size={"small"}
+                    sx={{ width: "100%" }}
+                    placeholder="House"
+                    error={!!errors.house}
+                    {...register("house", {
+                      required: "house is required",
+                    })}
+                    helperText={errors.house?.message}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <InputLabel>Room</InputLabel>
+                  <TextField
+                    size={"small"}
+                    sx={{ width: "100%" }}
+                    placeholder="Room"
+                    error={!!errors.apt}
+                    {...register("apt", {
+                      required: "room is required",
+                    })}
+                    helperText={errors.apt?.message}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+        
 
           <Grid item xs={12} sm={12}>
-            <InputLabel>Location</InputLabel>
-            <TextField
-              size={"small"}
-              disabled={true}
-              value={getValues("address") || ""}
-              sx={{ width: "100%" }}
-              placeholder="location"
-              error={!!errors.address}
-              {...register("address", {
-                required: "location is required",
-              })}
-              helperText={errors.address?.message}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <InputLabel>Street</InputLabel>
-            <TextField
-              size={"small"}
-              sx={{ width: "100%" }}
-              placeholder="Street"
-              error={!!errors.street}
-              {...register("street", {
-                required: "street is required",
-              })}
-              helperText={errors.street?.message}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <InputLabel>Area</InputLabel>
-            <TextField
-              size={"small"}
-              sx={{ width: "100%" }}
-              placeholder="Area"
-              error={!!errors.area}
-              {...register("area", {
-                required: "area is required",
-              })}
-              helperText={errors.area?.message}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <InputLabel>House</InputLabel>
-            <TextField
-              size={"small"}
-              sx={{ width: "100%" }}
-              placeholder="House"
-              error={!!errors.house}
-              {...register("house", {
-                required: "house is required",
-              })}
-              helperText={errors.house?.message}
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <InputLabel>Room</InputLabel>
-            <TextField
-              size={"small"}
-              sx={{ width: "100%" }}
-              placeholder="Room"
-              error={!!errors.apt}
-              {...register("apt", {
-                required: "room is required",
-              })}
-              helperText={errors.apt?.message}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
             {/* <Typography variant="subtitle1">Add Label</Typography> */}
-            <Box
-              sx={{ display: "flex", gap: "20px", alignItems: "center", my: 1 }}
-            >
+            <Box sx={{ display: "flex",justifyContent:"center", gap: "20px", alignItems: "center", my: 1 }} >
               <Box>
                 <IconButton
                   disableRipple
@@ -390,8 +398,8 @@ function AddressForm({
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Home" ? "#df6a2d" : "#b7b7b7",
-                      width: "32px",
-                      height: "32px",
+                      width: "25px",
+                      height: "25px",
                     },
                   }}
                 >
@@ -410,8 +418,8 @@ function AddressForm({
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Work" ? "#df6a2d" : "#b7b7b7",
-                      width: "32px",
-                      height: "32px",
+                      width: "25px",
+                      height: "25px",
                     },
                   }}
                 >
@@ -431,8 +439,8 @@ function AddressForm({
                     ".MuiSvgIcon-root": {
                       color:
                         selectedLabel === "Favorite" ? "#df6a2d" : "#b7b7b7",
-                      width: "32px",
-                      height: "32px",
+                      width: "25px",
+                      height: "25px",
                     },
                   }}
                 >
@@ -451,8 +459,8 @@ function AddressForm({
                     boxShadow: `rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;`,
                     ".MuiSvgIcon-root": {
                       color: selectedLabel === "Other" ? "#df6a2d" : "#b7b7b7",
-                      width: "32px",
-                      height: "32px",
+                      width: "25px",
+                      height: "25px",
                     },
                   }}
                 >
@@ -463,6 +471,7 @@ function AddressForm({
                 </Typography>
               </Box>
             </Box>
+          </Grid>
           </Grid>
           <Grid item xs={12} sm={12} sx={{ mt: 1 }}>
             <Box sx={{ display: "flex" }}>
