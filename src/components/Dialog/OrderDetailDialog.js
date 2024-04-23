@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -14,24 +14,18 @@ import {
 import { Close } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import moment from "moment";
-import {Map} from "../Dialog/AddressForm"
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
-import { fromLatLng } from "react-geocode";
-export default function OrderDetailDialog({ open, onClose, orderDetail  }) {
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
+function Map({ lat, lng }) {
+  console.log("lat===>" ,lat , "lng ===>" ,  lng)
   const googleMapKey = process.env.REACT_APP_MAP_API_KEY;
 
-  const [center, setCenter] = useState({ lat: 0, lng: 0 });
-  const [markerPosition, setMarkerPosition] = useState({ lat: 0, lng: 0 });
-  const [address, setAddress] = useState("");
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: googleMapKey,
     libraries: ["places"],
   });
-  
 
   const containerStyle = {
     width: "100%",
@@ -55,21 +49,26 @@ export default function OrderDetailDialog({ open, onClose, orderDetail  }) {
       },
     ],
   };
-  const handleMapLoad = (map) => {
-    map.addListener("click", (e) => {
-      fromLatLng(e.latLng.lat(), e.latLng.lng()).then(
-        (response) => {
-          setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-          setAddress(response.results[0].formatted_address);
-          console.log("address" ,markerPosition)
-         
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    });
-  };
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={{ lat: lat, lng: lng }}
+      zoom={14}
+      options={options}
+    >
+      <MarkerF position={{ lat: lat, lng: lng }} />
+    </GoogleMap>
+  ) : (
+    ""
+  );
+}
+export default function OrderDetailDialog({
+  open,
+  onClose,
+  orderDetail,
+}) {
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   return (
     <>
       <Dialog
@@ -246,7 +245,7 @@ export default function OrderDetailDialog({ open, onClose, orderDetail  }) {
                             padding: "15px",
                           }}
                         >
-                          {'$' + data.discounted_price}
+                          {"$" + data.discounted_price}
                         </td>
                       </TableRow>
                     ))}
@@ -256,36 +255,21 @@ export default function OrderDetailDialog({ open, onClose, orderDetail  }) {
             </Box>
           )}
 
-          
-          {/* <Box
+          <Box
             sx={{
-              mt: 2,
+              mt: 4,
               border: "2px solid #eaebed",
               padding: "30px",
               borderRadius: "5px",
             }}
           >
             <Box component={"h5"}>Delivery Address</Box>
-            {isLoaded ? 
-             <GoogleMap
-             mapContainerStyle={containerStyle}
-             center={center}
-             zoom={14}
-             options={options}
-             onLoad={handleMapLoad}
-           >
-             <MarkerF
-               position={markerPosition}
-               draggable={false}
-               onDragEnd={(e) => {
-                setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-              }}
-              //  onLoad={handleMarkerLoad}
-             />
-           </GoogleMap>
-            :""}
-           
-          </Box> */}
+            <Map
+              lat={orderDetail?.result?.address?.latitude}
+              lng={orderDetail?.result?.address?.longitude}
+            />
+           <Box sx={{mt:1 ,fontWeight:"600"}}>{orderDetail?.result?.address?.address }</Box>
+          </Box>
           <Box
             sx={{
               mt: 2,

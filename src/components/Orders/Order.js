@@ -190,6 +190,7 @@ const CustomTablePagination = styled(TablePagination)`
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  
 
     @media (min-width: 768px) {
       flex-direction: row;
@@ -198,17 +199,21 @@ const CustomTablePagination = styled(TablePagination)`
   }
 
   & .${classes.selectLabel} {
-    margin: 0;
+    margin: 0;  
   }
 
   & .${classes.displayedRows} {
     margin: 0;
+   
 
     @media (min-width: 768px) {
       margin-left: auto;
     }
   }
-
+  & .base-TablePagination-select{
+    width:60px
+  }
+  n
   & .${classes.spacer} {
     display: none;
   }
@@ -216,5 +221,10 @@ const CustomTablePagination = styled(TablePagination)`
   & .${classes.actions} {
     display: flex;
     gap: 0.25rem;
+  }
+  &  .base-TablePagination-actions button:focus {
+    background:#df6a2d;
+    color:white;
+    border:none
   }
 `;
