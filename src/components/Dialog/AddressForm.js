@@ -509,4 +509,4 @@ function AddressForm({
   );
 }
 
-export default AddressForm;
+export  {AddressForm , Map};

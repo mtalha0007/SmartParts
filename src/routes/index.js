@@ -15,11 +15,12 @@ import CheckOut from '../components/Checkout/CheckOut';
 import Order from "../components/Orders/Order"
 function AppRouter() {
   const [cardDetails, setCardDetails] = useState([]);
+
+
   const getProductData = async () => {
-    try {
+    try{
       const productData = await productServices .getProductData();
       setCardDetails(productData?.data?.result);
- 
     } catch (error) {
       console.error("Error fetching data:", error);
     }

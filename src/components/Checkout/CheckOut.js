@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { ContextApi } from "../../store/context";
 import SelectAddressDialog from "../Dialog/SelectedAddressDialog"
-import AddressForm from "../Dialog/AddressForm";
+import {AddressForm} from "../Dialog/AddressForm";
 import { useForm } from "react-hook-form";
 import addressPostServices from "../../services/adressServices";
 import PlaceOrderServices from "../../services/placeOrderServices";
