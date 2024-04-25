@@ -3,7 +3,14 @@ import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import CategorySlider from "../../components/CategorySlider/CategorySlider";
 import { Svgs } from "../../assets/images/index";
+import { useNavigate } from "react-router-dom";
 export default function PopularCategories({data}) {
+  
+  const navigate = useNavigate()
+  const handleNavigateToPoducts =()=>{
+  
+    navigate("/allProducts")
+  }
   return (
     <>
       <Box sx={{ display: "flex", gap: "15px", alignItems: "center" ,flexWrap:"wrap",}}>
@@ -78,7 +85,7 @@ export default function PopularCategories({data}) {
         <Box sx={{borderRadius:"20px",p:"7px 13px",cursor:"pointer" ,color:"white",fontSize:"13px",fontWeight:"400" ,backgroundColor:"#df6a2d",display:"flex",gap:"8px",alignItems:"center", "&:hover": {
               backgroundColor: "#1e96fc",
               color:"white"
-            },}}><Box>All Categories</Box> <Box sx={{color:"white"}} component={"span"}><FaArrowRight/></Box>
+            },}}><Box onClick={handleNavigateToPoducts}>All Categories</Box> <Box sx={{color:"white"}} component={"span"}><FaArrowRight/></Box>
             </Box>
       </Box>
 

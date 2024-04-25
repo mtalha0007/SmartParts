@@ -11,33 +11,19 @@ import EditorReview from "../../components/EditorReview/EditorReview";
 import productServices from "../../services/productServices";
 import DoubleSlider from "../../components/DoubleSlider/DoubleSlider";
 
-export default function App({data}) {
- 
-  // const [cardDetails, setCardDetails] = useState([]);
-  // const getProductData = async () => {
-  //   try {
-  //     const productData = await productServices.getProductData();
-  //     setCardDetails(productData?.data?.result);
- 
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
+export default function App({data }) {
 
-  // useEffect(() => {
-  //   getProductData();
-  // }, []);
   return (
     <>
       <SlideSection />
       <CarCard />
-      <CategoriesSection data={data} />
+      <CategoriesSection data={data}  />
       <CarBanner />
       <PopularProducts data={data}  />
       <AdBanner1 />
       <ProductReview />
       <AdBanner2 />
-      <DoubleSlider data={data} />
+      <DoubleSlider data={data}  />
       <EditorReview />
     </>
   );

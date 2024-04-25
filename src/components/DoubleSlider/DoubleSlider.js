@@ -2,7 +2,13 @@ import React from "react";
 import CategorySlider from "../CategorySlider/CategorySlider";
 import { Box } from "@mui/material";
 import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 export default function DoubleSlider({ data }) {
+
+  const navigate = useNavigate()
+  const handleNavigateToPoducts =()=>{
+    navigate("/allProducts")
+  }
   console.log(data, "ssadskjasjdks");
   return (
     <Box
@@ -24,7 +30,7 @@ export default function DoubleSlider({ data }) {
           }}
         >
           <Box component={"h4"}>Bestseller</Box>
-          <Box sx={{ fontSize: "12px", color: "#555555" }}>
+          <Box onClick={handleNavigateToPoducts} sx={{ fontSize: "12px", color: "#555555" ,cursor:"pointer"}}>
             All Products <FaArrowRight />
           </Box>
         </Box>
@@ -47,7 +53,7 @@ export default function DoubleSlider({ data }) {
           }}
         >
           <Box component={"h4"}>Best Rated</Box>
-          <Box sx={{ fontSize: "12px", color: "#555555" }}>
+          <Box onClick={handleNavigateToPoducts} sx={{ fontSize: "12px", color: "#555555" ,cursor:"pointer"}}>
             All Products <FaArrowRight />
           </Box>
         </Box>

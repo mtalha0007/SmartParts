@@ -153,17 +153,7 @@ function LoginPage() {
           </Button>
             </form>
 
-          <Box
-            sx={{
-              mt: 3,
-              fontSize: "13px",
-              color: "#b20808",
-              cursor: "pointer",
-              textDecoration: "underline",
-            }}
-          >
-            Lost your password?
-          </Box>
+          
           <Box sx={{ mt: 2, mb: 10 }} className="col-5">
             <Box
               sx={{
@@ -177,6 +167,7 @@ function LoginPage() {
                 textAlign: "left",
                 borderRadius: "5px",
                 fontSize: "13px",
+                cursor:"pointer"
               }}
             >
               <FaFacebookF
@@ -196,6 +187,7 @@ function LoginPage() {
                 textAlign: "left",
                 borderRadius: "5px",
                 fontSize: "13px",
+                cursor:"pointer"
               }}
             >
               <FaGoogle

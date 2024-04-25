@@ -3,7 +3,12 @@ import CategorySlider from "../CategorySlider/CategorySlider";
 import { Box } from "@mui/material";
 import { Svgs } from "../../assets/images/index";
 import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 export default function PopularProducts({data}) {
+  const navigate = useNavigate()
+  const handleNavigateToPoducts =()=>{
+    navigate("/allProducts")
+  }
   return (
     <Box sx={{ marginTop: "30px" }}>
       <Box
@@ -167,6 +172,7 @@ export default function PopularProducts({data}) {
             
             },
           }}
+          onClick={handleNavigateToPoducts}
         >
           <Box>Check All Categories</Box>
           <Box  component={"span"}>

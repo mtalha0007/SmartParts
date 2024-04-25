@@ -66,7 +66,7 @@ export default function TableUnstyled() {
       <OrderDetailDialog
         open={orderDetailDialog}
         onClose={() => setOrderDetailDialog(false)}
-        orderDetail={orderDetail}
+        orderDetailById={orderDetail}
       />
       <Root
         sx={{
@@ -86,27 +86,27 @@ export default function TableUnstyled() {
             </tr>
           </thead>
           <tbody>
-            {order.map((row, index) => (
-              <TableRow key={row.order_id} striped={index % 2 !== 0}>
+            {order.map((item, index) => (
+              <TableRow key={item.order_id} striped={index % 2 !== 0}>
                 <td
                   style={{ width: 160, textAlign: "center", padding: "15px" }}
                 >
-                  {row.order_id}
+                  {item?.order_id}
                 </td>
                 <td
                   style={{ width: 160, textAlign: "center", padding: "15px" }}
                 >
-                  {"$" + row.total_amount}
+                  {"$" + item?.total_amount}
                 </td>
                 <td
                   style={{ width: 160, textAlign: "center", padding: "15px" }}
                 >
-                  {row.status.name}
+                  {item?.status?.name}
                 </td>
                 <td
                   style={{ width: 160, textAlign: "center", padding: "15px" }}
                 >
-                  {moment(row?.createdAt).format("DD-MM-YYYY hh:mm A")}
+                  {moment(item?.createdAt).format("DD-MM-YYYY hh:mm A")}
                 </td>
                 <td
                   style={{
@@ -118,7 +118,7 @@ export default function TableUnstyled() {
                 >
                   <IoEyeOutline
                     onClick={() => {
-                      viewOrderDetail(row._id);
+                      viewOrderDetail(item?._id);
                     }}
                   />
                 </td>
@@ -222,9 +222,18 @@ const CustomTablePagination = styled(TablePagination)`
     display: flex;
     gap: 0.25rem;
   }
-  &  .base-TablePagination-actions button:focus {
+  &  .base-TablePagination-actions button   {
+    border:1px solid silver  
+  }
+  &  .base-TablePagination-actions button:active   {
     background:#df6a2d;
     color:white;
-    border:none
+    1px solid silver  
+  }
+  & .base-TablePagination-actions [disabled]:active{
+    background-color: light-dark(rgba(239, 239, 239, 0.3), rgba(19, 1, 1, 0.3));
+    color: light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+     
+
   }
 `;

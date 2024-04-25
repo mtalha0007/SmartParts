@@ -63,9 +63,9 @@ function Map({ lat, lng }) {
   );
 }
 export default function OrderDetailDialog({
-  open,
-  onClose,
-  orderDetail,
+    open,
+    onClose,
+  orderDetailById,
 }) {
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -125,7 +125,7 @@ export default function OrderDetailDialog({
                   color: "white",
                 }}
               >
-                {orderDetail?.result?.status?.name}
+                {orderDetailById?.result?.status?.name}
               </Typography>
             </Box>
             <Box
@@ -161,7 +161,7 @@ export default function OrderDetailDialog({
                   variant="body1"
                   sx={{ fontWeight: "bold", color: "#df6a2d" }}
                 >
-                  {orderDetail?.result?.order_id}
+                  {orderDetailById?.result?.order_id}
                 </Typography>
               </Box>
               <Box flex="50%" sx={{ textAlign: "center", p: 1 }}>
@@ -172,14 +172,14 @@ export default function OrderDetailDialog({
                   variant="body2"
                   sx={{ fontWeight: "bold", color: "#df6a2d" }}
                 >
-                  {moment(orderDetail?.result?.createdAt).format(
+                  {moment(orderDetailById?.result?.createdAt).format(
                     "DD-MM-YYYY hh:mm A"
                   )}
                 </Typography>
               </Box>
             </Card>
           </Box>
-          {orderDetail?.result?.productDetails?.length !== 0 && (
+          {orderDetailById?.result?.productDetails?.length !== 0 && (
             <Box
               sx={{
                 mt: 7,
@@ -206,7 +206,7 @@ export default function OrderDetailDialog({
                     </tr>
                   </thead>
                   <tbody>
-                    {orderDetail?.result?.productDetails.map((data, index) => (
+                    {orderDetailById?.result?.productDetails.map((data, index) => (
                       <TableRow key={index} striped={index % 2 !== 0}>
                         <td
                           style={{
@@ -265,10 +265,10 @@ export default function OrderDetailDialog({
           >
             <Box component={"h5"}>Delivery Address</Box>
             <Map
-              lat={orderDetail?.result?.address?.latitude}
-              lng={orderDetail?.result?.address?.longitude}
+              lat={orderDetailById?.result?.address?.latitude}
+              lng={orderDetailById?.result?.address?.longitude}
             />
-           <Box sx={{mt:1 ,fontWeight:"600"}}>{orderDetail?.result?.address?.address }</Box>
+           <Box sx={{mt:1 ,fontWeight:"600"}}>{orderDetailById?.result?.address?.address }</Box>
           </Box>
           <Box
             sx={{
@@ -286,7 +286,7 @@ export default function OrderDetailDialog({
               <Box
                 sx={{ fontSize: "15px", fontWeight: "500", color: "#df6a2d" }}
               >
-                ${orderDetail?.billing?.amount - 5}
+                ${orderDetailById?.billing?.amount - 5}
               </Box>
             </Box>
 
@@ -299,7 +299,7 @@ export default function OrderDetailDialog({
               <Box
                 sx={{ fontSize: "15px", fontWeight: "500", color: "#df6a2d" }}
               >
-                ${orderDetail?.billing?.delivery_charges}
+                ${orderDetailById?.billing?.delivery_charges}
               </Box>
             </Box>
             <Box
@@ -309,7 +309,7 @@ export default function OrderDetailDialog({
               <Box
                 sx={{ fontSize: "15px", fontWeight: "500", color: "#df6a2d" }}
               >
-                ${orderDetail?.billing?.total_amount}
+                ${orderDetailById?.billing?.total_amount}
               </Box>
             </Box>
           </Box>

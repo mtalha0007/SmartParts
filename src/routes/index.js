@@ -1,4 +1,4 @@
-import React ,{useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Login from '../layout/Login/index';
 import Dashboard from '../view/dashboard/index';
@@ -13,38 +13,48 @@ import ProductDetails from '../components/ProductDetails/ProductDetails';
 import productServices from '../services/productServices';
 import CheckOut from '../components/Checkout/CheckOut';
 import Order from "../components/Orders/Order"
+import AllProduct from "../components/CategorySlider/AllProduct"
+
 function AppRouter() {
   const [cardDetails, setCardDetails] = useState([]);
-
+ 
 
   const getProductData = async () => {
-    try{
-      const productData = await productServices .getProductData();
+    
+    try {
+      const productData = await productServices.getProductData();
       setCardDetails(productData?.data?.result);
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
+
+    
+  
+
   useEffect(() => {
     getProductData();
   }, []);
+
   return (
     <BrowserRouter>
-        <Header/>
-          <PrimarySearchAppBar />
-       <CategoryHeader/>
-       <FixedHeader /> 
+      <Header />
+      <PrimarySearchAppBar />
+      <CategoryHeader />
+      <FixedHeader />
       <Routes>
-        <Route path="/" element={<Dashboard data={cardDetails} />} />
+        <Route path="/" element={<Dashboard data={cardDetails}  />} />
         <Route path="/account" element={<Login />} />
-        <Route path="/cart" element={<Cart data={cardDetails}/>} />
+        <Route path="/cart" element={<Cart data={cardDetails} />} />
         <Route path="/product" element={<ProductDetails data={cardDetails} />} />
-        <Route path="/checkout" element={<CheckOut/>} />
-        <Route path="/orders" element={<Order/>} />
+        <Route path="/allProducts" element={<AllProduct data={cardDetails} />} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/orders" element={<Order />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <FeedBack/>
+      <FeedBack />
       <Footer />
     </BrowserRouter>
   );
